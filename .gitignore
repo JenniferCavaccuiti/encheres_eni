@@ -1,0 +1,6 @@
+/build
+/.settings
+/.idea
+.classpath
+.project
+encheresEni.iml
