@@ -5,3 +5,7 @@
 .project
 encheresEni.iml
 /.run/Tomcat 9.0.41.run.xml
+/WebContent/META-INF/context.xml
+/classes
+/out
+/lib
