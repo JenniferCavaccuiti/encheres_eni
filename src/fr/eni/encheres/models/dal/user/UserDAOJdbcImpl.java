@@ -11,8 +11,27 @@ import fr.eni.encheres.models.dal.ResultCodesDAL;
 
 public class UserDAOJdbcImpl implements UserDAO {
 
+	
+	//---------- Mise en place du Singleton
+	
+	private static UserDAO instance = null;
+	
+	private UserDAOJdbcImpl() { }
+	
+	public static UserDAO getInstance() {
+		
+		if(instance == null) {
+			instance = new UserDAOJdbcImpl();
+		}
+		
+		return instance;
+	}
+	
+	
+	//----------- Méthode d'insertion d'un user en BDD
+	
 	private static final String insertUser = "INSERT INTO USER (login, lastname, firstname, email, phone_number, street, postal_code, city, password, credits, administrator) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+	
 	@Override
 	public void insertUser(User user) throws BusinessException {
 
