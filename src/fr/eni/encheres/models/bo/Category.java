@@ -2,7 +2,7 @@ package fr.eni.encheres.models.bo;
 
 public class Category {
 	
-	private int category_id;
+	private int idCategory;
 	private String wording;
 	
 	
@@ -15,20 +15,21 @@ public class Category {
 		this.wording = wording;
 	}
 	
-	public Category(int category_id, String wording) {
+	public Category(int idCategory, String wording) {
 		super();
-		this.category_id = category_id;
+		this.idCategory = idCategory;
 		this.wording = wording;
 	}
 
 	//---------- Getters/Setters
 	
-	public int getCategory_id() {
-		return category_id;
+
+	public int getIdCategory() {
+		return idCategory;
 	}
 
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setIdCategory(int idCategory) {
+		this.idCategory = idCategory;
 	}
 
 	public String getWording() {
@@ -44,8 +45,9 @@ public class Category {
 	
 	@Override
 	public String toString() {
-		return "Category_id : " + category_id + ", Wording : " + wording +"/n";
+		return "Category : " + idCategory + ", Wording : " + wording +"/n";
 	}
+
 	
 
 	

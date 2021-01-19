@@ -4,76 +4,75 @@ import java.time.LocalDate;
 
 public class Item {
 
-	private int item_id;
-	private String item_name;
+	private int idItem;
+	private String itemName;
 	private String description;
-	private LocalDate bids_start_date;
-	private LocalDate bids_end_date;
-	private int initial_price;
-	private int current_price;
-	private int seller_id;
+	private LocalDate bidsStartDate;
+	private LocalDate bidsEndDate;
+	private int initialPrice;
+	private int currentPrice;
+	private int idSeller;
 	private String street;
-	private int postal_code;
+	private String postalCode;
 	private String city;
-	private int category_id;
+	private int idCategory;
 	
 	
 	//--------- Constructeur
 	
 	public Item() {}
 
-	public Item(String item_name, String description, LocalDate bids_start_date, LocalDate bids_end_date,
-			int initial_price, int current_price, int seller_id, String street, int postal_code, String city,
-			int category_id) {
-		super();
-		this.item_name = item_name;
+	public Item(String itemName, String description, LocalDate bidsStartDate, LocalDate bidsEndDate, int initialPrice,
+			int currentPrice, int idSeller, String street, String postalCode, String city, int idCategory) {
+		
+		this.itemName = itemName;
 		this.description = description;
-		this.bids_start_date = bids_start_date;
-		this.bids_end_date = bids_end_date;
-		this.initial_price = initial_price;
-		this.current_price = current_price;
-		this.seller_id = seller_id;
+		this.bidsStartDate = bidsStartDate;
+		this.bidsEndDate = bidsEndDate;
+		this.initialPrice = initialPrice;
+		this.currentPrice = currentPrice;
+		this.idSeller = idSeller;
 		this.street = street;
-		this.postal_code = postal_code;
+		this.postalCode = postalCode;
 		this.city = city;
-		this.category_id = category_id;
+		this.idCategory = idCategory;
 	}
 
-	public Item(int item_id, String item_name, String description, LocalDate bids_start_date, LocalDate bids_end_date,
-			int initial_price, int current_price, int seller_id, String street, int postal_code, String city,
-			int category_id) {
-		super();
-		this.item_id = item_id;
-		this.item_name = item_name;
+	public Item(int idItem, String itemName, String description, LocalDate bidsStartDate, LocalDate bidsEndDate,
+			int initialPrice, int currentPrice, int idSeller, String street, String postalCode, String city,
+			int idCategory) {
+		
+		this.idItem = idItem;
+		this.itemName = itemName;
 		this.description = description;
-		this.bids_start_date = bids_start_date;
-		this.bids_end_date = bids_end_date;
-		this.initial_price = initial_price;
-		this.current_price = current_price;
-		this.seller_id = seller_id;
+		this.bidsStartDate = bidsStartDate;
+		this.bidsEndDate = bidsEndDate;
+		this.initialPrice = initialPrice;
+		this.currentPrice = currentPrice;
+		this.idSeller = idSeller;
 		this.street = street;
-		this.postal_code = postal_code;
+		this.postalCode = postalCode;
 		this.city = city;
-		this.category_id = category_id;
+		this.idCategory = idCategory;
 	}
 
 	
 	//---------- Getters/Setters
 	
-	public int getItem_id() {
-		return item_id;
+	public int getIdItem() {
+		return idItem;
 	}
 
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setIdItem(int idItem) {
+		this.idItem = idItem;
 	}
 
-	public String getItem_name() {
-		return item_name;
+	public String getItemName() {
+		return itemName;
 	}
 
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
 	public String getDescription() {
@@ -84,44 +83,44 @@ public class Item {
 		this.description = description;
 	}
 
-	public LocalDate getBids_start_date() {
-		return bids_start_date;
+	public LocalDate getBidsStartDate() {
+		return bidsStartDate;
 	}
 
-	public void setBids_start_date(LocalDate bids_start_date) {
-		this.bids_start_date = bids_start_date;
+	public void setBidsStartDate(LocalDate bidsStartDate) {
+		this.bidsStartDate = bidsStartDate;
 	}
 
-	public LocalDate getBids_end_date() {
-		return bids_end_date;
+	public LocalDate getBidsEndDate() {
+		return bidsEndDate;
 	}
 
-	public void setBids_end_date(LocalDate bids_end_date) {
-		this.bids_end_date = bids_end_date;
+	public void setBidsEndDate(LocalDate bidsEndDate) {
+		this.bidsEndDate = bidsEndDate;
 	}
 
-	public int getInitial_price() {
-		return initial_price;
+	public int getInitialPrice() {
+		return initialPrice;
 	}
 
-	public void setInitial_price(int initial_price) {
-		this.initial_price = initial_price;
+	public void setInitialPrice(int initialPrice) {
+		this.initialPrice = initialPrice;
 	}
 
-	public int getCurrent_price() {
-		return current_price;
+	public int getCurrentPrice() {
+		return currentPrice;
 	}
 
-	public void setCurrent_price(int current_price) {
-		this.current_price = current_price;
+	public void setCurrentPrice(int currentPrice) {
+		this.currentPrice = currentPrice;
 	}
 
-	public int getSeller_id() {
-		return seller_id;
+	public int getIdSeller() {
+		return idSeller;
 	}
 
-	public void setSeller_id(int seller_id) {
-		this.seller_id = seller_id;
+	public void setIdSeller(int idSeller) {
+		this.idSeller = idSeller;
 	}
 
 	public String getStreet() {
@@ -132,12 +131,12 @@ public class Item {
 		this.street = street;
 	}
 
-	public int getPostal_code() {
-		return postal_code;
+	public String getPostalCode() {
+		return postalCode;
 	}
 
-	public void setPostal_code(int postal_code) {
-		this.postal_code = postal_code;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 
 	public String getCity() {
@@ -148,24 +147,26 @@ public class Item {
 		this.city = city;
 	}
 
-	public int getCategory_id() {
-		return category_id;
+	public int getIdCategory() {
+		return idCategory;
 	}
 
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setIdCategory(int idCategory) {
+		this.idCategory = idCategory;
 	}
-
+	
 	
 	//-------- Méthode toString
 	
 	@Override
 	public String toString() {
-		return "Item_id : " + item_id + ", item_name : " + item_name + ", description : " + description
-				+ ", bids_start_date : " + bids_start_date + ", bids_end_date : " + bids_end_date + ", initial_price : "
-				+ initial_price + ", current_price : " + current_price + ", seller_id : " + seller_id + ", street : " + street
-				+ ", postal_code : " + postal_code + ", city : " + city + ", category_id : " + category_id + "/n";
+		return "Id : " + idItem + ", Name : " + itemName + ", Description : " + description
+				+ ", Start date : " + bidsStartDate + ", End date : " + bidsEndDate + ", Initial price : "
+				+ initialPrice + ", Current price : " + currentPrice + ", Seller id : " + idSeller + ", Street : " + street
+				+ ", Postal code : " + postalCode + ", City : " + city + ", Category : " + idCategory + "/n";
 	}
+
+	
 		
 	
 }

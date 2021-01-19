@@ -4,57 +4,57 @@ import java.time.LocalDate;
 
 public class Bid {
 
-	private int buyer_id;
-	private int item_id;
-	private LocalDate bid_date;
-	private int bid_amount;
+	private int idBuyer;
+	private int idItem;
+	private LocalDate bidDate;
+	private int bidAmount;
 	
 	
 	//--------- Constructeur
 	
 	public Bid() {}
 
-	public Bid(int buyer_id, int item_id, LocalDate bid_date, int bid_amount) {
+	public Bid(int idBuyer, int idItem, LocalDate bidDate, int bidAmount) {
 		super();
-		this.buyer_id = buyer_id;
-		this.item_id = item_id;
-		this.bid_date = bid_date;
-		this.bid_amount = bid_amount;
+		this.idBuyer = idBuyer;
+		this.idItem = idItem;
+		this.bidDate = bidDate;
+		this.bidAmount = bidAmount;
 	}
 
 	
 	//---------- Getters/Setters
 	
-	public int getBuyer_id() {
-		return buyer_id;
+	public int getIdBuyer() {
+		return idBuyer;
 	}
 
-	public void setBuyer_id(int buyer_id) {
-		this.buyer_id = buyer_id;
+	public void setIdBuyer(int idBuyer) {
+		this.idBuyer = idBuyer;
 	}
 
-	public int getItem_id() {
-		return item_id;
+	public int getIdItem() {
+		return idItem;
 	}
 
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setIdItem(int idItem) {
+		this.idItem = idItem;
 	}
 
-	public LocalDate getBid_date() {
-		return bid_date;
+	public LocalDate getBidDate() {
+		return bidDate;
 	}
 
-	public void setBid_date(LocalDate bid_date) {
-		this.bid_date = bid_date;
+	public void setBidDate(LocalDate bidDate) {
+		this.bidDate = bidDate;
 	}
 
-	public int getBid_amount() {
-		return bid_amount;
+	public int getBidAmount() {
+		return bidAmount;
 	}
 
-	public void setBid_amount(int bid_amount) {
-		this.bid_amount = bid_amount;
+	public void setBidAmount(int bidAmount) {
+		this.bidAmount = bidAmount;
 	}
 
 	
@@ -62,9 +62,11 @@ public class Bid {
 	
 	@Override
 	public String toString() {
-		return "Buyer_id : " + buyer_id + ", item_id : " + item_id + ", bid_date : " + bid_date + ", bid_amount : "
-				+ bid_amount + "/n";
+		return "Buyer : " + idBuyer + ", Item : " + idItem + ", Date : " + bidDate + ", Amount : "
+				+ bidAmount + "/n";
 	}
+
+
 	
 	
 	

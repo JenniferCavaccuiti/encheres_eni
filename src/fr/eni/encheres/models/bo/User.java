@@ -2,14 +2,14 @@ package fr.eni.encheres.models.bo;
 
 public class User {
 
-	private int user_id;
+	private int idUser;
 	private String login;
 	private String lastname;
 	private String firstname;
 	private String email;
-	private String phone_number;
+	private String phoneNumber;
 	private String street;
-	private int postal_code;
+	private String postalCode;
 	private String city;
 	private String password;
 	private int credits;
@@ -20,33 +20,33 @@ public class User {
 	
 	public User() {}
 
-	public User(String login, String lastname, String firstname, String email, String phone_number, String street,
-			int postal_code, String city, String password, int credits, boolean administrator) {
-		super();
+	public User(String login, String lastname, String firstname, String email, String phoneNumber, String street,
+			String postalCode, String city, String password, int credits, boolean administrator) {
+
 		this.login = login;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.email = email;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.street = street;
-		this.postal_code = postal_code;
+		this.postalCode = postalCode;
 		this.city = city;
 		this.password = password;
 		this.credits = credits;
 		this.administrator = administrator;
 	}
 
-	public User(int user_id, String login, String lastname, String firstname, String email, String phone_number,
-			String street, int postal_code, String city, String password, int credits, boolean administrator) {
-		super();
-		this.user_id = user_id;
+	public User(int idUser, String login, String lastname, String firstname, String email, String phoneNumber,
+			String street, String postalCode, String city, String password, int credits, boolean administrator) {
+		
+		this.idUser = idUser;
 		this.login = login;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.email = email;
-		this.phone_number = phone_number;
+		this.phoneNumber = phoneNumber;
 		this.street = street;
-		this.postal_code = postal_code;
+		this.postalCode = postalCode;
 		this.city = city;
 		this.password = password;
 		this.credits = credits;
@@ -56,12 +56,12 @@ public class User {
 	
 	//---------- Getters/Setters
 	
-	public int getUser_id() {
-		return user_id;
+	public int getIdUser() {
+		return idUser;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getLogin() {
@@ -96,12 +96,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getStreet() {
@@ -112,12 +112,12 @@ public class User {
 		this.street = street;
 	}
 
-	public int getPostal_code() {
-		return postal_code;
+	public String getPostalCode() {
+		return postalCode;
 	}
 
-	public void setPostal_code(int postal_code) {
-		this.postal_code = postal_code;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
 	}
 
 	public String getCity() {
@@ -151,18 +151,18 @@ public class User {
 	public void setAdministrator(boolean administrator) {
 		this.administrator = administrator;
 	}
-
 	
+		
 	//-------- Méthode toString
 	
 	@Override
 	public String toString() {
-		return "User_id : " + user_id + ", login : " + login + ", lastname : " + lastname + ", firstname : " + firstname
-				+ ", email : " + email + ", phone_number : " + phone_number + ", street : " + street + ", postal_code : "
-				+ postal_code + ", city : " + city + ", password : " + password + ", credits : " + credits
-				+ ", administrator : " + administrator + "/n";
+		return "User : " + idUser + ", Login : " + login + ", Lastname : " + lastname + ", Firstname : " + firstname
+				+ ", Email : " + email + ", Phone number : " + phoneNumber + ", Street : " + street + ", Postal code : "
+				+ postalCode + ", City : " + city + ", Password : " + password + ", Credits : " + credits
+				+ ", Administrator : " + administrator + "/n";
 	}
-	
+
 	
 	
 	
