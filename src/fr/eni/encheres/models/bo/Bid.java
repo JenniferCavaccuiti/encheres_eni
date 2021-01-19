@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Bid {
 
+	private int idBid;
 	private int idBuyer;
 	private int idItem;
 	private LocalDateTime bidDate;
@@ -15,15 +16,32 @@ public class Bid {
 	public Bid() {}
 
 	public Bid(int idBuyer, int idItem, LocalDateTime bidDate, int bidAmount) {
-		super();
+		
+		this.idBuyer = idBuyer;
+		this.idItem = idItem;
+		this.bidDate = bidDate;
+		this.bidAmount = bidAmount;
+	}
+	
+		
+	public Bid(int idBid, int idBuyer, int idItem, LocalDateTime bidDate, int bidAmount) {
+		
+		this.idBid = idBid;
 		this.idBuyer = idBuyer;
 		this.idItem = idItem;
 		this.bidDate = bidDate;
 		this.bidAmount = bidAmount;
 	}
 
-	
 	//---------- Getters/Setters
+	
+	public int getIdBid() {
+		return idBid;
+	}
+
+	public void setIdBid(int idBid) {
+		this.idBid = idBid;
+	}
 	
 	public int getIdBuyer() {
 		return idBuyer;
@@ -62,7 +80,7 @@ public class Bid {
 	
 	@Override
 	public String toString() {
-		return "Buyer : " + idBuyer + ", Item : " + idItem + ", Date : " + bidDate + ", Amount : "
+		return "Id : "+idBid + ", Buyer : " + idBuyer + ", Item : " + idItem + ", Date : " + bidDate + ", Amount : "
 				+ bidAmount + "/n";
 	}
 
