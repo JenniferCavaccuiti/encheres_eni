@@ -13,8 +13,7 @@ public class DAOFactory {
     }
     
     public static UserDAO getUserDAO() {
-    	
-    	return new UserDAOJdbcImpl();
+    	return UserDAOJdbcImpl.getInstance();
     }
 
 }
