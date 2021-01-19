@@ -11,12 +11,12 @@ public class Category {
 	public Category () {}
 	
 	public Category(String wording) {
-		super();
+		
 		this.wording = wording;
 	}
 	
 	public Category(int idCategory, String wording) {
-		super();
+		
 		this.idCategory = idCategory;
 		this.wording = wording;
 	}

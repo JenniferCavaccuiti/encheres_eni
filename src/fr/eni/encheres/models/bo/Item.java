@@ -1,14 +1,14 @@
 package fr.eni.encheres.models.bo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Item {
 
 	private int idItem;
 	private String itemName;
 	private String description;
-	private LocalDate bidsStartDate;
-	private LocalDate bidsEndDate;
+	private LocalDateTime bidsStartDate;
+	private LocalDateTime bidsEndDate;
 	private int initialPrice;
 	private int currentPrice;
 	private int idSeller;
@@ -22,7 +22,7 @@ public class Item {
 	
 	public Item() {}
 
-	public Item(String itemName, String description, LocalDate bidsStartDate, LocalDate bidsEndDate, int initialPrice,
+	public Item(String itemName, String description, LocalDateTime bidsStartDate, LocalDateTime bidsEndDate, int initialPrice,
 			int currentPrice, int idSeller, String street, String postalCode, String city, int idCategory) {
 		
 		this.itemName = itemName;
@@ -38,7 +38,7 @@ public class Item {
 		this.idCategory = idCategory;
 	}
 
-	public Item(int idItem, String itemName, String description, LocalDate bidsStartDate, LocalDate bidsEndDate,
+	public Item(int idItem, String itemName, String description, LocalDateTime bidsStartDate, LocalDateTime bidsEndDate,
 			int initialPrice, int currentPrice, int idSeller, String street, String postalCode, String city,
 			int idCategory) {
 		
@@ -83,19 +83,19 @@ public class Item {
 		this.description = description;
 	}
 
-	public LocalDate getBidsStartDate() {
+	public LocalDateTime getBidsStartDate() {
 		return bidsStartDate;
 	}
 
-	public void setBidsStartDate(LocalDate bidsStartDate) {
+	public void setBidsStartDate(LocalDateTime bidsStartDate) {
 		this.bidsStartDate = bidsStartDate;
 	}
 
-	public LocalDate getBidsEndDate() {
+	public LocalDateTime getBidsEndDate() {
 		return bidsEndDate;
 	}
 
-	public void setBidsEndDate(LocalDate bidsEndDate) {
+	public void setBidsEndDate(LocalDateTime bidsEndDate) {
 		this.bidsEndDate = bidsEndDate;
 	}
 
