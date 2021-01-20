@@ -5,7 +5,7 @@ import fr.eni.encheres.models.dal.item.ItemDAOJdbcImpl;
 
 public class DAOFactory {
 
-    public static ItemDAO getAvisDAO()
+    public static ItemDAO getItemDAO()
     {
         return new ItemDAOJdbcImpl();
     }

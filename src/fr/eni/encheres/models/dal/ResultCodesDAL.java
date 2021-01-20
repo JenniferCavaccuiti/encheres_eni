@@ -4,4 +4,6 @@ package fr.eni.encheres.models.dal;
 
 public class ResultCodesDAL {
 
+    public static final int SELECT_ALL_ITEMS_FAILED=10000;
+
 }
