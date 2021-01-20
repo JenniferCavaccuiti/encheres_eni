@@ -9,10 +9,10 @@ public interface UserDAO {
 
 	public void insertUser (User user) throws BusinessException;
 	
-	public List<User> selectLogin (String login) throws BusinessException;
+	public List<String> selectLogin (String login) throws BusinessException;
 	
-	public List<User> selectEmail(String email) throws BusinessException;
+	public List<String> selectEmail(String email) throws BusinessException;
 
 	public List<User> findAll() throws BusinessException;
-	
+
 }

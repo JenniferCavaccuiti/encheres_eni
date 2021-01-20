@@ -1,11 +1,16 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.messages.MessagesReader;
+import fr.eni.encheres.models.bll.user.UserManager;
 
 /**
  * Servlet implementation class CreateProfil
@@ -21,7 +26,51 @@ public class CreateProfil extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
+		String login = request.getParameter("login");
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
+		String phoneNumber = request.getParameter("phoneNumber");
+		String postalCode = request.getParameter("postalCode");
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String street = request.getParameter("street");
+		String city = request.getParameter("city");
+		int credit = 0;
+		Boolean admin = false;
+		
+		
+		BusinessException exception = new BusinessException();		
+		UserManager userManager = new UserManager();
+		
+		System.out.println("xxxxxxxx");
+		
+		try {
+			userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, false);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+			
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			e.getErrorCodesList();
+			request.setAttribute("liste", e.getErrorCodesList());
+			
+			System.out.println(e.getErrorCodesList());
+			
+			for (int z : e.getErrorCodesList()) {
+				
+				MessagesReader.getErrorMessage(z);
+				System.out.println(MessagesReader.getErrorMessage(z));
+			}
+			
+			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/createProfil.jsp").forward(request, response);
+		}
+	
+		System.out.println("xxxxxxxx");
+		
+		
+		
+	}
+		
 	}
 
-}
+

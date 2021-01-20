@@ -10,8 +10,8 @@ public abstract class ManagerFactory {
         return ItemManager.getInstance();
     }
 
-	public static UserManager getUserManager() {
-		return UserManager.getInstance();
-	}
+	//public static UserManager getUserManager() {
+	//	return UserManager.getInstance();
+	//}
 
 }
