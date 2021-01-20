@@ -20,14 +20,6 @@ public class ItemManager {
     }
 
     public List<Item> findAll() throws BusinessException, SQLException {
-//        List<Item> itemsList = null;
-//
-//        itemsList = DAOFactory.getItemDAO().findAll();
-//
-//        DateFormat fullDateFormat = DateFormat.getDateTimeInstance(
-//                DateFormat.FULL,
-//                DateFormat.FULL);
-
        return DAOFactory.getItemDAO().findAll();
     }
 }
