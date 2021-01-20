@@ -39,7 +39,7 @@
 			type="email" name="email" required="required"> <label>Rue
 			: </label> <input type="text" name="street" required="required"> <label>Ville
 			: </label><input type="text" name="city" required="required"> <label>Confirmation
-			: </label><input type="text" name="passwordConfirm" required="required">
+			: </label><input type="password" name="passwordConfirm" required="required">
 	</section>
 	<input type="submit" value="Créer">
 	<button>

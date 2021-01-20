@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.messages.MessagesReader;
+import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bll.user.UserManager;
 
 /**
@@ -38,15 +39,16 @@ public class CreateProfil extends HttpServlet {
 		String city = request.getParameter("city");
 		int credit = 0;
 		Boolean admin = false;
+		String confirm = request.getParameter("passwordConfirm");
 		
 		
-		BusinessException exception = new BusinessException();		
+			
 		UserManager userManager = new UserManager();
 		
 		System.out.println("xxxxxxxx");
 		
 		try {
-			userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, false);
+			userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
 			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 			
 		} catch (BusinessException e) {

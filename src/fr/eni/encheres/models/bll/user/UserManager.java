@@ -18,27 +18,30 @@ public class UserManager {
 
 	// ---------- Mise en place du Singleton
 
-	// private static UserManager instance = null;
+	 //private static UserManager instance = null;
 
 	// private UserManager() {
 	// }
 
-	// public static UserManager getInstance() {
+	//public static UserManager getInstance() {
 
-//		if (instance == null) {
-//			instance = new UserManager();
-//		}
-//		return instance;
-//	}
+	//	if (instance == null) {
+	//	instance = new UserManager();
+	//}
+	//return instance;
+	//}
 
+	
+	// --------- Méthode d'insertion d'un user en BDD après verif du pseudo et de
+		// l'email
+	
 	public void addUser(String login, String lastname, String firstname, String email, String phoneNumber,
-			String street, String postalCode, String city, String password, boolean administrator) throws BusinessException
+			String street, String postalCode, String city, String password, String confirmPassword, boolean administrator) throws BusinessException
 			 {
 
 		BusinessException exception = new BusinessException();
-
-
-
+			
+			confirmPassword(password, confirmPassword, exception);
 			loginIsAlphanum(login, exception);
 			loginExists(login, exception);
 			emailExists(email, exception);
@@ -64,13 +67,10 @@ public class UserManager {
 		}
 		
 		else {
-
 			throw exception;
 		}
-		
 
-
-		}
+	}
 
 	// -------- Méthode pour vérifier que le pseudo est bien composé de
 	// caractères
@@ -93,10 +93,21 @@ public class UserManager {
 		}
 	}
 
+	// -------- TODO description
+	
 	public List<User> findAll() throws BusinessException {
 		return DAOFactory.getUserDAO().findAll();
 	}
-
+	
+	// -------- Méthode confirm mot de passe
+	
+		public void confirmPassword (String password, String confirmPassword, BusinessException exception) { 
+			
+			if(!password.equals(confirmPassword)) {
+				exception.addError(ResultCodesBLL.ERROR_CONFIRM_PASSWORD);
+			}
+			
+		}
 
 	// -------- Méthode pour vérifier que l'email n'existe pas
 
@@ -107,8 +118,5 @@ public class UserManager {
 			exception.addError(ResultCodesBLL.ERROR_EMAIL_EXISTS);
 		}
 	}
-
-	// --------- Méthode d'insertion d'un user en BDD après verif du pseudo et de
-	// l'email
 
 }
