@@ -5,7 +5,7 @@ import fr.eni.encheres.models.dal.item.ItemDAOJdbcImpl;
 import fr.eni.encheres.models.dal.user.UserDAO;
 import fr.eni.encheres.models.dal.user.UserDAOJdbcImpl;
 
-public class DAOFactory {
+public abstract class DAOFactory {
 
     public static ItemDAO getItemDAO()
     {

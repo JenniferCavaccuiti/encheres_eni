@@ -13,4 +13,5 @@ public abstract class ManagerFactory {
 	public static UserManager getUserManager() {
 		return UserManager.getInstance();
 	}
+	
 }
