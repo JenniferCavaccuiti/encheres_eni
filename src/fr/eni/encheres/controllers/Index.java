@@ -17,7 +17,10 @@ public class Index extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.setCharacterEncoding("utf-8");
+
+
+
+//        request.setCharacterEncoding("utf-8");
         List<Item> itemsList = null;
         List<User> usersList = null;
         ManagerFactory.getItemManager();
@@ -25,6 +28,11 @@ public class Index extends HttpServlet {
         try {
             itemsList = ManagerFactory.getItemManager().findAll();
             usersList = ManagerFactory.getUserManager().findAll();
+
+            if (request.getParameter("searchedWord") != null) {
+
+            }
+
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
