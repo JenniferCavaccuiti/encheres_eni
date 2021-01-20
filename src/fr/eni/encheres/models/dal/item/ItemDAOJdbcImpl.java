@@ -24,7 +24,6 @@ public class ItemDAOJdbcImpl implements ItemDAO {
         try (Connection connection = ConnectionProvider.getConnection()) {
             Statement stmt = connection.createStatement();
             ResultSet resultSet = stmt.executeQuery(SQL_SELECT_ALL);
-            System.out.println("je passe ici");
 
             while (resultSet.next()) {
                 item = new Item();

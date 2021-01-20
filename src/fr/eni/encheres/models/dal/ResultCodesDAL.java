@@ -9,6 +9,6 @@ public class ResultCodesDAL {
 	public static final int SELECT_LOGIN_ECHEC = 10002;
 	public static final int SELECT_EMAIL_ECHEC = 10003;
 
-    public static final int SELECT_ALL_ITEMS_FAILED=10000;
+    public static final int SELECT_ALL_ITEMS_FAILED=10101;
 
 }

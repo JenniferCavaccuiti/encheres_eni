@@ -21,7 +21,6 @@ public class Index extends HttpServlet {
         ManagerFactory.getItemManager();
         try {
             itemsList = ManagerFactory.getItemManager().findAll();
-//            System.out.println(itemsList.get(0));
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
