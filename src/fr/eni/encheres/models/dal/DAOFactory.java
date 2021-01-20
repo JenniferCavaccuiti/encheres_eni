@@ -13,7 +13,7 @@ public abstract class DAOFactory {
     }
     
     public static UserDAO getUserDAO() {
-    	return UserDAOJdbcImpl.getInstance();
+    	return new UserDAOJdbcImpl();
     }
 
 }

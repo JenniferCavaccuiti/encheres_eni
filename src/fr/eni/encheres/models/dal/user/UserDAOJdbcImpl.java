@@ -18,7 +18,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 	private static UserDAO instance = null;
 
-	private UserDAOJdbcImpl() {
+	public UserDAOJdbcImpl() {
 	}
 
 	public static UserDAO getInstance() {
@@ -38,9 +38,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String selectLogin = "SELECT login FROM USERS WHERE login = ?";
 
 	@Override
-	public List<User> selectLogin(String login) throws BusinessException {
+	public List<String> selectLogin(String login) throws BusinessException {
 		
-		List<User> loginList = new ArrayList<>();
+		List<String> loginList = new ArrayList<>();
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = cnx.prepareStatement(selectLogin);) {
@@ -48,11 +48,13 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pStmt.setString(1, login);
 			
 			ResultSet rs = pStmt.executeQuery();
+			
+			
 
 			while (rs.next()) {
 				
-				User user = new User(rs.getString("login"), rs.getString("lastname"), rs.getString("firstname"), rs.getString("email"), rs.getString("phone_number"), rs.getString("street"), rs.getString("postal_code"), rs.getString("city"), rs.getString("password"), rs.getInt("credits"), rs.getBoolean("administrator")); 
-				loginList.add(user);
+				String liste = rs.getString(1); 
+				loginList.add(liste);
 			}
 
 			rs.close();
@@ -76,9 +78,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String selectEmail = "SELECT email FROM USERS WHERE email = ?";
 
 	@Override
-	public List<User> selectEmail(String email) throws BusinessException {
+	public List<String> selectEmail(String email) throws BusinessException {
 		
-		List<User> emailList = new ArrayList<>();
+		List<String> emailList = new ArrayList<>();
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = cnx.prepareStatement(selectEmail);) {
@@ -89,8 +91,8 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 			while (rs.next()) {
 				
-				User user = new User(rs.getString("login"), rs.getString("lastname"), rs.getString("firstname"), rs.getString("email"), rs.getString("phone_number"), rs.getString("street"), rs.getString("postal_code"), rs.getString("city"), rs.getString("password"), rs.getInt("credits"), rs.getBoolean("administrator")); 
-				emailList.add(user);
+				String liste = rs.getString(1); 
+				emailList.add(liste);
 			}
 
 			rs.close();

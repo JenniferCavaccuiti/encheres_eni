@@ -37,7 +37,7 @@ private List<Integer> errorCodesList;
 	
 	//--------- Méthode retournant la liste des codes d'erreurs  
 	
-	public List<Integer> getListeCodesErreur()
+	public List<Integer> getErrorCodesList()
 	{
 		return this.errorCodesList;
 	}
