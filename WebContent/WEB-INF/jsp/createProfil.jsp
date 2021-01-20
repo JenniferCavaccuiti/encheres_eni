@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@include file="../templates/startFile.jsp" %>
 
 <h1>Mon profil</h1>
