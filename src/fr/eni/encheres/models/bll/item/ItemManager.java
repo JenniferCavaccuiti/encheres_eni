@@ -5,6 +5,7 @@ import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.dal.DAOFactory;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.List;
 
 public class ItemManager {
@@ -19,6 +20,14 @@ public class ItemManager {
     }
 
     public List<Item> findAll() throws BusinessException, SQLException {
+//        List<Item> itemsList = null;
+//
+//        itemsList = DAOFactory.getItemDAO().findAll();
+//
+//        DateFormat fullDateFormat = DateFormat.getDateTimeInstance(
+//                DateFormat.FULL,
+//                DateFormat.FULL);
+
        return DAOFactory.getItemDAO().findAll();
     }
 }
