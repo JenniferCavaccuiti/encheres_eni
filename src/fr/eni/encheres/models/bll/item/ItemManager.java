@@ -5,7 +5,6 @@ import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.dal.DAOFactory;
 
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.util.List;
 
 public class ItemManager {

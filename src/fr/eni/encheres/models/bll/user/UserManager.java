@@ -110,5 +110,9 @@ public class UserManager {
 		
 		return user;
 	}
+
+	public List<User> findAll() throws BusinessException {
+		return DAOFactory.getUserDAO().findAll();
+	}
 	
 }

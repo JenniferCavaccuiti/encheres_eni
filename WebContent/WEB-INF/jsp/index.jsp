@@ -9,13 +9,12 @@
         <c:forEach var="item" items="${itemsList}">
             <div class="card col-4">
                 <div class="card-header">
-                    Featured
+                        ${item.itemName}
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">${item.itemName}</h5>
-                    <p class="card-text">Prix : ${item.currentPrice}</p>
+                    <h5 class="card-title">Prix : ${item.currentPrice}</h5>
                     <p>Fin de l'enchère : ${f:formatLocalDateTime(item.bidsEndDate, 'EEEE dd MMMM yyyy HH:mm')}</p>
-                    <p class="card-text">Vendeur : ${item.idSeller}</p>
+                    <p class="card-text">Vendeur : ${f:getUserLogin(item.idSeller, usersList)}</p>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>

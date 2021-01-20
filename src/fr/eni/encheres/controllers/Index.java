@@ -3,6 +3,7 @@ package fr.eni.encheres.controllers;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Item;
+import fr.eni.encheres.models.bo.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,14 +19,18 @@ public class Index extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.setCharacterEncoding("utf-8");
         List<Item> itemsList = null;
+        List<User> usersList = null;
         ManagerFactory.getItemManager();
+        ManagerFactory.getUserManager();
         try {
             itemsList = ManagerFactory.getItemManager().findAll();
+            usersList = ManagerFactory.getUserManager().findAll();
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
 
         request.setAttribute("itemsList", itemsList);
+        request.setAttribute("usersList", usersList);
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }

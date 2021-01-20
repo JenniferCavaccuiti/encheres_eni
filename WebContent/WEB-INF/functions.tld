@@ -14,4 +14,9 @@
         <function-class>fr.eni.encheres.tag.Dates</function-class>
         <function-signature>java.lang.String formatLocalDateTime(java.time.LocalDateTime, java.lang.String)</function-signature>
     </function>
+    <function>
+        <name>getUserLogin</name>
+        <function-class>fr.eni.encheres.tag.ItemUserServices</function-class>
+        <function-signature>java.lang.String getUserLogin(java.lang.Integer,java.util.List)</function-signature>
+    </function>
 </taglib>
