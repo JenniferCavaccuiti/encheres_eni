@@ -26,7 +26,7 @@
             <c:when test="${empty sessionScope}">
                 <div class="collapse navbar-collapse" id="disconnect">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="login.jsp">Se connecter / s'inscrire</a>
+                        <a class="nav-link active" aria-current="page" href="login">Se connecter / s'inscrire</a>
                     </div>
                 </div>
             </c:when>

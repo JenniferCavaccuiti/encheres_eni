@@ -162,11 +162,5 @@ public class User {
 				+ postalCode + ", City : " + city + ", Password : " + password + ", Credits : " + credits
 				+ ", Administrator : " + administrator + "/n";
 	}
-
-	
-	
-	
-	
-	
 	
 }

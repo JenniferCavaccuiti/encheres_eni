@@ -4,4 +4,11 @@
   <welcome-file-list>
     <welcome-file>index</welcome-file>
   </welcome-file-list>
+  
+  <!-- Servlet de login -->
+  <servlet>
+	<servlet-name>login</servlet-name>
+	<servlet-class>/WEB-INF/jsp/login</servlet-class>
+</servlet>
+
 </web-app>
