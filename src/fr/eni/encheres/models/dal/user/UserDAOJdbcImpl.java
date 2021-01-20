@@ -155,4 +155,41 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 	}
 
+	private static final String SELECT_ALL_LOGIN = "SELECT * FROM USERS";
+
+	public List<User> findAll() throws BusinessException {
+		List<User> usersList = new ArrayList<>();
+		User user;
+
+		try (Connection cnx = ConnectionProvider.getConnection();
+			 PreparedStatement pStmt = cnx.prepareStatement(SELECT_ALL_LOGIN)) {
+
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+
+				user = new User(
+						rs.getInt("user_id"),
+						rs.getString("login"),
+						rs.getString("lastname"),
+						rs.getString("firstname"),
+						rs.getString("email"),
+						rs.getString("phone_number"),
+						rs.getString("street"),
+						rs.getString("postal_code"),
+						rs.getString("city"),
+						rs.getString("password"),
+						rs.getInt("credits"),
+						rs.getBoolean("administrator"));
+				usersList.add(user);
+			}
+
+			rs.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usersList;
+	}
+
 }
