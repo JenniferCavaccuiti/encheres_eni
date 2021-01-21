@@ -14,5 +14,7 @@ public interface UserDAO {
 	public List<String> selectEmail(String email) throws BusinessException;
 
 	public List<User> findAll() throws BusinessException;
+	
+	public User selectUserByLogin(String login) throws BusinessException;
 
 }
