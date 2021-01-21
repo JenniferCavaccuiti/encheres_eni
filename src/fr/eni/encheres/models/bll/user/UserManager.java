@@ -61,7 +61,7 @@ public class UserManager {
 			user.setCity(city);
 			user.setPassword(password);
 			user.setAdministrator(administrator);
-			user.setCredits(0);
+			user.setCredits(100);
 
 			userDAO.insertUser(user);
 		}

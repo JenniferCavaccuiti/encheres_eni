@@ -15,7 +15,7 @@ import fr.eni.encheres.models.bll.user.UserManager;
 /**
  * Servlet implementation class CreateProfil
  */
-@WebServlet(name = "nouveauProfil", value = "/nouveauProfil")
+@WebServlet(name = "nouveauProfil", value = "/nouveau-profil")
 public class CreateProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

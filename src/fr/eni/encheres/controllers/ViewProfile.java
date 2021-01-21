@@ -14,7 +14,7 @@ import fr.eni.encheres.models.bo.User;
 /**
  * Servlet implementation class ViewProfile
  */
-@WebServlet("/ViewProfile")
+@WebServlet("/profil-utilisateur")
 public class ViewProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
