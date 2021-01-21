@@ -90,7 +90,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Prix : ${item.currentPrice}</h5>
                     <p>Fin de l'enchère : ${f:formatLocalDateTime(item.bidsEndDate, 'EEEE dd MMMM yyyy HH:mm')}</p>
-                    <p class="card-text">Vendeur : <a href="ViewProfile">${f:getUserLogin(item.idSeller, usersList)}</a></p>
+                    <p class="card-text">Vendeur : <a href="ViewProfile?login=${f:getUserLogin(item.idSeller, usersList)}">${f:getUserLogin(item.idSeller, usersList)}</a></p>
                     <c:if test="${not empty sessionScope}">
                         <a href="#" class="stretched-link">Afficher le détail</a>
                     </c:if>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.User;
 
@@ -20,8 +21,15 @@ public class ViewProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		User user = null;
-		user = ManagerFactory.getUserManager().selectUserByLogin(login);
-		user = new User("toto", "lastname", "firstname", "email", "phoneNumber", "street", "postalCode", "city", "password", 100, false); 
+		String login = request.getParameter("login");
+		
+		try {
+			user = ManagerFactory.getUserManager().selectUserByLog(login);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			
+		}
+		
 		
 		request.setAttribute("userProfile", user);
 		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profileView.jsp").forward(request, response);
