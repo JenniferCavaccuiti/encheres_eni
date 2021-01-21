@@ -63,7 +63,7 @@ public class CreateProfil extends HttpServlet {
 				System.out.println(MessagesReader.getErrorMessage(z));
 			}
 			
-			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/createProfil.jsp").forward(request, response);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/createProfile.jsp").forward(request, response);
 		}
 	
 		System.out.println("xxxxxxxx");
