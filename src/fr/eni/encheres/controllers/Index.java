@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "index", value = "/index")
@@ -17,20 +18,22 @@ public class Index extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-
-
-//        request.setCharacterEncoding("utf-8");
         List<Item> itemsList = null;
         List<User> usersList = null;
         ManagerFactory.getItemManager();
         ManagerFactory.getUserManager();
+
+        String searchedWord = request.getParameter("searchedWord");
+
         try {
+//            Récupération des users et des items en base
             itemsList = ManagerFactory.getItemManager().findAll();
             usersList = ManagerFactory.getUserManager().findAll();
 
-            if (request.getParameter("searchedWord") != null) {
-
+//            barre de recherche : si un mot clé est rentré, récupérer les items dont le nom contient le mot
+//             TODO enlever les espaces et les majuscules de la recherche
+            if (searchedWord != null) {
+                itemsList = ManagerFactory.getItemManager().searchedItems(searchedWord, itemsList);
             }
 
         } catch (BusinessException | SQLException businessException) {
