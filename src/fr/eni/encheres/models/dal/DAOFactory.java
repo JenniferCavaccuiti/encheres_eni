@@ -1,5 +1,7 @@
 package fr.eni.encheres.models.dal;
 
+import fr.eni.encheres.models.dal.bid.BidDAO;
+import fr.eni.encheres.models.dal.bid.BidDAOJdbcImpl;
 import fr.eni.encheres.models.dal.category.CategoryDAO;
 import fr.eni.encheres.models.dal.category.CategoryDAOJdbcImpl;
 import fr.eni.encheres.models.dal.item.ItemDAO;
@@ -20,5 +22,9 @@ public abstract class DAOFactory {
 
     public static CategoryDAO getCategoryDAO() {
         return new CategoryDAOJdbcImpl();
+    }
+
+    public static BidDAO getBidDAO() {
+        return new BidDAOJdbcImpl();
     }
 }
