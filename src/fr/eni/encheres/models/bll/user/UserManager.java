@@ -119,4 +119,10 @@ public class UserManager {
 		}
 	}
 
+	//---------- Méthode pour sélectionner un profil utilisateur en BDD
+	
+	public User selectUserByLogin(String login) throws BusinessException {
+		return DAOFactory.getUserDAO().selectUserByLogin(login);
+	}
+	
 }
