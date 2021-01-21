@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ItemDAOJdbcImpl implements ItemDAO {
 
-    private static final String SQL_SELECT_ALL = "select * from Item";
+    private static final String SQL_SELECT_ALL = "select * from ITEM";
 
     @Override
     public List<Item> findAll() {

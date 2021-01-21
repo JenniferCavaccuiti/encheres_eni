@@ -1,4 +1,6 @@
-package fr.eni.encheres.models.bo;
+package fr.eni.encheres.models.bll;
+
+import fr.eni.encheres.models.bo.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class LoginForm {
 		return errors;
 	}
 
-	public User connectUser( HttpServletRequest request ) {
+	public User connectUser(HttpServletRequest request ) {
 		/* Récupération des champs du formulaire */
 		String login = getValeurChamp( request, CHAMP_LOGIN );
 		String password = getValeurChamp( request, CHAMP_PASS );
