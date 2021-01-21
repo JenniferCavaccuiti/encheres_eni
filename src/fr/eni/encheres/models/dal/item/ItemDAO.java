@@ -10,4 +10,9 @@ public interface ItemDAO {
 
     public List<Item> findAll() throws BusinessException, SQLException;
 
+    List<Item> findByDateAndBuyerWhithoutProposal(int idBuyer);
+
+    List<Item> findByDateAndBuyerWhithProposal(int idBuyer);
+
+    List<Item> findFinishedBidsWinByUser(int idBuyer);
 }
