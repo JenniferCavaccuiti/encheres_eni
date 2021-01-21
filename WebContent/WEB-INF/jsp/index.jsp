@@ -26,6 +26,40 @@
                 </select>
             </div>
         </div>
+<div class="row">
+    <div class="form-check col">
+        <%--            <div class="col">--%>
+
+        <input class="form-check-input" type="radio" name="type" id="buy" value="buy" checked>
+        <label class="form-check-label" for="buy">
+            Achats
+        </label>
+
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="openedBids" value="option1">
+            <label class="form-check-label" for="openedBids">enchères en cours</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="onGoingBids" value="option1">
+            <label class="form-check-label" for="onGoingBids">mes enchères en cours</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="bidsWon" value="option1">
+            <label class="form-check-label" for="bidsWon">mes enchères remportées</label>
+        </div>
+        <%--            </div>--%>
+
+    </div>
+
+    <div class="form-check col">
+        <input class="form-check-input" type="radio" name="type" id="sell" value="sell" checked>
+        <label class="form-check-label" for="buy">
+            Mes ventes
+        </label>
+    </div>
+</div>
+        <%--        Partie de la recherche qui n'apparait que lorsque connecté--%>
+
 
         <button class="col-3 btn btn-outline-success btn-lg my-2 my-sm-0 block" type="submit">Rechercher</button>
 
