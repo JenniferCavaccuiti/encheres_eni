@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ItemDAOJdbcImpl implements ItemDAO {
 
-    private static final String SQL_SELECT_ALL = "select * from ITEM";
+    private static final String SQL_SELECT_ALL_NOT_FINISH = "select * from ITEM WHERE bids_end_date > getdate() ";
     private static final String SQL_SELECT_UNFINISHED_WITH_USER_PROPOSAL = "SELECT * FROM ITEM" +
             " WHERE item_id IN (select item_id FROM BID where buyer_id = ?)" +
             "AND bids_end_date > getdate() AND ITEM.seller_id != ?";
@@ -34,7 +34,7 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 
         try (Connection connection = ConnectionProvider.getConnection()) {
             Statement stmt = connection.createStatement();
-            ResultSet resultSet = stmt.executeQuery(SQL_SELECT_ALL);
+            ResultSet resultSet = stmt.executeQuery(SQL_SELECT_ALL_NOT_FINISH);
 
             while (resultSet.next()) {
                 item = new Item();
