@@ -28,7 +28,7 @@
             <c:when test="${empty sessionScope}">
                 <div class="collapse navbar-collapse" id="disconnect">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="nouveauProfil">Se connecter / s'inscrire</a>
+                        <a class="nav-link active" aria-current="page" href="nouveau-profil">Se connecter / s'inscrire</a>
                     </div>
                 </div>
             </c:when>
@@ -37,7 +37,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="#">Enchères</a>
                         <a class="nav-link" href="#">Vendre un article</a>
-                        <a class="nav-link" href="#">Mon profil</a>
+                        <a class="nav-link" href="ViewProfile">Mon profil</a>
                         <a class="nav-link disabled" href="/deconnexion" tabindex="-1">Déconnexion</a>
                     </div>
                 </div>

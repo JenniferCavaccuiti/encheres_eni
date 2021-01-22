@@ -16,7 +16,7 @@ import fr.eni.encheres.models.bll.user.UserManager;
  * Servlet implementation class CreateProfil
  */
 @WebServlet(name = "nouveauProfil", value = "/nouveau-profil")
-public class CreateProfil extends HttpServlet {
+public class CreateProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
@@ -36,11 +36,7 @@ public class CreateProfil extends HttpServlet {
 		String email = request.getParameter("email");
 		String street = request.getParameter("street");
 		String city = request.getParameter("city");
-		int credit = 0;
-		Boolean admin = false;
 		String confirm = request.getParameter("passwordConfirm");
-		
-		
 			
 		UserManager userManager = new UserManager();
 		
