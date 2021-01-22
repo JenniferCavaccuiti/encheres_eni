@@ -34,11 +34,11 @@ public class UserManager {
 	// --------- Méthode de mise à jour d'un user en BDD après verif du pseudo, de
 	// l'email, de la correspondance entre le nouveau mdp et la confirmation
 	// et de la correspondance de l'ancien mdp en BDD
-	
-	
-	
+
+
+
 	// --------- Méthode d'insertion d'un user en BDD après verif du pseudo et de
-	// l'email, et de la correspondance entre le mdp et la confirmation
+		// l'email
 	
 	public void addUser(String login, String lastname, String firstname, String email, String phoneNumber,
 			String street, String postalCode, String city, String password, String confirmPassword, boolean administrator) throws BusinessException
@@ -126,9 +126,9 @@ public class UserManager {
 	}
 	
 	// -------- Méthode qui retourne la liste des utilisateurs
-	
+
 		public List<User> findAll() throws BusinessException {
 			return DAOFactory.getUserDAO().findAll();
 		}
-		
+
 }
