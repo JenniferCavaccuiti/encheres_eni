@@ -16,9 +16,6 @@ import java.util.List;
 @WebServlet(name = "index", value = "/index")
 public class Index extends HttpServlet {
 
-
-
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         List<Item> itemsList = null;
@@ -33,9 +30,9 @@ public class Index extends HttpServlet {
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
-        HttpSession session = request.getSession();
-
-        session.setAttribute("idUser", 3);
+//        HttpSession session = request.getSession();
+//
+//        session.setAttribute("idUser", 3);
         request.setAttribute("itemsList", itemsList);
         request.setAttribute("usersList", usersList);
         request.setAttribute("categoriesList", categoriesList);
