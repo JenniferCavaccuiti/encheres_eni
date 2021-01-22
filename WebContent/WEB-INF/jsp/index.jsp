@@ -7,7 +7,7 @@
 
     <h5>Filtre : </h5>
 
-    <%--    barre de recherche--%>
+<%--    barre de recherche --%>
     <c:choose>
     <c:when test="${empty sessionScope}">
         <%@include file="../templates/searchBarNonConnectedTemplate.jsp" %>
@@ -20,11 +20,11 @@
 
     <div class="row justify-content-center">
         <c:forEach var="item" items="${itemsList}">
-        <c:if test="${not empty sessionScope}">--%>
+        <c:if test="${not empty sessionScope}">
         <div class="card col-4" id="item-${item.idItem}"
              onClick="changePage('${pageContext.request.contextPath}/nouveau-profil');">
             </c:if>
-            <c:if test="${empty sessionScope}">--%>
+            <c:if test="${empty sessionScope}">
             <div class="card col-4" id="item-${item.idItem}">
                 </c:if>
                 <div class="card-header">
