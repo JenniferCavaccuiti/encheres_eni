@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.LoginForm;
+import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bll.user.UserManager;
 import fr.eni.encheres.models.bo.User;
 import fr.eni.encheres.models.dal.user.UserDAOJdbcImpl;
@@ -27,6 +28,18 @@ public class Login extends HttpServlet {
 	public static final String ATT_SESSION_USER = "sessionUser";
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+		List<User> users = null;
+		try {
+			users = ManagerFactory.getUserManager().findAll();
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Les stoquer en attributs
+		request.setAttribute("users", users);
+		System.out.println(users);
+		
+
 		/* Affichage de la page de connexion */
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
 		
