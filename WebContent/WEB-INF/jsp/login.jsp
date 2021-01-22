@@ -16,10 +16,9 @@ Date: 19/01/2021
 	<form method="POST" action="login">
 		<fieldset>
 			<legend>Connexion</legend>
-			<p>Se connecter:</p>
 			<label for="login">Identifiant utilisateur<span class="required">*</span></label>
-			<input type="text" id="login" name="login" value="<c:out value="${user.user_id}"/>" size="20" maxlength="60"/>
-			<span class="error">${form.errors['user_id']}</span>
+			<input type="text" id="login" name="login" value="<c:out value="${user.login}"/>" size="20" maxlength="60"/>
+			<span class="error">${form.errors['login']}</span>
 			<br/>
 			<label for="password">Mot de passe<span class="required">*</span></label>
 			<input type="password" id="password" name="password" value="" size="20" maxlength="20" />
@@ -29,6 +28,11 @@ Date: 19/01/2021
 			<br/>
 			<!--  In case of unknown ID or password, display error or result -->
 			<p class="${empty form.errors ? 'success' : 'error'}">${form.result}</p>
+			<!--  Vérif de la présence d'une session existente -->
+			<c:if test="${!empty sessionScope.sessionUser}">
+            	<%-- Si l'utilisateur existe en session, alors on affiche son login --%>
+            	<p class="success">Bienvenue ${sessionScope.sessionUser.login}</p>
+            </c:if>
 		</fieldset>
 	</form>
 </body>

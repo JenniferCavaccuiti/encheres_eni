@@ -16,7 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="">
                 <%--                Ici, logo du site--%>
                 <img src="#" alt="" width="30" height="24" class="d-inline-block align-top">
                 Enchères Eni
@@ -28,7 +28,9 @@
             <c:when test="${empty sessionScope}">
                 <div class="collapse navbar-collapse" id="disconnect">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="nouveauProfil">Se connecter / s'inscrire</a>
+                        <a class="nav-link active" aria-current="page" href="nouveauProfil">S'inscrire</a>
+                        <br/>
+                        <a class="nav-link active" aria-current="page" href="login">Se connecter</a>
                     </div>
                 </div>
             </c:when>

@@ -3,6 +3,7 @@ package fr.eni.encheres.models.bll;
 import fr.eni.encheres.models.bo.User;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,8 @@ public class LoginForm {
 	private static final String CHAMP_PASS   = "password";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-
+	
+	
 	public String getResult() {
 		return result;
 	}
@@ -28,13 +30,13 @@ public class LoginForm {
 
 		User user = new User();
 
-		/* Validation du champ email. */
+		/* Validation du champ login. */
 		try {
 			validationLogin( login );
 		} catch ( Exception e ) {
 			setError( CHAMP_LOGIN, e.getMessage() );
 		}
-		user.setLogin( login );
+		user.setLogin(login);
 
 		/* Validation du champ mot de passe. */
 		try {
@@ -50,18 +52,26 @@ public class LoginForm {
 		} else {
 			result = "Échec de la connexion.";
 		}
-
+		// print de la combinaison login/mdp
+		System.out.println(user.getLogin()+user.getPassword());
 		return user;
 	}
 
 	/**
 	 * Valider l'identifiant saisi.
-	 */
-	private void validationLogin( String login ) throws Exception {
-		if ( login != null && !login.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+	 * v1
+	 * 	private void validationLogin( String login ) throws Exception {
+		if ( login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)") ) {
 			throw new Exception( "Merci de saisir une adresse mail valide." );
 		}
 	}
+	 */
+	private void validationLogin( String login ) throws Exception {
+		if (login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+			throw new Exception( "Merci de saisir un login valide." );
+		}
+	}
+
 
 	/**
 	 * Valider le mot de passe saisi.

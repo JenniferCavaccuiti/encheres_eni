@@ -1,6 +1,8 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.LoginForm;
+import fr.eni.encheres.models.bll.user.UserManager;
 import fr.eni.encheres.models.bo.User;
+import fr.eni.encheres.models.dal.user.UserDAOJdbcImpl;
 
 /**
  * Servlet implementation class Login
@@ -23,7 +28,8 @@ public class Login extends HttpServlet {
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 		/* Affichage de la page de connexion */
-		this.getServletContext().getRequestDispatcher("/login.jsp").forward( request, response );
+		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
+		
 	}
 
 	/**
@@ -38,7 +44,7 @@ public class Login extends HttpServlet {
 
         /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
-
+        
         /**
          * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
          * Utilisateur à la session, sinon suppression du bean de la session.
@@ -53,7 +59,7 @@ public class Login extends HttpServlet {
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, user );
 
-        this.getServletContext().getRequestDispatcher("/login.jsp").forward( request, response );
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward( request, response );
     }
 
 }

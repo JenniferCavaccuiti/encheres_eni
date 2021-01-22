@@ -95,7 +95,7 @@ public class UserManager {
 
 	// -------- TODO description
 	
-	public List<User> findAll() throws BusinessException {
+	public static List<User> findAll() throws BusinessException {
 		return DAOFactory.getUserDAO().findAll();
 	}
 	
