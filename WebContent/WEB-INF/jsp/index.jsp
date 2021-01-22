@@ -18,6 +18,7 @@
     </c:choose>
 
 
+<%--    Affichage items--%>
     <div class="row justify-content-center">
         <c:forEach var="item" items="${itemsList}">
         <c:if test="${not empty sessionScope}">
@@ -45,8 +46,6 @@
     <script type="text/javascript">
 
         function changePage(newPage) {
-
-
             window.location.pathname = newPage;
         }
 
