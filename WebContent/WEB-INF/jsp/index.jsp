@@ -59,15 +59,15 @@
                     </label>
                     <div class="">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="openedSell" value="option1" disabled>
+                            <input class="form-check-input" type="checkbox" id="openedSell" name="filter" value="option1" disabled>
                             <label class="form-check-label" for="openedSell">enchères en cours</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="onGoingSell" value="option1" disabled>
+                            <input class="form-check-input" type="checkbox" id="onGoingSell" name="filter" value="option1" disabled>
                             <label class="form-check-label" for="onGoingSell">mes enchères en cours</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="wonSell" value="option1" disabled>
+                            <input class="form-check-input" type="checkbox" id="wonSell" name="filter" value="option1" disabled>
                             <label class="form-check-label" for="wonSell">mes enchères remportées</label>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
     <%-- Card pour les enchères--%>
     <div class="row justify-content-center">
         <c:forEach var="item" items="${itemsList}">
-            <div class="card col-4">
+            <div class="card col-4" id="item-${item.idItem}">
                 <div class="card-header">
                         ${item.itemName}
                 </div>
@@ -92,7 +92,7 @@
                     <p>Fin de l'enchère : ${f:formatLocalDateTime(item.bidsEndDate, 'EEEE dd MMMM yyyy HH:mm')}</p>
                     <p class="card-text">Vendeur : <a href="profil-utilisateur?login=${f:getUserLogin(item.idSeller, usersList)}">${f:getUserLogin(item.idSeller, usersList)}</a></p>
                     <c:if test="${not empty sessionScope}">
-                        <a href="#" class="stretched-link">Afficher le détail</a>
+                        <a href="#" class="stretched-link"></a>
                     </c:if>
                 </div>
             </div>
@@ -120,6 +120,25 @@
             document.getElementById('onGoingBuy').disabled = true;
             document.getElementById('wonBuy').disabled = true;
         }
+    }
+
+    function filter() {
+        // je récupère tous els boutons radio
+        var filter = document.getElementsByName('filter');
+
+        var filterType;
+
+        // je récupère le bouton radio coché
+        for(var i = 0; i < filter.length; i++){
+            if(filter[i].checked){
+                filterType = filter[i].value;
+            }
+        }
+
+        var itemsList = document.getElementById('item-${item.idItem}');
+
+
+
     }
 </script>
 
