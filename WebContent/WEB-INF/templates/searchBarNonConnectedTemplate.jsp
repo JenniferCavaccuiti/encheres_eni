@@ -10,7 +10,6 @@
                    aria-label="Search">
         </div>
 
-
         <div class="col-auto my-1">
             <label class="mr-sm-2" for="category">Catégorie :</label>
             <select name="searchedCategory" class="custom-select mr-sm-2" id="category">
