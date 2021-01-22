@@ -1,6 +1,7 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,7 +29,7 @@ public class Login extends HttpServlet {
 	public static final String ATT_SESSION_USER = "sessionUser";
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		List<User> users = null;
+		List<User> users = new ArrayList<>();
 		try {
 			users = ManagerFactory.getUserManager().findAll();
 		} catch (BusinessException e) {
@@ -49,13 +50,10 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        /* Préparation de l'objet formulaire */
         LoginForm form = new LoginForm();
 
-        /* Traitement de la requête et récupération du bean en résultant */
         User user = form.connectUser(request);
 
-        /* Récupération de la session depuis la requête */
         HttpSession session = request.getSession();
         
         /**
