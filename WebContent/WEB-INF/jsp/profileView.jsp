@@ -14,13 +14,7 @@
 <label for="city">Ville : </label><p>${userProfile.getCity()}</p>
 </div>
 
-<c:if test="${not empty sessionScope} && ${String.valueOf(userProfile.getIdUser()).equals(session.getId())}">
 
-	 <div class="col-auto">
-      <button type="submit" class="btn btn-primary mb-2">Modifier</button>
-    </div>
-
-</c:if>
 <div class="container">
 <div class="col-auto">
 	 <button class="btn btn-secondary mb-2"><a href="index">Retour</a></button>
