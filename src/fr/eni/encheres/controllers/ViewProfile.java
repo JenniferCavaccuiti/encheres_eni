@@ -26,7 +26,6 @@ public class ViewProfile extends HttpServlet {
 		
 		User user = null;
 		String login = request.getParameter("login");
-		HttpSession session = request.getSession();
 		
 		try {
 			user = ManagerFactory.getUserManager().selectUserByLog(login);

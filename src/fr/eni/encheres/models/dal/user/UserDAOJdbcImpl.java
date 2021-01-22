@@ -36,9 +36,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String selectLogin = "SELECT login FROM USERS WHERE login = ?";
 
 	@Override
-	public String selectLogin(String login) throws BusinessException {
+	public List<String> selectLogin(String login) throws BusinessException {
 
-		String log = null;
+		List<String> listLogin = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = cnx.prepareStatement(selectLogin);) {
@@ -47,9 +47,10 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 			ResultSet rs = pStmt.executeQuery();
 
-			if(rs.next()) {
+			while(rs.next()) {
 
-				log = rs.getString(1);
+				String log = rs.getString(1);
+				listLogin.add(log);
 			}
 
 			rs.close();
@@ -61,7 +62,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw exception;
 		}
 
-		return log;
+		return listLogin;
 
 	}
 
@@ -103,9 +104,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String selectEmail = "SELECT email FROM USERS WHERE email = ?";
 
 	@Override
-	public String selectEmail(String email) throws BusinessException {
+	public List<String> selectEmail(String email) throws BusinessException {
 
-		String mail = null;
+		List<String> emailList = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = cnx.prepareStatement(selectEmail);) {
@@ -114,8 +115,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 			ResultSet rs = pStmt.executeQuery();
 
-			if (rs.next()) {
-				mail = rs.getString(1);
+			while (rs.next()) {
+				String mail = rs.getString(1);
+				emailList.add(mail);
 			}
 
 			rs.close();
@@ -127,7 +129,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw exception;
 		}
 
-		return mail;
+		return emailList;
 
 	}
 	

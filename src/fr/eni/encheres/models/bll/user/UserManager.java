@@ -92,8 +92,8 @@ public class UserManager {
 
 	public void loginExists(String login, BusinessException exception) throws BusinessException {
 
-		String log = DAOFactory.getUserDAO().selectLogin(login);
-		if (!(log.isEmpty())) {
+		List<String> logList = DAOFactory.getUserDAO().selectLogin(login);
+		if (!(logList.isEmpty())) {
 			exception.addError(ResultCodesBLL.ERROR_PSEUDO_EXISTS);
 		}
 	}
@@ -113,8 +113,8 @@ public class UserManager {
 
 	public void emailExists(String email, BusinessException exception) throws BusinessException {
 
-		String mail = DAOFactory.getUserDAO().selectEmail(email);
-		if (!(mail.isEmpty())) {
+		List<String> mailList = DAOFactory.getUserDAO().selectEmail(email);
+		if (!(mailList.isEmpty())) {
 			exception.addError(ResultCodesBLL.ERROR_EMAIL_EXISTS);
 		}
 	}

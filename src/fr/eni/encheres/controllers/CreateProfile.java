@@ -44,7 +44,8 @@ public class CreateProfile extends HttpServlet {
 		
 		try {
 			userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
-			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+			request.getSession().setAttribute("login", login);
+			request.getServletContext().getRequestDispatcher("/index").forward(request, response);
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();
