@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@page import="fr.eni.encheres.messages.MessagesReader"%>
 
-<h1>Mon profil</h1>
+<h1>Créer un nouveau profil</h1>
 
 
 
@@ -18,7 +18,7 @@
 </c:if>
 
 
-<form method="post" action="nouveauProfil">
+<form method="post" action="nouveau-profil">
 
 <div class="container">
 

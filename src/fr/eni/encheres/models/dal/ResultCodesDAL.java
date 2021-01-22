@@ -5,10 +5,11 @@ package fr.eni.encheres.models.dal;
 public class ResultCodesDAL {
 	
 	public static final int INSERT_OBJET_NULL = 10000;
-	public static final int INSERT_OBJET_FAILED = 10001;
+	public static final int INSERT_UPDATE_OBJET_FAILED = 10001;
 	public static final int SELECT_LOGIN_FAILED = 10002;
 	public static final int SELECT_EMAIL_FAILED = 10003;
 	public static final int SELECT_USER_FAILED = 10004;
+	public static final int SELECT_PASSWORD_FAILED = 10005;
 
     public static final int SELECT_ALL_ITEMS_FAILED=10101;
     public static final int SELECT_ALL_CATEGORIES_FAILED = 10102;

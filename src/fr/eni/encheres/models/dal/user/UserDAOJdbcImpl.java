@@ -36,9 +36,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String selectLogin = "SELECT login FROM USERS WHERE login = ?";
 
 	@Override
-	public List<String> selectLogin(String login) throws BusinessException {
+	public String selectLogin(String login) throws BusinessException {
 
-		List<String> loginList = new ArrayList<>();
+		String log = null;
 
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = cnx.prepareStatement(selectLogin);) {
@@ -47,10 +47,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 			ResultSet rs = pStmt.executeQuery();
 
-			while (rs.next()) {
+			if(rs.next()) {
 
-				String liste = rs.getString(1);
-				loginList.add(liste);
+				log = rs.getString(1);
 			}
 
 			rs.close();
@@ -62,11 +61,41 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw exception;
 		}
 
-		return loginList;
+		return log;
 
 	}
 
 	
+	// ------------ Méthode qui renvoie le mot de passe pour l'user dont l'id est en paramètres
+	
+	private static final String selectPasswordById = "SELECT password FROM USERS WHERE user_id = ?";
+	
+	@Override
+	public String selectPasswordById(int id) throws BusinessException {
+
+		String password = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(selectPasswordById);) {
+
+			pStmt.setInt(1, id);
+			ResultSet rs = pStmt.executeQuery();
+
+			if (rs.next()) {
+				password = rs.getString(1);
+			}
+
+			rs.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException exception = new BusinessException();
+			exception.addError(ResultCodesDAL.SELECT_PASSWORD_FAILED);
+			throw exception;
+		}
+		
+		return password;
+	}
 
 	// ------------ Méthode qui sélectionne en BDD l'email correspondant à la valeur
 	// ------------ passée en param (null si l'email n'est pas présent en base)
@@ -74,9 +103,9 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String selectEmail = "SELECT email FROM USERS WHERE email = ?";
 
 	@Override
-	public List<String> selectEmail(String email) throws BusinessException {
+	public String selectEmail(String email) throws BusinessException {
 
-		List<String> emailList = new ArrayList<>();
+		String mail = null;
 
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = cnx.prepareStatement(selectEmail);) {
@@ -85,22 +114,20 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 			ResultSet rs = pStmt.executeQuery();
 
-			while (rs.next()) {
-
-				String liste = rs.getString(1);
-				emailList.add(liste);
+			if (rs.next()) {
+				mail = rs.getString(1);
 			}
 
 			rs.close();
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException exception = new BusinessException();
 			exception.addError(ResultCodesDAL.SELECT_EMAIL_FAILED);
 			throw exception;
 		}
 
-		return emailList;
+		return mail;
 
 	}
 	
@@ -166,7 +193,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 				rs.close();
 
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			return usersList;
@@ -212,12 +239,55 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 			rs.close();
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			exception.addError(ResultCodesDAL.INSERT_OBJET_FAILED);
+			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
 			throw exception;
 		}
 
 	}
+	
+	//------------------ Méthode de modification d'un user (cherché en BDD via son id)
+
+	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ? WHERE login = ?";
+	
+	@Override
+	public void updateUserById(User user) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+
+		if (user == null) {
+			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+			throw exception;
+		}
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(updateUserById)) {
+
+			pStmt.setString(1, user.getLogin());
+			pStmt.setString(2, user.getLastname());
+			pStmt.setString(3, user.getFirstname());
+			pStmt.setString(4, user.getEmail());
+			pStmt.setString(5, user.getPhoneNumber());
+			pStmt.setString(6, user.getStreet());
+			pStmt.setString(7, user.getPostalCode());
+			pStmt.setString(8, user.getCity());
+			pStmt.setString(9, user.getPassword());
+			pStmt.setInt(10, user.getIdUser());
+			
+
+			pStmt.executeUpdate();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+			throw exception;
+		}
+		
+		
+	}
+
+	
 
 }
