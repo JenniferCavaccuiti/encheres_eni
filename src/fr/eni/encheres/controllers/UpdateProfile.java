@@ -44,14 +44,19 @@ public class UpdateProfile extends HttpServlet {
 		
 		//On récupère les infos de l'user via son login stocké en session
 		//String loginSession = (String) request.getSession().getAttribute("login");
-		String loginSession = "OKKKK";
-		User user = null;
+		User userT = (User) request.getSession().getAttribute("user");
+		System.out.println(userT);
+		String loginSession = userT.getLogin();
+		//String loginSession = "OKKKK"; //Pour tester
+		
 		UserManager userManager = new UserManager();
 	
 		try {
-			user = ManagerFactory.getUserManager().selectUserByLog(loginSession);
+			User user = ManagerFactory.getUserManager().selectUserByLog(loginSession);
+			//request.setAttribute("user", user);
 			userManager.updateUser(user, login, lastname, firstname, email, phoneNumber, street, postalCode, city, oldPassword, newPassword, confirm);
 			request.getSession().setAttribute("login", login);
+			request.getSession().setAttribute("user", user);
 			request.getServletContext().getRequestDispatcher("/index").forward(request, response);
 						
 		} catch (BusinessException e) {
@@ -67,10 +72,7 @@ public class UpdateProfile extends HttpServlet {
 				MessagesReader.getErrorMessage(z);
 				System.out.println(MessagesReader.getErrorMessage(z));
 			}
-			
-			
-			
-			request.setAttribute("credit", user.getCredits());
+						
 			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/updateProfile.jsp").forward(request, response);
 			
 		}

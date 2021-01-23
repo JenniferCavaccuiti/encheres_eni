@@ -51,9 +51,6 @@ public class UserManager {
 			if(!exception.hasErrors()) {
 				user.setLogin(login);
 			}
-			else {
-				throw exception;
-			}
 		}
 		
 		if(!firstname.isEmpty() && !user.getFirstname().equals(firstname)) {
@@ -70,9 +67,6 @@ public class UserManager {
 			
 			if(!exception.hasErrors()) {
 				user.setEmail(email);
-			}
-			else {
-				throw exception;
 			}
 		}
 		
