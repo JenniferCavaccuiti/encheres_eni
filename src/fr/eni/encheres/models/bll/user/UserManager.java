@@ -31,7 +31,12 @@ public class UserManager {
 	//return instance;
 	//}
 
-	
+	// --------- Méthode de mise à jour d'un user en BDD après verif du pseudo, de
+	// l'email, de la correspondance entre le nouveau mdp et la confirmation
+	// et de la correspondance de l'ancien mdp en BDD
+
+
+
 	// --------- Méthode d'insertion d'un user en BDD après verif du pseudo et de
 		// l'email
 	
@@ -61,7 +66,7 @@ public class UserManager {
 			user.setCity(city);
 			user.setPassword(password);
 			user.setAdministrator(administrator);
-			user.setCredits(0);
+			user.setCredits(100);
 
 			userDAO.insertUser(user);
 		}
@@ -83,21 +88,16 @@ public class UserManager {
 		}
 	}
 
-	// -------- Méthode pour vérifier que le login n'existe pas
+	// -------- Méthode pour vérifier que le login n'existe pas en BDD
 
 	public void loginExists(String login, BusinessException exception) throws BusinessException {
 
-		List<String> loginList = DAOFactory.getUserDAO().selectLogin(login);
-		if (!(loginList.isEmpty())) {
+		List<String> logList = DAOFactory.getUserDAO().selectLogin(login);
+		if (!(logList.isEmpty())) {
 			exception.addError(ResultCodesBLL.ERROR_PSEUDO_EXISTS);
 		}
 	}
 
-	// -------- TODO description
-	
-	public static List<User> findAll() throws BusinessException {
-		return DAOFactory.getUserDAO().findAll();
-	}
 	
 	// -------- Méthode confirm mot de passe
 	
@@ -109,20 +109,26 @@ public class UserManager {
 			
 		}
 
-	// -------- Méthode pour vérifier que l'email n'existe pas
+	// -------- Méthode pour vérifier que l'email n'existe pas en BDD
 
 	public void emailExists(String email, BusinessException exception) throws BusinessException {
 
-		List<String> emailList = DAOFactory.getUserDAO().selectEmail(email);
-		if (!(emailList.isEmpty())) {
+		List<String> mailList = DAOFactory.getUserDAO().selectEmail(email);
+		if (!(mailList.isEmpty())) {
 			exception.addError(ResultCodesBLL.ERROR_EMAIL_EXISTS);
 		}
 	}
 
-	//---------- Méthode pour sélectionner un profil utilisateur en BDD
+	//---------- Méthode pour sélectionner un profil utilisateur en BDD via son login
 	
 	public User selectUserByLog(String login) throws BusinessException {
 		return DAOFactory.getUserDAO().selectUserByLogin(login);
 	}
 	
+	// -------- Méthode qui retourne la liste des utilisateurs
+
+		public List<User> findAll() throws BusinessException {
+			return DAOFactory.getUserDAO().findAll();
+		}
+
 }

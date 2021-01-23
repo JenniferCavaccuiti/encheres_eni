@@ -16,5 +16,9 @@ public interface UserDAO {
 	public List<User> findAll() throws BusinessException;
 	
 	public User selectUserByLogin(String login) throws BusinessException;
+	
+	public String selectPasswordById(int id) throws BusinessException;
+	
+	public void updateUserById(User user) throws BusinessException;
 
 }

@@ -15,4 +15,11 @@
 </div>
 
 
+<div class="container">
+<div class="col-auto">
+	 <button class="btn btn-secondary mb-2"><a href="index">Retour</a></button>
+</div>
+</div>
+
+
 <%@include file="../templates/footer.jsp" %>

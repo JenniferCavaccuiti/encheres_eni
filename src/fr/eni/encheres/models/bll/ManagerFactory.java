@@ -1,5 +1,6 @@
 package fr.eni.encheres.models.bll;
 
+import fr.eni.encheres.models.bll.bid.BidManager;
 import fr.eni.encheres.models.bll.item.ItemManager;
 import fr.eni.encheres.models.bll.category.CategoryManager;
 import fr.eni.encheres.models.bll.user.UserManager;
@@ -18,4 +19,7 @@ public abstract class ManagerFactory {
         return new CategoryManager();
     }
 
+    public static BidManager getBidManager() {
+        return new BidManager();
+    }
 }

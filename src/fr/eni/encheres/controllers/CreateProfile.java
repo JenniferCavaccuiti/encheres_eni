@@ -15,8 +15,8 @@ import fr.eni.encheres.models.bll.user.UserManager;
 /**
  * Servlet implementation class CreateProfil
  */
-@WebServlet(name = "nouveauProfil", value = "/nouveauProfil")
-public class CreateProfil extends HttpServlet {
+@WebServlet(name = "nouveauProfil", value = "/nouveau-profil")
+public class CreateProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
@@ -36,11 +36,7 @@ public class CreateProfil extends HttpServlet {
 		String email = request.getParameter("email");
 		String street = request.getParameter("street");
 		String city = request.getParameter("city");
-		int credit = 0;
-		Boolean admin = false;
 		String confirm = request.getParameter("passwordConfirm");
-		
-		
 			
 		UserManager userManager = new UserManager();
 		
@@ -48,7 +44,8 @@ public class CreateProfil extends HttpServlet {
 		
 		try {
 			userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
-			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+			request.getSession().setAttribute("login", login);
+			request.getServletContext().getRequestDispatcher("/index").forward(request, response);
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();

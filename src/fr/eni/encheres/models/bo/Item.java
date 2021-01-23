@@ -1,6 +1,8 @@
 package fr.eni.encheres.models.bo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Item {
 
@@ -16,6 +18,8 @@ public class Item {
 	private String postalCode;
 	private String city;
 	private int idCategory;
+
+	List<Bid> bidsList = new ArrayList<>();
 	
 	
 	//--------- Constructeur
@@ -154,8 +158,15 @@ public class Item {
 	public void setIdCategory(int idCategory) {
 		this.idCategory = idCategory;
 	}
-	
-	
+
+	public void addBid(Bid bid) {
+		bidsList.add(bid);
+	}
+
+	public List<Bid> getBidsList() {
+		return bidsList;
+	}
+
 	//-------- Méthode toString
 	
 	@Override
@@ -163,10 +174,7 @@ public class Item {
 		return "Id : " + idItem + ", Name : " + itemName + ", Description : " + description
 				+ ", Start date : " + bidsStartDate + ", End date : " + bidsEndDate + ", Initial price : "
 				+ initialPrice + ", Current price : " + currentPrice + ", Seller id : " + idSeller + ", Street : " + street
-				+ ", Postal code : " + postalCode + ", City : " + city + ", Category : " + idCategory + "/n";
+				+ ", Postal code : " + postalCode + ", City : " + city + ", Category : " + idCategory + "\n"
+				+ "bids : " + bidsList + "\n";
 	}
-
-	
-		
-	
 }
