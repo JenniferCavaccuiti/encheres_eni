@@ -34,16 +34,16 @@
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="openedBuy" name="filter"
                                value="openedBuy">
-                        <label class="form-check-label" for="openedBuy">enchères en cours</label>
+                        <label class="form-check-label" for="openedBuy">Les enchères en cours</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="onGoingBuy" name="filter"
                                value="onGoingBuy">
-                        <label class="form-check-label" for="onGoingBuy">mes enchères en cours</label>
+                        <label class="form-check-label" for="onGoingBuy">Mes enchères suivies</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="wonBuy" name="filter" value="wonBuy">
-                        <label class="form-check-label" for="wonBuy">mes enchères remportées</label>
+                        <label class="form-check-label" for="wonBuy">Mes enchères remportées</label>
                     </div>
                 </div>
             </div>
@@ -57,23 +57,22 @@
                 <div class="">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="openedSell" name="filter"
-                               value="option1" disabled>
-                        <label class="form-check-label" for="openedSell">enchères en cours</label>
+                               value="openedSell" disabled>
+                        <label class="form-check-label" for="openedSell">Mes enchères non commencées</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="onGoingSell" name="filter"
-                               value="option1" disabled>
+                               value="onGoingSell" disabled>
                         <label class="form-check-label" for="onGoingSell">mes enchères en cours</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="wonSell" name="filter" value="option1"
+                        <input class="form-check-input" type="checkbox" id="wonSell" name="filter" value="wonSell"
                                disabled>
-                        <label class="form-check-label" for="wonSell">mes enchères remportées</label>
+                        <label class="form-check-label" for="wonSell">mes enchères terminées</label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <button class="col-5 btn btn-outline-success btn-lg my-2 my-sm-0 block" type="submit">Rechercher</button>
-
+    <button class="col-5 btn btn-outline-success btn-lg my-2 my-sm-0 block" type="submit" onclick="filter();">Rechercher</button>
 </form>
