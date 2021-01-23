@@ -40,7 +40,6 @@ public class Login extends HttpServlet {
 	 */
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         LoginForm form = new LoginForm();
-
         HttpSession session = request.getSession();
 
         /*
@@ -61,18 +60,23 @@ public class Login extends HttpServlet {
          * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
          * Utilisateur à la session, sinon suppression du bean de la session.
          */
-        if ( form.getErrors().isEmpty() ) {
+        /*if ( form.getErrors().isEmpty() ) {
             session.setAttribute( ATT_SESSION_USER, user );
-        } /* else {
+        } else {
             session.setAttribute( ATT_SESSION_USER, null );
         } */
-
+        if ( user != null ) {
+        	session.setAttribute("id_user", user.getIdUser());
+        	this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward( request, response );
+        } else {
+        	this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
+        }
+                
         /* Stockage du formulaire et du bean dans l'objet request 
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, user );
         */
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward( request, response );
+       
     }
     
     

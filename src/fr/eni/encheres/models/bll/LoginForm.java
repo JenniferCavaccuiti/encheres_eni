@@ -15,8 +15,8 @@ public class LoginForm {
 	private static final String CHAMP_PASS   = "password";
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
-	
-	
+
+
 	public String getResult() {
 		return result;
 	}
@@ -29,21 +29,23 @@ public class LoginForm {
 		User user = new User();
 		try {
 			user = DAOFactory.getUserDAO().selectUserByLogin(login);
+
+			if ( user == null ) {
+				throw new Exception("Login inconnu.");
+			} 
+			// test password
+			System.out.println(password);
+			if ( !password.equals(user.getPassword())) {
+				throw new Exception( "Mot de passe incorrecte." );
+			}
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		/* test print user */
 		System.out.println(user.getLogin()+user.getPassword());
-		
-		if ( user == null ) {
-				throw new Exception( "Login inconnu." );
-		} else {
-			if ( password != user.getPassword() ) {
-				throw new Exception( "Mot de passe incorrecte." );
-			}
-		}
-		
+
 		return user;
 	}
 
@@ -56,14 +58,14 @@ public class LoginForm {
 		}
 	}
 	 */
-	
+
 	/**
 	private void validationLogin( String login ) throws Exception {
 		if (login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 			throw new Exception( "Merci de saisir un login valide." );
 		}
 	}
-	*/
+	 */
 
 	/**
 	 * Valider le mot de passe saisi.
@@ -97,5 +99,5 @@ public class LoginForm {
 			return valeur;
 		}
 	}
-	
+
 }
