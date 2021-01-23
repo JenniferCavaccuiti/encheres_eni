@@ -22,19 +22,17 @@ function radio() {
     }
 }
 
-function filter() {
-    // je récupère tous els boutons radio
-    var filter = document.getElementsByName('filter');
-
-    var filterType;
-
-    // je récupère le bouton radio coché
-    for (var i = 0; i < filter.length; i++) {
-        if (filter[i].checked) {
-            filterType = filter[i].value;
-        }
-    }
-    var itemsList = document.getElementById('item-${item.idItem}');
-
-
-}
+// function filter() {
+//     // je récupère tous els boutons radio
+//     var filter = document.getElementsByName('filter');
+//
+//     var filterType;
+//
+//     // je récupère le bouton radio coché
+//     for (var i = 0; i < filter.length; i++) {
+//         if (filter[i].checked) {
+//             filterType = filter[i].value;
+//         }
+//     }
+//
+//     console.log(filterType);
