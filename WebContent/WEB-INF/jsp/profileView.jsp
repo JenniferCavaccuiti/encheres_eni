@@ -21,5 +21,6 @@
 </div>
 </div>
 
+<!-- ADD BOUTON MODIFIER PROFIL -->
 
 <%@include file="../templates/footer.jsp" %>

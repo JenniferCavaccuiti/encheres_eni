@@ -6,6 +6,7 @@ import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ResultCodesBLL;
 import fr.eni.encheres.models.bo.User;
 import fr.eni.encheres.models.dal.DAOFactory;
+import fr.eni.encheres.models.dal.ResultCodesDAL;
 import fr.eni.encheres.models.dal.user.UserDAO;
 
 public class UserManager {
@@ -35,7 +36,80 @@ public class UserManager {
 	// l'email, de la correspondance entre le nouveau mdp et la confirmation
 	// et de la correspondance de l'ancien mdp en BDD
 
+	public void updateUser(User user, String login, String lastname, String firstname, String email, String phoneNumber,
+			String street, String postalCode, String city, String oldPassword, String newPassword, String confirmPassword) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		passwordExists(user.getPassword(), oldPassword, exception);
+		
+		if (!login.isEmpty() && !user.getLogin().equals(login)) {
+			
+			loginIsAlphanum(login, exception);
+			loginExists(login, exception);
+			
+			if(!exception.hasErrors()) {
+				user.setLogin(login);
+			}
+			else {
+				throw exception;
+			}
+		}
+		
+		if(!firstname.isEmpty() && !user.getFirstname().equals(firstname)) {
+			user.setFirstname(firstname);
+		}
+		
+		if(!lastname.isEmpty() && !user.getLastname().equals(lastname)) {
+			user.setLastname(lastname);
+		}
+		
+		if(!email.isEmpty() && !user.getEmail().equals(email)) {
+			
+			emailExists(email, exception);
+			
+			if(!exception.hasErrors()) {
+				user.setEmail(email);
+			}
+			else {
+				throw exception;
+			}
+		}
+		
+		if(!phoneNumber.isEmpty() && !user.getPhoneNumber().equals(phoneNumber)) {
+			user.setPhoneNumber(phoneNumber);
+		}
+		
+		if(!street.isEmpty() && !user.getStreet().equals(street)) {
+			user.setStreet(street);
+		}
+		
+		if(!postalCode.isEmpty() && !user.getPostalCode().equals(postalCode)) {
+			user.setPostalCode(postalCode);
+		}
+		
+		if(!city.isEmpty() && !user.getCity().equals(city)) {
+			user.setCity(city);
+		}
+		
+		if(!newPassword.isEmpty()) {
+			confirmPassword(newPassword, confirmPassword, exception);
+			if(!exception.hasErrors()) {
+				user.setPassword(newPassword);
+			}
+		}
+		
+				
+		if (!exception.hasErrors()) {
 
+			userDAO.updateUserById(user);
+		}
+		
+		else {
+			throw exception;
+		}
+
+	}
 
 	// --------- Méthode d'insertion d'un user en BDD après verif du pseudo et de
 		// l'email
@@ -53,7 +127,7 @@ public class UserManager {
 		
 		User user = null;
 
-		if (!exception.hasErreurs()) {
+		if (!exception.hasErrors()) {
 
 			user = new User();
 			user.setLogin(login);
@@ -86,6 +160,15 @@ public class UserManager {
 		if (!(login.matches("[a-zA-Z0-9]+"))) {
 			exception.addError(ResultCodesBLL.ERROR_PSEUDO);
 		}
+	}
+	
+	// 
+	
+	public void passwordExists(String userPassword, String oldPassword, BusinessException exception) throws BusinessException {
+		
+		if(!userPassword.equals(oldPassword)) {
+			exception.addError(ResultCodesBLL.ERROR_OLD_PASSWORD);
+		}		
 	}
 
 	// -------- Méthode pour vérifier que le login n'existe pas en BDD

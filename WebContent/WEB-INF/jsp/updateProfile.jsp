@@ -20,13 +20,11 @@
 			<div class="row">
 			
 				<div class="col-auto">
-					<label>Pseudo</label> <input type="text" name="login"
-						required="required">
+					<label>Pseudo</label> <input type="text" name="login">
 				</div>
 
 				<div class="col-auto">
-					<label>Nom : </label> <input type="text" name="lastname"
-						required="required">
+					<label>Nom : </label> <input type="text" name="lastname">
 				</div>
 
 			</div>
@@ -35,48 +33,39 @@
 		<div class="container">
 			<div class="row">
 					<div class="col-auto">
-						<label>Prénom : </label> <input type="text" name="firstname"
-							required="required">
+						<label>Prénom : </label> <input type="text" name="firstname">
 					</div>
 					<div class="col-auto">
-						<label>Email : </label> <input type="email" name="email"
-							required="required">
+						<label>Email : </label> <input type="email" name="email">
 					</div>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="row">
-
 					<div class="col-auto">
-						<label>Téléphone : </label> <input type="tel" name="phoneNumber"
-							required="required">
+						<label>Téléphone : </label> <input type="tel" name="phoneNumber">
 					</div>
 
 					<div class="col-auto">
-						<label>Rue : </label> <input type="text" name="street"
-							required="required">
+						<label>Rue : </label> <input type="text" name="street">
 					</div>
 			</div>
 		</div>
 			
 		<div class="container">
 			<div class="row">
-
 					<div class="col-auto">
-						<label>Code postal : </label> <input type="text" name="postalCode"
-							required="required">
+						<label>Code postal : </label> <input type="text" name="postalCode">
 					</div>
 					<div class="col-auto">
-						<label>Ville : </label> <input type="text" name="city"
-							required="required">
+						<label>Ville : </label> <input type="text" name="city">
 					</div>
 			</div>
 		</div>
 		
 		<div class="container">
 			<div class="row">
-				
 				<div class="col-auto">
 						<label>Mot de passe actuel : </label> <input type="password"
 							name="oldPassword" required="required">
@@ -88,18 +77,18 @@
 			<div class="row">
 				<div class="col-auto">
 						<label>Nouveau mot de passe : </label> <input type="password"
-							name="newPassword" required="required">
+							name="newPassword">
 				</div>			
 				<div class="col-auto">
 						<label>Confirmation : </label> <input type="password"
-							name="passwordConfirm" required="required">
+							name="passwordConfirm">
 				</div>
 			</div>
 		</div>
 		
 		<div class="container">
 			<div class="row">
-			<label>Crédit</label><p>${x}</p>  <!-- TODO Récupérer le crédit de l'utilisateur !! -->
+			<label>Crédit</label><p>${credit}</p>  <!-- TODO Récupérer le crédit de l'utilisateur !! -->
 			</div>
 		</div>
 		
