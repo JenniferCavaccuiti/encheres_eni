@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.messages.MessagesReader;
 import fr.eni.encheres.models.bll.LoginForm;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bll.user.UserManager;
@@ -29,9 +30,7 @@ public class Login extends HttpServlet {
 	public static final String ATT_SESSION_USER = "sessionUser";
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		
-		/* Affichage de la page de connexion */
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
+		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
 		
 	}
 
@@ -41,42 +40,29 @@ public class Login extends HttpServlet {
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         LoginForm form = new LoginForm();
         HttpSession session = request.getSession();
-
-        /*
-         *  Récupération des saisies
-         */
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		
         User user = null;
 		try {
 			user = form.connectUser(login, password);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+	       
+	        	session.setAttribute("id_user", user.getIdUser());
+	        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward( request, response );
+		} 
+		catch (BusinessException e) {
 			e.printStackTrace();
+			e.getErrorCodesList();
+			request.setAttribute("listeError", e.getErrorCodesList());
+			System.out.println(e.getErrorCodesList());
+			
+			for (int z : e.getErrorCodesList()){
+				MessagesReader.getErrorMessage(z); 
+				System.out.println(MessagesReader.getErrorMessage(z));
+			}
+			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
 		}
         
-        /**
-         * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
-         * Utilisateur à la session, sinon suppression du bean de la session.
-         */
-        /*if ( form.getErrors().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, user );
-        } else {
-            session.setAttribute( ATT_SESSION_USER, null );
-        } */
-        if ( user != null ) {
-        	session.setAttribute("id_user", user.getIdUser());
-        	this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward( request, response );
-        } else {
-        	this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
-        }
-                
-        /* Stockage du formulaire et du bean dans l'objet request 
-        request.setAttribute( ATT_FORM, form );
-        request.setAttribute( ATT_USER, user );
-        */
-       
     }
     
     

@@ -25,51 +25,31 @@ public class LoginForm {
 		return errors;
 	}
 
-	public User connectUser(String login, String password ) throws Exception {
-		User user = new User();
+	public User connectUser(String login, String password ) throws BusinessException {
+		BusinessException exception = new BusinessException();
+		User user = null;
+		
 		try {
 			user = DAOFactory.getUserDAO().selectUserByLogin(login);
 
 			if ( user == null ) {
-				throw new Exception("Login inconnu.");
+				exception.addError(ResultCodesBLL.ERROR_CNX_LOGIN);
 			} 
 			// test password
 			System.out.println(password);
 			if ( !password.equals(user.getPassword())) {
-				throw new Exception( "Mot de passe incorrecte." );
+				exception.addError(ResultCodesBLL.ERROR_CNX_PASSWORD);
+			}
+			if ( exception.hasErreurs() ) {
+				throw exception;
 			}
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		/* test print user */
-		System.out.println(user.getLogin()+user.getPassword());
-
 		return user;
 	}
 
-	/**
-	 * Valider l'identifiant saisi.
-	 * v1
-	 * 	private void validationLogin( String login ) throws Exception {
-		if ( login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)") ) {
-			throw new Exception( "Merci de saisir une adresse mail valide." );
-		}
-	}
-	 */
-
-	/**
-	private void validationLogin( String login ) throws Exception {
-		if (login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-			throw new Exception( "Merci de saisir un login valide." );
-		}
-	}
-	 */
-
-	/**
-	 * Valider le mot de passe saisi.
-	 */
 	private void validationPassword( String password ) throws Exception {
 		if ( password != null ) {
 			if ( password.length() < 3 ) {
@@ -80,17 +60,11 @@ public class LoginForm {
 		}
 	}
 
-	/*
-	 * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-	 */
 	private void setError( String champ, String message ) {
 		errors.put( champ, message );
 	}
 
-	/*
-	 * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
-	 * sinon.
-	 */
+
 	private static String getValeurChamp( HttpServletRequest request, String nomChamp ) {
 		String valeur = request.getParameter( nomChamp );
 		if ( valeur == null || valeur.trim().length() == 0 ) {
