@@ -1,6 +1,8 @@
 package fr.eni.encheres.models.bll;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bo.User;
+import fr.eni.encheres.models.dal.DAOFactory;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,37 +25,25 @@ public class LoginForm {
 		return errors;
 	}
 
-	public User connectUser(HttpServletRequest request ) {
-		/* Récupération des champs du formulaire */
-		String login = getValeurChamp( request, CHAMP_LOGIN );
-		String password = getValeurChamp( request, CHAMP_PASS );
-
+	public User connectUser(String login, String password ) throws Exception {
 		User user = new User();
-
-		/* Validation du champ login. */
 		try {
-			validationLogin( login );
-		} catch ( Exception e ) {
-			setError( CHAMP_LOGIN, e.getMessage() );
+			user = DAOFactory.getUserDAO().selectUserByLogin(login);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		user.setLogin(login);
-
-		/* Validation du champ mot de passe. */
-		try {
-			validationPassword( password );
-		} catch ( Exception e ) {
-			setError( CHAMP_PASS, e.getMessage() );
-		}
-		user.setPassword( password );
-
-		/* Initialisation du résultat global de la validation. */
-		if ( errors.isEmpty() ) {
-			result = "Succès de la connexion.";
-		} else {
-			result = "Échec de la connexion.";
-		}
-		// print de la combinaison login/mdp
+		/* test print user */
 		System.out.println(user.getLogin()+user.getPassword());
+		
+		if ( user == null ) {
+				throw new Exception( "Login inconnu." );
+		} else {
+			if ( password != user.getPassword() ) {
+				throw new Exception( "Mot de passe incorrecte." );
+			}
+		}
+		
 		return user;
 	}
 
@@ -66,12 +56,14 @@ public class LoginForm {
 		}
 	}
 	 */
+	
+	/**
 	private void validationLogin( String login ) throws Exception {
 		if (login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 			throw new Exception( "Merci de saisir un login valide." );
 		}
 	}
-
+	*/
 
 	/**
 	 * Valider le mot de passe saisi.
@@ -105,4 +97,5 @@ public class LoginForm {
 			return valeur;
 		}
 	}
+	
 }

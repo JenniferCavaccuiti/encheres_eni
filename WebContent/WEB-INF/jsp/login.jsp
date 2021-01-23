@@ -13,7 +13,6 @@ Date: 19/01/2021
 <title>Login section</title>
 </head>
 <body>
-<p>Utilisateurs: ${users}</p>
 	<form method="POST" action="login">
 		<fieldset>
 			<legend>Connexion</legend>

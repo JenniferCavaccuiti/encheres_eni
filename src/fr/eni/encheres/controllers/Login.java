@@ -29,18 +29,7 @@ public class Login extends HttpServlet {
 	public static final String ATT_SESSION_USER = "sessionUser";
 
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		List<User> users = new ArrayList<>();
-		try {
-			users = ManagerFactory.getUserManager().findAll();
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// Les stoquer en attributs
-		request.setAttribute("users", users);
-		System.out.println(users);
 		
-
 		/* Affichage de la page de connexion */
 		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
 		
@@ -52,9 +41,21 @@ public class Login extends HttpServlet {
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         LoginForm form = new LoginForm();
 
-        User user = form.connectUser(request);
-
         HttpSession session = request.getSession();
+
+        /*
+         *  Récupération des saisies
+         */
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+		
+        User user = null;
+		try {
+			user = form.connectUser(login, password);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         /**
          * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
@@ -62,15 +63,18 @@ public class Login extends HttpServlet {
          */
         if ( form.getErrors().isEmpty() ) {
             session.setAttribute( ATT_SESSION_USER, user );
-        } else {
+        } /* else {
             session.setAttribute( ATT_SESSION_USER, null );
-        }
+        } */
 
-        /* Stockage du formulaire et du bean dans l'objet request */
+        /* Stockage du formulaire et du bean dans l'objet request 
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, user );
+        */
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward( request, response );
+        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward( request, response );
     }
+    
+    
 
 }
