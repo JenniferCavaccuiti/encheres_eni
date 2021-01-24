@@ -9,4 +9,18 @@ import java.util.List;
 public interface ItemDAO {
 
     List<Item> findAll() throws BusinessException, SQLException;
+
+    List<Item> findByDateAndBuyerWhithoutProposal(int idBuyer);
+
+    List<Item> findByDateAndBuyerWhithProposal(int idBuyer);
+
+    List<Item> findFinishedBidsWinByUser(int idBuyer);
+
+    List<Item> findNotOpenedBidSellByUser(int user);
+
+    List<Item> findOpenedSellItemsByUser(int user);
+
+    List<Item> findFinishedSellItemsByUser(int user);
+
+    List<Item> findOnGoingItems();
 }

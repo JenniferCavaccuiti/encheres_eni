@@ -22,17 +22,24 @@ public class Index extends HttpServlet {
         List<User> usersList = null;
         List<Category> categoriesList = null;
 
+        HttpSession session = request.getSession();
+
         try {
-            itemsList = ManagerFactory.getItemManager().findAll();
+
+            if(session==null) {
+                itemsList = ManagerFactory.getItemManager().findOnGoingItems();
+            } else {
+                itemsList = ManagerFactory.getItemManager().findAll();
+            }
+
             usersList = ManagerFactory.getUserManager().findAll();
             categoriesList = ManagerFactory.getCategoryManager().findAll();
 
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
-        HttpSession session = request.getSession();
 
-        session.setAttribute("idUser", 3);
+//        session.setAttribute("idUser", 3);
         request.setAttribute("itemsList", itemsList);
         request.setAttribute("usersList", usersList);
         request.setAttribute("categoriesList", categoriesList);
