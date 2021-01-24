@@ -31,6 +31,10 @@ public class Index extends HttpServlet {
             businessException.printStackTrace();
         }
 
+        HttpSession session = request.getSession();
+        System.out.println(itemsList);
+
+
        
         request.setAttribute("itemsList", itemsList);
         request.setAttribute("usersList", usersList);

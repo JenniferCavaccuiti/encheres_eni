@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
-<form method="get" action="${pageContext.request.contextPath}/index"
+<form method="POST" action="${pageContext.request.contextPath}/index"
       class="form-inline row my-2 my-lg-0  justify-content-evenly">
     <div class="col-4">
         <div class="col-auto my-1">
@@ -9,7 +9,6 @@
                    placeholder="Le nom de l'article contient"
                    aria-label="Search">
         </div>
-
 
         <div class="col-auto my-1">
             <label class="mr-sm-2" for="category">Catégorie :</label>
