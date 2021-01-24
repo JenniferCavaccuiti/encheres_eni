@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="fr.eni.encheres.messages.MessagesReader"%>
 <%@include file="../templates/startFile.jsp"%>
-<%@page import="java.util.List"%>
+
 	<form method="POST" action="login">
 		<fieldset>
 			<legend>Connexion</legend>
@@ -18,8 +18,8 @@
 			<br/>
 		</fieldset>
 	</form>
-<c:if test="${liste != null }">
-	<c:forEach var="erreur" items="${liste}">
+<c:if test="${listeError != null }">
+	<c:forEach var="erreur" items="${listeError}">
 	<li>${MessagesReader.getErrorMessage(erreur)}</li>
 	</c:forEach>
 </c:if>

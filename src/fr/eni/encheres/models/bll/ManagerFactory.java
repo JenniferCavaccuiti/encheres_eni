@@ -1,5 +1,6 @@
 package fr.eni.encheres.models.bll;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.bid.BidManager;
 import fr.eni.encheres.models.bll.item.ItemManager;
 import fr.eni.encheres.models.bll.category.CategoryManager;
@@ -22,4 +23,9 @@ public abstract class ManagerFactory {
     public static BidManager getBidManager() {
         return new BidManager();
     }
+
+    public static LoginForm getLoginForm(BusinessException exceptionList) {
+        return new LoginForm(exceptionList);
+    }
 }
+

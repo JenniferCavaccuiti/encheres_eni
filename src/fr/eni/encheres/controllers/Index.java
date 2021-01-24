@@ -30,10 +30,10 @@ public class Index extends HttpServlet {
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
-        HttpSession session = request.getSession();
-        System.out.println(itemsList);
-
-        session.setAttribute("idUser", 3);
+//        HttpSession session = request.getSession();
+//        System.out.println(itemsList);
+//
+//        session.setAttribute("idUser", 3);
         request.setAttribute("itemsList", itemsList);
         request.setAttribute("usersList", usersList);
         request.setAttribute("categoriesList", categoriesList);

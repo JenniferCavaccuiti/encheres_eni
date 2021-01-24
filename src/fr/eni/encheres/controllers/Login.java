@@ -24,47 +24,42 @@ import fr.eni.encheres.models.dal.user.UserDAOJdbcImpl;
  */
 @WebServlet("/login")
 public class Login extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	public static final String ATT_USER         = "user";
-	public static final String ATT_FORM         = "form";
-	public static final String ATT_SESSION_USER = "sessionUser";
+    private static final long serialVersionUID = 1L;
+    public static final String ATT_USER = "user";
+    public static final String ATT_FORM = "form";
+    public static final String ATT_SESSION_USER = "sessionUser";
 
-	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
-		
-	}
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        LoginForm form = new LoginForm();
-        HttpSession session = request.getSession();
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-		
-        User user = null;
-		try {
-			user = form.connectUser(login, password);
-	       
-	        	session.setAttribute("id_user", user.getIdUser());
-	        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward( request, response );
-		} 
-		catch (BusinessException e) {
-			e.printStackTrace();
-			e.getErrorCodesList();
-			request.setAttribute("listeError", e.getErrorCodesList());
-			System.out.println(e.getErrorCodesList());
-			
-			for (int z : e.getErrorCodesList()){
-				MessagesReader.getErrorMessage(z); 
-				System.out.println(MessagesReader.getErrorMessage(z));
-			}
-			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
-		}
-        
     }
-    
-    
 
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BusinessException exceptionList = new BusinessException();
+
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+
+        LoginForm form = ManagerFactory.getLoginForm(exceptionList);
+        User user = new User();
+
+        try {
+            user = form.connectUser(login, password);
+        } catch (BusinessException e) {
+            e.printStackTrace();
+//            request.setAttribute("listeError", exceptionList.getErrorCodesList());
+        }
+
+        if (exceptionList.hasErreurs()) {
+			request.setAttribute("listeError", exceptionList.getErrorCodesList());
+            request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("idUser", user.getIdUser());
+            request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+        }
+    }
 }

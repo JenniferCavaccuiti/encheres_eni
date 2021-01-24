@@ -31,7 +31,6 @@ public class ViewProfile extends HttpServlet {
 			user = ManagerFactory.getUserManager().selectUserByLog(login);
 		} catch (BusinessException e) {
 			e.printStackTrace();
-			
 		}
 		
 		
