@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.messages.MessagesReader;
 import fr.eni.encheres.models.bll.user.UserManager;
+import fr.eni.encheres.models.bo.User;
 
 /**
  * Servlet implementation class CreateProfil
@@ -46,7 +47,9 @@ public class CreateProfile extends HttpServlet {
 		
 		try {
 			userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
+			User user = userManager.selectUserByLog(login);
 			request.getSession().setAttribute("login", login);
+			request.getSession().setAttribute("user", user);
 			request.getServletContext().getRequestDispatcher("/index").forward(request, response);
 			
 		} catch (BusinessException e) {

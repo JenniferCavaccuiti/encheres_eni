@@ -37,7 +37,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="#">Enchères</a>
                         <a class="nav-link" href="#">Vendre un article</a>
-                        <a class="nav-link" href="profil-utilisateur?login=${request.getSession.getAttribute("login")}">Mon profil</a>
+                        <a class="nav-link" href="profil-utilisateur?login=${sessionScope.user.getLogin()}">Mon profil</a>
                         <a class="nav-link" href="deconnexion" tabindex="-1">Déconnexion</a>
                     </div>
                 </div>

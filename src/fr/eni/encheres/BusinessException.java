@@ -29,7 +29,7 @@ private List<Integer> errorCodesList;
 	
 	//-------- Méthode retournant un boolean, vrai si la liste contient des erreurs
 	
-	public boolean hasErreurs()
+	public boolean hasErrors()
 	{
 		return this.errorCodesList.size()>0;
 	}

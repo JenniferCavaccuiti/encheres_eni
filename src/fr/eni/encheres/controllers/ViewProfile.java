@@ -6,10 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-//import javax.websocket.Session;
-
-//import org.apache.catalina.ant.SessionsTask;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ManagerFactory;
@@ -31,6 +27,7 @@ public class ViewProfile extends HttpServlet {
 			user = ManagerFactory.getUserManager().selectUserByLog(login);
 		} catch (BusinessException e) {
 			e.printStackTrace();
+			//TODO add une erreur
 		}
 		
 		

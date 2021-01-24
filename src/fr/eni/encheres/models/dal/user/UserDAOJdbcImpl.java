@@ -250,7 +250,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	
 	//------------------ Méthode de modification d'un user (cherché en BDD via son id)
 
-	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ? WHERE login = ?";
+	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ? WHERE user_id = ?";
 	
 	@Override
 	public void updateUserById(User user) throws BusinessException {
