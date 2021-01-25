@@ -3,7 +3,7 @@
 <%@taglib uri="http://example.com/functions" prefix="f" %>
 <%@include file="../templates/startFile.jsp" %>
 <div class="col-11 center-block">
-    <h1>bienvenue</h1>
+    <h1>Bienvenue</h1>
 
     <h5>Filtres : </h5>
 
@@ -22,8 +22,9 @@
     <div class="row justify-content-center">
         <c:forEach var="item" items="${itemsList}">
         <c:if test="${not empty sessionScope}">
-        <div class="card col-4" id="item-${item.idItem}"
-             onClick="changePage('${pageContext.request.contextPath}/nouveau-profil');">
+        <div class="card col-4" id="item-${item.idItem}">
+        	 <a href="details-vente?itemId=${item.idItem}">Afficher détails</a>
+        
             </c:if>
             <c:if test="${empty sessionScope}">
             <div class="card col-4" id="item-${item.idItem}">

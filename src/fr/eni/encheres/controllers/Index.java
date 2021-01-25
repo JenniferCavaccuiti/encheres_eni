@@ -20,7 +20,7 @@ public class Index extends HttpServlet {
         List<Item> itemsList = null;
         List<Category> categoriesList = null;
 
-        boolean connected = isConnected(request.getSession().getAttribute("idUser"));
+       boolean connected = isConnected(request.getSession().getAttribute("idUser"));
 
         try {
             if (!connected) {

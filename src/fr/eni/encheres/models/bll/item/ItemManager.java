@@ -123,5 +123,20 @@ public class ItemManager {
         setSellerAndBidsToItemsList(newItemsList);
         return newItemsList;
     }
+    
+    //--------------- Méthode qui récupère en item en fonction de son id
+    
+    public Item getItemById(int id) throws BusinessException {
+    	return DAOFactory.getItemDAO().selectItemById(id);
+    }
 
+    //---------------- Méthode qui set le nom de la catégorie et du vendeur pour un item
+    
+    public Item setSellerNameCatagoryName(Item item) {
+    	 item.setCategoryName(DAOFactory.getCategoryDAO().findOne(item.getIdCategory()));
+         item.setSellerName(DAOFactory.getUserDAO().findOneById(item.getIdSeller()));
+         
+		return item;
+    }
+    
 }

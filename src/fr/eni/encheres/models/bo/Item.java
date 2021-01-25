@@ -197,7 +197,7 @@ public class Item {
 		return "Id : " + idItem + ", Name : " + itemName + ", Description : " + description
 				+ ", Start date : " + bidsStartDate + ", End date : " + bidsEndDate + ", Initial price : "
 				+ initialPrice + ", Current price : " + currentPrice + ", Seller id : " + idSeller + ", Street : " + street
-				+ ", Postal code : " + postalCode + ", City : " + city + ", Category : " + idCategory + "\n"
-				+ "bids : " + bidsList + " vendeur ;"+ sellerName +"\n";
+				+ ", Postal code : " + postalCode + ", City : " + city + ", Category : " + idCategory + ", " +categoryName + "\n"
+				+ "Bids : " + bidsList + " Seller name : "+ sellerName +"\n";
 	}
 }

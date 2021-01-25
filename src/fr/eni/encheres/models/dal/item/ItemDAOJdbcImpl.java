@@ -1,7 +1,10 @@
 package fr.eni.encheres.models.dal.item;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bo.Item;
+import fr.eni.encheres.models.bo.User;
 import fr.eni.encheres.models.dal.ConnectionProvider;
+import fr.eni.encheres.models.dal.ResultCodesDAL;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -261,4 +264,51 @@ public class ItemDAOJdbcImpl implements ItemDAO {
             itemsList.add(item);
         }
     }
+    
+    
+    //------------- Méthode qui selectionne un item via son nom
+    
+    private static final String selectItemById = "SELECT * FROM ITEM where item_id = ?";
+    
+    @Override
+    public Item selectItemById(int id) throws BusinessException {
+    	
+    	Item item = null;
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(selectItemById);) {
+			
+			pStmt.setInt(1, id);
+		
+			ResultSet resultSet = pStmt.executeQuery();
+		
+			if (resultSet.next()) {
+				
+				item = new Item();
+	            item.setIdItem(resultSet.getInt("item_id"));
+	            item.setItemName(resultSet.getString("item_name"));
+	            item.setDescription(resultSet.getString("description"));
+	            item.setBidsStartDate(resultSet.getTimestamp("bids_start_date").toLocalDateTime());
+	            item.setBidsEndDate(resultSet.getTimestamp("bids_end_date").toLocalDateTime());
+	            item.setInitialPrice(resultSet.getInt("initial_price"));
+	            item.setCurrentPrice(resultSet.getInt("current_price"));
+	            item.setIdSeller(resultSet.getInt("seller_id"));
+	            item.setStreet(resultSet.getString("street"));
+	            item.setPostalCode(resultSet.getString("postal_code"));
+	            item.setCity(resultSet.getString("city"));
+	            item.setIdCategory(resultSet.getInt("category_id"));
+			}
+
+			resultSet.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException exception = new BusinessException();
+			exception.addError(ResultCodesDAL.SELECT_ITEM_ID_FAILED);
+			throw exception;
+		}
+    	
+    	return item;
+    }
+    
 }
