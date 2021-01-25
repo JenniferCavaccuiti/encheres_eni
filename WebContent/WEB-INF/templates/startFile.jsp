@@ -16,7 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="<%=response.encodeURL(request.getContextPath() + "/index")%>">
+            <a class="navbar-brand" href="/enchere_test/index">
                 <%--                Ici, logo du site--%>
                 <img src="img/logo1.png" alt="" width="30" height="24" class="d-inline-block align-top">
                 Enchères Eni
@@ -37,7 +37,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="#">Enchères</a>
                         <a class="nav-link" href="#">Vendre un article</a>
-                        <a class="nav-link" href="profil-utilisateur?login=${sessionScope.login}">Mon profil</a>
+                        <a class="nav-link" href="profil-utilisateur?login=${sessionScope.user.getLogin()}">Mon profil</a>
                         <a class="nav-link" href="deconnexion" tabindex="-1">Déconnexion</a>
                     </div>
                 </div>

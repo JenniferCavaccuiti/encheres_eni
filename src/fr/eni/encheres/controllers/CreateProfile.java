@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.messages.MessagesReader;
-import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bll.user.UserManager;
 import fr.eni.encheres.models.bo.User;
 
@@ -40,14 +39,14 @@ public class CreateProfile extends HttpServlet {
 		String city = request.getParameter("city");
 		String confirm = request.getParameter("passwordConfirm");
 			
-		//UserManager userManager = new UserManager();
+		UserManager userManager = new UserManager();
 
 
 		// TODO pas laissé trainé les syso :)
 		System.out.println("xxxxxxxx");
 		
 		try {
-			User user = ManagerFactory.getUserManager().addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
+			User user = userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
 			//user = userManager.selectUserByLog(login);
 			//request.getSession().setAttribute("login", user.getLogin());
 			request.getSession().setAttribute("user", user);

@@ -23,7 +23,7 @@
 
 <div class="container">
 	<div class="col-auto">
-		<c:if test="${userProfile.getLogin() == sessionScope.login}">
+		<c:if test="${userProfile.getLogin() == sessionScope.user.getLogin()}">
 			<button class="btn btn-secondary mb-2">
 				<a href="modifier-profil">Modifier mon profil</a>
 			</button>
