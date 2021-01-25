@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,13 +54,15 @@ public class Login extends HttpServlet {
 //            request.setAttribute("listeError", exceptionList.getErrorCodesList());
         }
 
-        if (exceptionList.hasErreurs()) {
+        if (exceptionList.hasErrors()) {
 			request.setAttribute("listeError", exceptionList.getErrorCodesList());
             request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("idUser", user.getIdUser());
-            request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+            session.setAttribute("user", user);
+            response.sendRedirect(request.getContextPath()+"/index");
+            //request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
         }
     }
 }

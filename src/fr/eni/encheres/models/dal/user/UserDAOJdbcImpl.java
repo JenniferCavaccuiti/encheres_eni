@@ -206,7 +206,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String insertUser = "INSERT INTO USERS (login, lastname, firstname, email, phone_number, street, postal_code, city, password, credits, administrator) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	@Override
-	public void insertUser(User user) throws BusinessException {
+	public User insertUser(User user) throws BusinessException {
 
 		BusinessException exception = new BusinessException();
 
@@ -246,6 +246,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw exception;
 		}
 
+		return user;
 	}
 	
 	//------------------ Méthode de modification d'un user (cherché en BDD via son id)
@@ -253,7 +254,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ? WHERE user_id = ?";
 	
 	@Override
-	public void updateUserById(User user) throws BusinessException {
+	public User updateUserById(User user) throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
 
@@ -286,6 +287,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw exception;
 		}
 		
+		return user;
 		
 	}
 

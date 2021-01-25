@@ -34,11 +34,6 @@ public class Index extends HttpServlet {
 
         HttpSession session = request.getSession();
         System.out.println(itemsList);
-       
-
-        
-
-        session.setAttribute("idUser", 3);
 
         request.setAttribute("itemsList", itemsList);
         request.setAttribute("usersList", usersList);

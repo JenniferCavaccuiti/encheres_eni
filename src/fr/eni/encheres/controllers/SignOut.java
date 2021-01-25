@@ -17,7 +17,8 @@ public class SignOut extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getSession().invalidate();
-		request.getServletContext().getRequestDispatcher("/index").forward(request, response);
+		response.sendRedirect(request.getContextPath()+"/index");
+		//request.getServletContext().getRequestDispatcher("/index").forward(request, response);
 	}
 
 	/**
