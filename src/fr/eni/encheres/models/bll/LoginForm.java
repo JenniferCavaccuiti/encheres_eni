@@ -1,5 +1,7 @@
 package fr.eni.encheres.models.bll;
 
+import java.util.Scanner;
+
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bo.User;
 import fr.eni.encheres.models.dal.DAOFactory;
@@ -25,7 +27,11 @@ public class LoginForm {
 
         // j'essaye de récupérer l'user en base
         try {
-            user = DAOFactory.getUserDAO().selectUserByLogin(login);
+        	if( login.contains("@") ) {
+        		user = (DAOFactory.getUserDAO().selectUserByEmail(login));
+        	} else {
+        		user = (DAOFactory.getUserDAO().selectUserByLogin(login));
+        	}
         } catch (Exception e) {
             e.printStackTrace();
             this.exceptionList.addError(ResultCodesBLL.ERROR_CNX_LOGIN);

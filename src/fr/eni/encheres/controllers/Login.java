@@ -39,7 +39,6 @@ public class Login extends HttpServlet {
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BusinessException exceptionList = new BusinessException();
-
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
