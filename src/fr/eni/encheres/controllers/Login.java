@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("idUser", user.getIdUser());
-            session.setAttribute("login", user.getLogin());
+            session.setAttribute("user", user);
             response.sendRedirect("index");
         }
     }
