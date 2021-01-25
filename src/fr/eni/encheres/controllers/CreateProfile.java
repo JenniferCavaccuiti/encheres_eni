@@ -46,11 +46,12 @@ public class CreateProfile extends HttpServlet {
 		System.out.println("xxxxxxxx");
 		
 		try {
-			userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
-			User user = userManager.selectUserByLog(login);
-			request.getSession().setAttribute("login", login);
+			User user = userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
+			//user = userManager.selectUserByLog(login);
+			//request.getSession().setAttribute("login", user.getLogin());
 			request.getSession().setAttribute("user", user);
-			request.getServletContext().getRequestDispatcher("/index").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/index");
+			//request.getServletContext().getRequestDispatcher("/index").forward(request, response);
 			
 		} catch (BusinessException e) {
 			e.printStackTrace();

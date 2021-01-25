@@ -36,8 +36,6 @@ public class Index extends HttpServlet {
             businessException.printStackTrace();
         }
 
-        // TODO la liste de catégories ne s'affiche pas en mode connecté
-
         request.setAttribute("itemsList", itemsList);
         request.setAttribute("categoriesList", categoriesList);
 

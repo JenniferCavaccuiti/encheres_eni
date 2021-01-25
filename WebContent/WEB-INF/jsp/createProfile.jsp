@@ -5,7 +5,7 @@
 
 <h1>Créer un nouveau profil</h1>
 
-
+<p>Votre pseudo doit contenir uniquement des caractères alphanumériques</p>
 
 <c:if test="${liste != null }">
 
@@ -26,7 +26,7 @@
   
     <div class="col-auto">
       <label>Pseudo</label>
-      <input type="text" name ="login" required="required">
+      <input type="text" name ="login" required="required" pattern="[a-zA-Z0-9]+">
     </div>
     
     <div class="col-auto">
@@ -49,12 +49,12 @@
    
     <div class="col-auto">
         <label>Téléphone : </label> 
-		<input type="tel" name="phoneNumber" required="required"> 
+		<input type="tel" name="phoneNumber" required="required" pattern="(0|\\+33|0033)[1-9][0-9]{8}" > 
     </div>
     
     <div class="col-auto">
        <label>Code postal : </label>
-		<input type="text" name="postalCode" required="required"> 
+		<input type="text" name="postalCode" required="required" maxlength="5" pattern="^(([0-8][0-9])|(9[0-5]))[0-9]{3}$"> 
     </div>
     
     <div class="col-auto">
