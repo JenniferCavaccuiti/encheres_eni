@@ -55,6 +55,7 @@ public class CategoryDAOJdbcImpl implements CategoryDAO {
             e.printStackTrace();
         }
         return categoryName;
+
     }
 }
 
