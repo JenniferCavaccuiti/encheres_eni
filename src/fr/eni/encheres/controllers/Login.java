@@ -34,9 +34,6 @@ public class Login extends HttpServlet {
 
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BusinessException exceptionList = new BusinessException();
         String login = request.getParameter("login");
