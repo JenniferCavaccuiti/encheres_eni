@@ -21,4 +21,6 @@ public interface UserDAO {
 	
 	public void updateUserById(User user) throws BusinessException;
 
+    String findOneById(int idSeller);
 }
+

@@ -23,4 +23,10 @@ public interface ItemDAO {
     List<Item> findFinishedSellItemsByUser(int user);
 
     List<Item> findOnGoingItems();
+
+    List<Item> findOnGoingItemsByCategory(int category);
+
+    List<Item> findOnGoingItemsByKeyword(String searchedWord);
+
+    List<Item> findOnGoingItemsByKeywordAndCategory(String searchedWord, int category);
 }

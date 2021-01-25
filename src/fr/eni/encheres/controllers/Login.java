@@ -1,6 +1,7 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import fr.eni.encheres.messages.MessagesReader;
 import fr.eni.encheres.models.bll.LoginForm;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bll.user.UserManager;
+import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.bo.User;
 import fr.eni.encheres.models.dal.user.UserDAOJdbcImpl;
 
@@ -31,7 +33,6 @@ public class Login extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
-
     }
 
     /**
@@ -53,13 +54,14 @@ public class Login extends HttpServlet {
 //            request.setAttribute("listeError", exceptionList.getErrorCodesList());
         }
 
-        if (exceptionList.hasErreurs()) {
+        if (exceptionList.hasErrors()) {
 			request.setAttribute("listeError", exceptionList.getErrorCodesList());
             request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("idUser", user.getIdUser());
-            request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+            session.setAttribute("login", user.getLogin());
+            response.sendRedirect("index");
         }
     }
 }

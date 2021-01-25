@@ -5,16 +5,14 @@ import fr.eni.encheres.models.bo.Category;
 import fr.eni.encheres.models.dal.ConnectionProvider;
 import fr.eni.encheres.models.dal.ResultCodesDAL;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAOJdbcImpl implements CategoryDAO {
 
     private static final String SQL_SELECT_ALL = "select * from CATEGORY";
+    private static final String SQL_SELECT_ONE = "select wording from CATEGORY WHERE category_id = ?";
 
     @Override
     public List<Category> findAll() throws BusinessException, SQLException {
@@ -39,4 +37,24 @@ public class CategoryDAOJdbcImpl implements CategoryDAO {
         }
         return categoriesList;
     }
+
+    @Override
+    public String findOne(int idCategory) {
+        String categoryName = null;
+
+        try (Connection connection = ConnectionProvider.getConnection()) {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_SELECT_ONE);
+
+            pStmt.setInt(1, idCategory);
+            ResultSet resultSet = pStmt.executeQuery();
+
+            while (resultSet.next()) {
+            categoryName = resultSet.getString("wording");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return categoryName;
+    }
 }
+

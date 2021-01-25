@@ -4,7 +4,6 @@ import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Category;
 import fr.eni.encheres.models.bo.Item;
-import fr.eni.encheres.models.bo.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -19,29 +18,27 @@ public class Index extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         List<Item> itemsList = null;
-        List<User> usersList = null;
         List<Category> categoriesList = null;
 
-        HttpSession session = request.getSession();
+        boolean connected = isConnected(request.getSession().getAttribute("idUser"));
+
 
         try {
-
-            if(session==null) {
+            // mode déco marche pas date enchères
+            if (!connected) {
                 itemsList = ManagerFactory.getItemManager().findOnGoingItems();
             } else {
                 itemsList = ManagerFactory.getItemManager().findAll();
             }
-
-            usersList = ManagerFactory.getUserManager().findAll();
             categoriesList = ManagerFactory.getCategoryManager().findAll();
 
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
 
-//        session.setAttribute("idUser", 3);
+        // TODO la liste de catégories ne s'affiche pas en mode connecté
+
         request.setAttribute("itemsList", itemsList);
-        request.setAttribute("usersList", usersList);
         request.setAttribute("categoriesList", categoriesList);
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
@@ -50,35 +47,49 @@ public class Index extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Item> itemsList = null;
-        List<User> usersList = null;
         List<Category> categoriesList = null;
-        int userId = 3;
 
         String searchedWord = request.getParameter("searchedWord");
         String searchedCategory = request.getParameter("searchedCategory");
         String filter = request.getParameter("filter");
-        System.out.println(filter);
+        int idUser;
+
+        boolean connected = isConnected(request.getSession().getAttribute("idUser"));
+
 
         try {
-            itemsList = ManagerFactory.getItemManager().findAll();
-            usersList = ManagerFactory.getUserManager().findAll();
+            // si user pas connecté
+            if (!connected) {
+                    itemsList = ManagerFactory.getItemManager().getNonConnectedList(searchedWord, searchedCategory);
+            } else {
+                idUser = (int) request.getSession().getAttribute("idUser");
+
+                // checkbox
+                if (filter != null) {
+                    itemsList = ManagerFactory.getItemManager().searchedItemsByFilter(filter, idUser);
+                } else {
+                    itemsList = ManagerFactory.getItemManager().findAll();
+                }
+
+                // barre de recherche
+//                if (searchedWord != null || searchedCategory != null) {
+//                    itemsList = ManagerFactory.getItemManager().connectedSearch(searchedWord, searchedCategory, itemsList);
+//                }
+            }
+
             categoriesList = ManagerFactory.getCategoryManager().findAll();
-
-            if (searchedWord != null || searchedCategory != null) {
-                itemsList = ManagerFactory.getItemManager().searchedItems(searchedWord, itemsList, searchedCategory);
-            }
-            if (filter != null) {
-                itemsList = ManagerFactory.getItemManager().searchedItemsByFilter(filter, userId);
-            }
-
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
 
         request.setAttribute("itemsList", itemsList);
-        request.setAttribute("usersList", usersList);
         request.setAttribute("categoriesList", categoriesList);
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+    }
+
+    public boolean isConnected(Object idUser) {
+        return idUser != null;
+
     }
 }

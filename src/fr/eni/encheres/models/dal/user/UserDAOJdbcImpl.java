@@ -289,6 +289,23 @@ public class UserDAOJdbcImpl implements UserDAO {
 		
 	}
 
-	
+	private static final String findOneById = "SELECT login FROM USERS WHERE user_id = ?";
 
+	public String findOneById(int idSeller) {
+		String login = null;
+
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = connection.prepareStatement(findOneById);
+
+			pStmt.setInt(1, idSeller);
+			ResultSet resultSet = pStmt.executeQuery();
+
+            while (resultSet.next()) {
+			login = resultSet.getString("login");
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return login;
+	}
 }

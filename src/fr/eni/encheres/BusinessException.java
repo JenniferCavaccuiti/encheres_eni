@@ -41,6 +41,5 @@ private List<Integer> errorCodesList;
 	{
 		return this.errorCodesList;
 	}
-	
-	
+
 }
