@@ -36,7 +36,6 @@ public class LoginForm {
             return null;
         }
 
-        System.out.println(password);
         if (!password.equals(user.getPassword())) {
             this.exceptionList.addError(ResultCodesBLL.ERROR_CNX_PASSWORD);
         }

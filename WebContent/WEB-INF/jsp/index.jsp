@@ -5,7 +5,7 @@
 <div class="col-11 center-block">
     <h1>bienvenue</h1>
 
-    <h5>Filtre : </h5>
+    <h5>Filtres : </h5>
 
 <%--    barre de recherche --%>
     <c:choose>
@@ -35,7 +35,7 @@
                     <h5 class="card-title">Prix : ${item.currentPrice}</h5>
                     <p>Fin de l'enchère : ${f:formatLocalDateTime(item.bidsEndDate, 'EEEE dd MMMM yyyy HH:mm')}</p>
                     <p class="card-text">Vendeur : <a
-                            href="profil-utilisateur?login=${f:getUserLogin(item.idSeller, usersList)}">${f:getUserLogin(item.idSeller, usersList)}</a>
+                            href="profil-utilisateur?login=${item.sellerName}">${item.sellerName}</a>
                     </p>
                 </div>
             </div>

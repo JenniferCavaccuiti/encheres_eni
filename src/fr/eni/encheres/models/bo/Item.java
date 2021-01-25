@@ -19,6 +19,29 @@ public class Item {
 	private String city;
 	private int idCategory;
 
+	// pour avoir directement le nom de la catégorie dans l'objet
+	private String categoryName;
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	// pour avoir directement le login du vendeur dans l'item
+	private String sellerName;
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	// association bitaupe que je sais pas encore trop quoi en faire mais c'est zoli
 	List<Bid> bidsList = new ArrayList<>();
 	
 	
@@ -175,6 +198,6 @@ public class Item {
 				+ ", Start date : " + bidsStartDate + ", End date : " + bidsEndDate + ", Initial price : "
 				+ initialPrice + ", Current price : " + currentPrice + ", Seller id : " + idSeller + ", Street : " + street
 				+ ", Postal code : " + postalCode + ", City : " + city + ", Category : " + idCategory + "\n"
-				+ "bids : " + bidsList + "\n";
+				+ "bids : " + bidsList + " vendeur ;"+ sellerName +"\n";
 	}
 }
