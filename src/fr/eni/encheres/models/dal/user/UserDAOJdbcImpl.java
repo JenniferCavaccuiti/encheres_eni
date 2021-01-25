@@ -166,7 +166,6 @@ public class UserDAOJdbcImpl implements UserDAO {
 				exception.addError(ResultCodesDAL.SELECT_USER_FAILED);
 				throw exception;
 			}
-			
 			return user;
 		}
 		

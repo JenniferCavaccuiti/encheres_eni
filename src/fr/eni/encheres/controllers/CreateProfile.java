@@ -40,7 +40,9 @@ public class CreateProfile extends HttpServlet {
 		String confirm = request.getParameter("passwordConfirm");
 			
 		UserManager userManager = new UserManager();
-		
+
+
+		// TODO pas laissé trainé les syso :)
 		System.out.println("xxxxxxxx");
 		
 		try {
@@ -67,9 +69,7 @@ public class CreateProfile extends HttpServlet {
 		}
 	
 		System.out.println("xxxxxxxx");
-		
-		
-		
+
 	}
 		
 	}

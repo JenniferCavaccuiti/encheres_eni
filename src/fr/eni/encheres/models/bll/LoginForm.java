@@ -1,108 +1,70 @@
 package fr.eni.encheres.models.bll;
 
+import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bo.User;
+import fr.eni.encheres.models.dal.DAOFactory;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
 
 public class LoginForm {
-	private static final String CHAMP_LOGIN  = "login";
-	private static final String CHAMP_PASS   = "password";
-	private String result;
-	private Map<String, String> errors = new HashMap<String, String>();
-	
-	
-	public String getResult() {
-		return result;
-	}
+//	private static final String CHAMP_LOGIN  = "login";
+//	private static final String CHAMP_PASS   = "password";
+//	private String result;
+//	private Map<String, String> errors = new HashMap<String, String>();
 
-	public Map<String, String> getErrors() {
-		return errors;
-	}
+    private BusinessException exceptionList;
 
-	public User connectUser(HttpServletRequest request ) {
-		/* Récupération des champs du formulaire */
-		String login = getValeurChamp( request, CHAMP_LOGIN );
-		String password = getValeurChamp( request, CHAMP_PASS );
+    public LoginForm(BusinessException exceptionList) {
+        this.exceptionList = exceptionList;
+    }
 
-		User user = new User();
+    public User connectUser(String login, String password) throws BusinessException {
+        User user = null;
 
-		/* Validation du champ login. */
-		try {
-			validationLogin( login );
-		} catch ( Exception e ) {
-			setError( CHAMP_LOGIN, e.getMessage() );
-		}
-		user.setLogin(login);
+        // j'essaye de récupérer l'user en base
+        try {
+            user = DAOFactory.getUserDAO().selectUserByLogin(login);
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.exceptionList.addError(ResultCodesBLL.ERROR_CNX_LOGIN);
+        }
 
-		/* Validation du champ mot de passe. */
-		try {
-			validationPassword( password );
-		} catch ( Exception e ) {
-			setError( CHAMP_PASS, e.getMessage() );
-		}
-		user.setPassword( password );
+        if (user == null) {
+            this.exceptionList.addError(ResultCodesBLL.ERROR_CNX_LOGIN);
+            return null;
+        }
 
-		/* Initialisation du résultat global de la validation. */
-		if ( errors.isEmpty() ) {
-			result = "Succès de la connexion.";
-		} else {
-			result = "Échec de la connexion.";
-		}
-		// print de la combinaison login/mdp
-		System.out.println(user.getLogin()+user.getPassword());
-		return user;
-	}
+        System.out.println(password);
+        if (!password.equals(user.getPassword())) {
+            this.exceptionList.addError(ResultCodesBLL.ERROR_CNX_PASSWORD);
+        }
+        return user;
+    }
 
-	/**
-	 * Valider l'identifiant saisi.
-	 * v1
-	 * 	private void validationLogin( String login ) throws Exception {
-		if ( login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)") ) {
-			throw new Exception( "Merci de saisir une adresse mail valide." );
-		}
-	}
-	 */
-	private void validationLogin( String login ) throws Exception {
-		if (login != null && !login.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-			throw new Exception( "Merci de saisir un login valide." );
-		}
-	}
+//    private void validationPassword(String password) throws Exception {
+//        if (password != null) {
+//            if (password.length() < 3) {
+//                throw new Exception("Le mot de passe doit contenir au moins 3 caractères.");
+//            }
+//        } else {
+//            throw new Exception("Merci de saisir votre mot de passe.");
+//        }
+//    }
+//
+//    private void setError(String champ, String message) {
+//        errors.put(champ, message);
+//    }
+//
+//
+//    private static String getValeurChamp(HttpServletRequest request, String nomChamp) {
+//        String valeur = request.getParameter(nomChamp);
+//        if (valeur == null || valeur.trim().length() == 0) {
+//            return null;
+//        } else {
+//            return valeur;
+//        }
+//    }
 
-
-	/**
-	 * Valider le mot de passe saisi.
-	 */
-	private void validationPassword( String password ) throws Exception {
-		if ( password != null ) {
-			if ( password.length() < 3 ) {
-				throw new Exception( "Le mot de passe doit contenir au moins 3 caractères." );
-			}
-		} else {
-			throw new Exception( "Merci de saisir votre mot de passe." );
-		}
-	}
-
-	/*
-	 * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-	 */
-	private void setError( String champ, String message ) {
-		errors.put( champ, message );
-	}
-
-	/*
-	 * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
-	 * sinon.
-	 */
-	private static String getValeurChamp( HttpServletRequest request, String nomChamp ) {
-		String valeur = request.getParameter( nomChamp );
-		if ( valeur == null || valeur.trim().length() == 0 ) {
-			return null;
-		} else {
-			return valeur;
-		}
-	}
 }

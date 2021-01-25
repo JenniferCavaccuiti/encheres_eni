@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.messages.MessagesReader;
 import fr.eni.encheres.models.bll.LoginForm;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bll.user.UserManager;
@@ -23,54 +24,42 @@ import fr.eni.encheres.models.dal.user.UserDAOJdbcImpl;
  */
 @WebServlet("/login")
 public class Login extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	public static final String ATT_USER         = "user";
-	public static final String ATT_FORM         = "form";
-	public static final String ATT_SESSION_USER = "sessionUser";
+    private static final long serialVersionUID = 1L;
+    public static final String ATT_USER = "user";
+    public static final String ATT_FORM = "form";
+    public static final String ATT_SESSION_USER = "sessionUser";
 
-	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-		List<User> users = new ArrayList<>();
-		try {
-			users = ManagerFactory.getUserManager().findAll();
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// Les stoquer en attributs
-		request.setAttribute("users", users);
-		System.out.println(users);
-		
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
 
-		/* Affichage de la page de connexion */
-		this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response );
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-    public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
-        LoginForm form = new LoginForm();
-
-        User user = form.connectUser(request);
-
-        HttpSession session = request.getSession();
-        
-        /**
-         * Si aucune erreur de validation n'a eu lieu, alors ajout du bean
-         * Utilisateur à la session, sinon suppression du bean de la session.
-         */
-        if ( form.getErrors().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, user );
-        } else {
-            session.setAttribute( ATT_SESSION_USER, null );
-        }
-
-        /* Stockage du formulaire et du bean dans l'objet request */
-        request.setAttribute( ATT_FORM, form );
-        request.setAttribute( ATT_USER, user );
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward( request, response );
     }
 
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        BusinessException exceptionList = new BusinessException();
+
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+
+        LoginForm form = ManagerFactory.getLoginForm(exceptionList);
+        User user = new User();
+
+        try {
+            user = form.connectUser(login, password);
+        } catch (BusinessException e) {
+            e.printStackTrace();
+//            request.setAttribute("listeError", exceptionList.getErrorCodesList());
+        }
+
+        if (exceptionList.hasErreurs()) {
+			request.setAttribute("listeError", exceptionList.getErrorCodesList());
+            request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("idUser", user.getIdUser());
+            request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
+        }
+    }
 }
