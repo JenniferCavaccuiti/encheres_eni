@@ -42,19 +42,19 @@ public class UpdateProfile extends HttpServlet {
 		String confirm = request.getParameter("passwordConfirm");
 		
 		//On récupère les infos de l'user via son login stocké en session
-		String loginSession = (String) request.getSession().getAttribute("login");
-		//User user = (User) request.getSession().getAttribute("user");
+		//String loginSession = (String) request.getSession().getAttribute("login");
+		User user = (User) request.getSession().getAttribute("user");
 		//System.out.println(userT);
 		//String loginSession = userT.getLogin();
 		//String loginSession = "OKKKK"; //Pour tester
+		
 		//UserManager userManager = new UserManager();
-		User user = null;
 	
 		try {
-			user = ManagerFactory.getUserManager().selectUserByLog(loginSession);
+			//User user = ManagerFactory.getUserManager().selectUserByLog(loginSession);
+			//request.setAttribute("user", user);
 			user = ManagerFactory.getUserManager().updateUser(user, login, lastname, firstname, email, phoneNumber, street, postalCode, city, oldPassword, newPassword, confirm);
 			//request.getSession().setAttribute("login", login);
-			//request.setAttribute("user", user);
 			request.getSession().setAttribute("user", user);
 			//request.getServletContext().getRequestDispatcher("/index").forward(request, response);
 			response.sendRedirect(request.getContextPath()+"/index");
