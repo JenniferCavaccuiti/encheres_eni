@@ -5,7 +5,7 @@
       class="form-inline row my-2 my-lg-0  justify-content-evenly">
     <div class="col-4">
         <div class="col-auto my-1">
-            <input name="searchedWord" class="form-control mr-sm-2" type="search"
+            <input name="keyword" class="form-control mr-sm-2" type="search"
                    placeholder="Le nom de l'article contient"
                    aria-label="Search">
         </div>

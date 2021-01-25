@@ -7,7 +7,7 @@
     <div class="col-5">
         <div class="col">
             <div class="col-auto my-1">
-                <input name="searchedWord" class="form-control mr-sm-2" type="search"
+                <input name="keyword" class="form-control mr-sm-2" type="search"
                        placeholder="Le nom de l'article contient"
                        aria-label="Search">
             </div>
