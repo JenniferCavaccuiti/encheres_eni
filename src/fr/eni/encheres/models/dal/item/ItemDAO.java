@@ -29,4 +29,10 @@ public interface ItemDAO {
     List<Item> findOnGoingItemsByKeyword(String searchedWord);
 
     List<Item> findOnGoingItemsByKeywordAndCategory(String searchedWord, int category);
+
+    List<Item> findAllItemsByCategory(int category);
+
+    List<Item> findAllItemsByKeyword(String searchedWord);
+
+    List<Item> findAllItemsByKeywordAndCategory(String searchedWord, int category);
 }

@@ -21,15 +21,29 @@ public class ItemDAOJdbcImpl implements ItemDAO {
                     "WHERE bids_end_date > current_timestamp " +
                     "AND category_id = ?";
 
-    private static final String SQL_SELECT_ALL_ITEMS_ONGOING_By_KEYWORD =
+    private static final String SQL_SELECT_ALL_ITEMS_BY_CATEGORY =
+            "select * from ITEM " +
+                    "WHERE category_id = ?";
+
+
+    private static final String SQL_SELECT_ALL_ITEMS_ONGOING_BY_KEYWORD =
             "select * from ITEM " +
                     "WHERE bids_end_date > current_timestamp " +
                     "AND item_name LIKE ?";
+
+    private static final String SQL_SELECT_ALL_ITEMS_BY_KEYWORD =
+            "select * from ITEM " +
+                    "WHERE item_name LIKE ?";
 
     private static final String SQL_SELECT_ALL_ITEMS_ONGOING_BY_CATEGORY_AND_KEYWORD =
             "select * from ITEM " +
                     "WHERE bids_end_date > current_timestamp " +
                     "AND item_name LIKE ? " +
+                    "AND category_id = ?";
+
+    private static final String SQL_SELECT_ALL_ITEMS_BY_CATEGORY_AND_KEYWORD =
+            "select * from ITEM " +
+                    "WHERE item_name LIKE ? " +
                     "AND category_id = ?";
 
     private static final String SQL_SELECT_UNFINISHED_WITH_USER_PROPOSAL =
@@ -148,7 +162,23 @@ public class ItemDAOJdbcImpl implements ItemDAO {
         Item item;
 
         try (Connection connection = ConnectionProvider.getConnection()) {
-            PreparedStatement pStmt = connection.prepareStatement(SQL_SELECT_ALL_ITEMS_ONGOING_By_KEYWORD);
+            PreparedStatement pStmt = connection.prepareStatement(SQL_SELECT_ALL_ITEMS_ONGOING_BY_KEYWORD);
+
+            pStmt.setString(1, "%" + key + "%");
+
+            setResultset(itemsList, pStmt);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return itemsList;
+    }
+
+    public List<Item> findAllItemsByKeyword(String key) {
+        List<Item> itemsList = new ArrayList<>();
+        Item item;
+
+        try (Connection connection = ConnectionProvider.getConnection()) {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_SELECT_ALL_ITEMS_BY_KEYWORD);
 
             pStmt.setString(1, "%" + key + "%");
 
@@ -169,6 +199,39 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 
             pStmt.setString(1, "%" + key + "%");
             pStmt.setInt(2, category);
+
+            setResultset(itemsList, pStmt);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return itemsList;
+    }
+
+    @Override
+    public List<Item> findAllItemsByKeywordAndCategory(String key, int category) {
+        List<Item> itemsList = new ArrayList<>();
+        Item item;
+
+        try (Connection connection = ConnectionProvider.getConnection()) {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_SELECT_ALL_ITEMS_BY_CATEGORY_AND_KEYWORD);
+
+            pStmt.setString(1, "%" + key + "%");
+            pStmt.setInt(2, category);
+
+            setResultset(itemsList, pStmt);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return itemsList;
+    }
+
+    public List<Item> findAllItemsByCategory(int category) {
+        List<Item> itemsList = new ArrayList<>();
+        Item item;
+
+        try (Connection connection = ConnectionProvider.getConnection()) {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_SELECT_ALL_ITEMS_BY_CATEGORY);
+            pStmt.setInt(1, category);
 
             setResultset(itemsList, pStmt);
         } catch (SQLException throwables) {

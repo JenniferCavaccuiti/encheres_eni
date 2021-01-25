@@ -10,6 +10,7 @@ public class ResultCodesDAL {
 	public static final int SELECT_EMAIL_FAILED = 10003;
 	public static final int SELECT_USER_FAILED = 10004;
 	public static final int SELECT_PASSWORD_FAILED = 10005;
+	public static final int DELETE_USER_FAILED = 10006;
 
     public static final int SELECT_ALL_ITEMS_FAILED=10101;
     public static final int SELECT_ALL_CATEGORIES_FAILED = 10102;

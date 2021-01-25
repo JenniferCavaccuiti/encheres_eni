@@ -100,7 +100,7 @@
 					</div>
 					<div class="col-auto">
 						<button class="btn  btn-secondary mb-2">
-							<a href="#">Supprimer mon compte</a>
+							<a href="supprimer-profil">Supprimer mon compte</a>
 						</button>
 					</div>
 					<div class="col-auto">

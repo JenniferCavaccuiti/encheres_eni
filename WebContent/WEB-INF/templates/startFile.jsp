@@ -16,8 +16,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/enchere_test/index">
-                <%--                Ici, logo du site--%>
+            <a class="navbar-brand" href="index">
                 <img src="img/logo1.png" alt="" width="30" height="24" class="d-inline-block align-top">
                 Enchères Eni
             </a>

@@ -20,6 +20,8 @@ public interface UserDAO {
 	public String selectPasswordById(int id) throws BusinessException;
 	
 	public User updateUserById(User user) throws BusinessException;
+	
+	public void deleteUserById(User user) throws BusinessException;
 
     String findOneById(int idSeller);
 }

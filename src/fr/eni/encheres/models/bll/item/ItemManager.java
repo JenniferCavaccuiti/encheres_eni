@@ -53,72 +53,43 @@ public class ItemManager {
         }
     }
 
-    public List<Item> getNonConnectedList(String searchedWord, String searchedCategory) throws BusinessException, SQLException {
+    public List<Item> getNonConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
         List<Item> itemsList;
 
-        searchedWord = prepareKeyWord(searchedWord);
+        keyword = prepareKeyWord(keyword);
         int category = Integer.parseInt(searchedCategory);
 
-        if (searchedWord == null && category == 0) {
+        if (keyword == null && category == 0) {
             itemsList = DAOFactory.getItemDAO().findOnGoingItems();
-        } else if (searchedWord == null && category != 0) {
+        } else if (keyword == null && category != 0) {
             itemsList = DAOFactory.getItemDAO().findOnGoingItemsByCategory(category);
-        } else if (searchedWord != null && category == 0) {
-            itemsList = DAOFactory.getItemDAO().findOnGoingItemsByKeyword(searchedWord);
+        } else if (keyword != null && category == 0) {
+            itemsList = DAOFactory.getItemDAO().findOnGoingItemsByKeyword(keyword);
         } else {
-            itemsList = DAOFactory.getItemDAO().findOnGoingItemsByKeywordAndCategory(searchedWord, category);
+            itemsList = DAOFactory.getItemDAO().findOnGoingItemsByKeywordAndCategory(keyword, category);
         }
         setSellerAndBidsToItemsList(itemsList);
         return itemsList;
     }
 
-//    public List<Item> connectedSearch(String searchedWord, String searchedCategory, List<Item> itemsList) throws BusinessException, SQLException {
-//        List<Item> itemsList = new ArrayList<>();
-//
-////        Mettre mot en minuscule et enlever les espaces avant et après
-//        searchedWord = prepareKeyWord(searchedWord);
-//        int category = Integer.parseInt(searchedCategory);
-//
-//        // TODO rechercher items correspondants
-//        // items pas connectés
-////
-//
-//
-//        if (category != 0) {
-//            searchedItemsList = searchByCategory(category);
-//        } else {
-//
-//        }
+    public List<Item> getConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
+        List<Item> itemsList;
 
+        keyword = prepareKeyWord(keyword);
+        int category = Integer.parseInt(searchedCategory);
 
-//        Conserver uniquement les items contenant le mot
-
-
-        // TODO searchByCategory
-
-        // findOnGoingItemsByCategory
-        // TODO searchBYCAtegORYANdKeyWord
-
-        // TODO searchBYKeyWord
-
-
-        // si la catégorie vaut 0, je recherche tous les items contenant le mot clé
-//        if (category == 0) {
-//            for (Item item : itemsList) {
-//                if (item.getItemName().contains(searchedWord)) {
-//                    searchedItemsList.add(item);
-//                }
-//            } //si la catégorie est définie, je recherche tous les items contenant le mot clé dans cette catégorie
-//        } else {
-//            for (Item item : itemsList) {
-//                if (item.getItemName().contains(searchedWord)
-//                        && (item.getIdCategory() == category)) {
-//                    searchedItemsList.add(item);
-//                }
-//            }
-//        }
-//        return searchedItemsList;
-//    }
+        if (keyword == null && category == 0) {
+            itemsList = DAOFactory.getItemDAO().findAll();
+        } else if (keyword == null && category != 0) {
+            itemsList = DAOFactory.getItemDAO().findAllItemsByCategory(category);
+        } else if (keyword != null && category == 0) {
+            itemsList = DAOFactory.getItemDAO().findAllItemsByKeyword(keyword);
+        } else {
+            itemsList = DAOFactory.getItemDAO().findAllItemsByKeywordAndCategory(keyword, category);
+        }
+        setSellerAndBidsToItemsList(itemsList);
+        return itemsList;
+    }
 
     public String prepareKeyWord(String keyWord) {
         keyWord = keyWord.toLowerCase(Locale.ROOT);

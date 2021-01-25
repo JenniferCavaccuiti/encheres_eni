@@ -30,6 +30,19 @@ public class UserManager {
 	//}
 	//return instance;
 	//}
+	
+	//--------------- Méthode de suppression d'un user 
+	
+	public void deleteUser(User user) throws BusinessException {
+		
+		try {
+			DAOFactory.getUserDAO().deleteUserById(user);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			e.addError(ResultCodesBLL.ERROR_DELETE_USER);
+			throw e;
+		}		
+	}
 
 	// --------- Méthode de mise à jour d'un user en BDD après verif du pseudo, de
 	// l'email, de la correspondance entre le nouveau mdp et la confirmation

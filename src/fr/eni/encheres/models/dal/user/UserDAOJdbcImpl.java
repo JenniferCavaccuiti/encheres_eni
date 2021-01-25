@@ -290,6 +290,36 @@ public class UserDAOJdbcImpl implements UserDAO {
 		return user;
 		
 	}
+	
+	//-------------- Méthode de suppression d'un user en BDD via son id
+	
+	private static final String deleteUser = "DELETE FROM USERS where user_id = ?";
+	
+	@Override
+	public void deleteUserById(User user) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if (user == null) {
+			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+			throw exception;
+		}
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(deleteUser)) {
+
+			pStmt.setInt(1, user.getIdUser());
+			pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+			throw exception;
+		}
+		
+	}
+	
+	//TODO commentaire méthode
 
 	private static final String findOneById = "SELECT login FROM USERS WHERE user_id = ?";
 
@@ -305,9 +335,14 @@ public class UserDAOJdbcImpl implements UserDAO {
             while (resultSet.next()) {
 			login = resultSet.getString("login");
             }
+            
+            resultSet.close();
+            
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return login;
 	}
+
+	
 }

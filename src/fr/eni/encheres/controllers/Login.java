@@ -1,11 +1,9 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.Servlet;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,13 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.encheres.BusinessException;
-import fr.eni.encheres.messages.MessagesReader;
 import fr.eni.encheres.models.bll.LoginForm;
 import fr.eni.encheres.models.bll.ManagerFactory;
-import fr.eni.encheres.models.bll.user.UserManager;
-import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.bo.User;
-import fr.eni.encheres.models.dal.user.UserDAOJdbcImpl;
 
 /**
  * Servlet implementation class Login
@@ -36,6 +30,7 @@ public class Login extends HttpServlet {
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
 
+    
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
@@ -61,7 +56,7 @@ public class Login extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("idUser", user.getIdUser());
-            session.setAttribute("login", user.getLogin());
+            //session.setAttribute("login", user.getLogin());
             session.setAttribute("user", user);
             response.sendRedirect("index");
         }
