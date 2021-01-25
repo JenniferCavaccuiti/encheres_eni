@@ -1,6 +1,8 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Item;
+import fr.eni.encheres.models.bo.User;
 
 /**
  * Servlet implementation class SaleDetails
@@ -23,7 +26,6 @@ public class SaleDetails extends HttpServlet {
 		
 		//Recupération du paramètre placé en URL
 		int id = Integer.parseInt(request.getParameter("itemId"));
-		
 		Item item = null;
 		
 		//On récupère l'item
@@ -35,12 +37,16 @@ public class SaleDetails extends HttpServlet {
 		
 		//On cherche la catégorie correspondante à l'idCategory		
 		//On cherche le vendeur correspondant à l'idSeller
-		item= ManagerFactory.getItemManager().setSellerNameCatagoryName(item);
-		System.out.println(item);
-		System.out.println(item.getCategoryName());
+		item = ManagerFactory.getItemManager().setSellerNameCatagoryName(item);
+		
+		User user = (User) request.getSession().getAttribute("user");
+		
+		boolean beforeEndBid = LocalDateTime.now().isBefore(item.getBidsEndDate());
+		boolean afterStartBid = LocalDateTime.now().isAfter(item.getBidsStartDate());
+		request.setAttribute("beforeEnd", beforeEndBid);
+		request.setAttribute("afterStart", afterStartBid);
 		
 		request.setAttribute("item", item);
-				
 		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/saleDetails.jsp").forward(request, response);
 	}
 
