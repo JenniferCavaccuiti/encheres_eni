@@ -53,7 +53,7 @@ public class Login extends HttpServlet {
 //            request.setAttribute("listeError", exceptionList.getErrorCodesList());
         }
 
-        if (exceptionList.hasErreurs()) {
+        if (exceptionList.hasErrors()) {
 			request.setAttribute("listeError", exceptionList.getErrorCodesList());
             request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
         } else {
