@@ -138,6 +138,42 @@ public class UserDAOJdbcImpl implements UserDAO {
 			return user;
 		}
 		
+		// ------------ Méthode qui sélectionne en BDD l'utilisateur correspondant à la valeur
+		// ------------ passée en param (null si l'email n'est pas présent en base)
+
+			private static final String selectUserByEmail = "SELECT * FROM USERS WHERE email = ?";
+
+			@Override
+			public User selectUserByEmail(String email) throws BusinessException {
+
+				User user = null;
+				
+				try (Connection cnx = ConnectionProvider.getConnection();
+						PreparedStatement pStmt = cnx.prepareStatement(selectUserByEmail);) {
+					
+					pStmt.setString(1, email);
+				
+					ResultSet rs = pStmt.executeQuery();
+				
+					if (rs.next()) {
+						
+						user = new User(rs.getInt("user_id"), rs.getString("login"), rs.getString("lastname"),
+								rs.getString("firstname"), 	rs.getString("email"), rs.getString("phone_number"), 
+								rs.getString("street"), rs.getString("postal_code"), rs.getString("city"), 
+								rs.getString("password"), rs.getInt("credits"), rs.getBoolean("administrator"));
+					}
+
+					rs.close();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+					BusinessException exception = new BusinessException();
+					exception.addError(ResultCodesDAL.SELECT_USER_FAILED);
+					throw exception;
+				}
+				return user;
+			}
+		
 		
 		// ------------------ Méthode qui sert à lister l'ensemble des users
 

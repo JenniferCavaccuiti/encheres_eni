@@ -30,12 +30,8 @@ public class Login extends HttpServlet {
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         BusinessException exceptionList = new BusinessException();
-
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
