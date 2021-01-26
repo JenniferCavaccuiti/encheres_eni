@@ -67,37 +67,6 @@ public class UserDAOJdbcImpl implements UserDAO {
 	}
 
 	
-	// ------------ Méthode qui renvoie le mot de passe pour l'user dont l'id est en paramètres
-	
-	private static final String selectPasswordById = "SELECT password FROM USERS WHERE user_id = ?";
-	
-	@Override
-	public String selectPasswordById(int id) throws BusinessException {
-
-		String password = null;
-		
-		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pStmt = cnx.prepareStatement(selectPasswordById);) {
-
-			pStmt.setInt(1, id);
-			ResultSet rs = pStmt.executeQuery();
-
-			if (rs.next()) {
-				password = rs.getString(1);
-			}
-
-			rs.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			BusinessException exception = new BusinessException();
-			exception.addError(ResultCodesDAL.SELECT_PASSWORD_FAILED);
-			throw exception;
-		}
-		
-		return password;
-	}
-
 	// ------------ Méthode qui sélectionne en BDD l'email correspondant à la valeur
 	// ------------ passée en param (null si l'email n'est pas présent en base)
 
@@ -319,17 +288,17 @@ public class UserDAOJdbcImpl implements UserDAO {
 		
 	}
 	
-	//TODO commentaire méthode
+	//--------------- Méthode qui retourne le login de l'utilisateur en fonction de son id
 
 	private static final String findOneById = "SELECT login FROM USERS WHERE user_id = ?";
 
-	public String findOneById(int idSeller) {
+	public String findOneById(int id) {
 		String login = null;
 
 		try (Connection connection = ConnectionProvider.getConnection()) {
 			PreparedStatement pStmt = connection.prepareStatement(findOneById);
 
-			pStmt.setInt(1, idSeller);
+			pStmt.setInt(1, id);
 			ResultSet resultSet = pStmt.executeQuery();
 
             while (resultSet.next()) {

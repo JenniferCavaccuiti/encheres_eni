@@ -2,6 +2,7 @@ package fr.eni.encheres.models.bll.bid;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bo.Bid;
+import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.dal.DAOFactory;
 
 import java.sql.SQLException;
@@ -34,5 +35,12 @@ public class BidManager {
 //
 //        }
 //    }
-
+    
+    //-------------- Méthode qui renvoit le login du plus gros enchérisseur sur un article
+    
+    public String biggestBuyer(Item item) throws BusinessException {
+    	    	
+    	int id = DAOFactory.getBidDAO().biggestBider(item);
+    	return DAOFactory.getUserDAO().findOneById(id);
+    }
 }

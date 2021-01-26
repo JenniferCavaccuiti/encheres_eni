@@ -39,14 +39,25 @@ public class SaleDetails extends HttpServlet {
 		//On cherche le vendeur correspondant à l'idSeller
 		item = ManagerFactory.getItemManager().setSellerNameCatagoryName(item);
 		
+		//On cherche le login du plus gros encherisseur
+		String login = null;
+		
+		try {
+			login = ManagerFactory.getBidManager().biggestBuyer(item);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+		
 		User user = (User) request.getSession().getAttribute("user");
 		
 		boolean beforeEndBid = LocalDateTime.now().isBefore(item.getBidsEndDate());
 		boolean afterStartBid = LocalDateTime.now().isAfter(item.getBidsStartDate());
+		
 		request.setAttribute("beforeEnd", beforeEndBid);
 		request.setAttribute("afterStart", afterStartBid);
-		
 		request.setAttribute("item", item);
+		request.setAttribute("login", login);
+		
 		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/saleDetails.jsp").forward(request, response);
 	}
 

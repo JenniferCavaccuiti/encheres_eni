@@ -19,7 +19,7 @@
 
 	<div>
 		<label>Meilleure offre : </label>
-		<p>${item.currentPrice}</p>
+		<p>${item.currentPrice} par <a href="profil-utilisateur?login=${login}">${login}</a></p>
 	</div>
 
 	<div>

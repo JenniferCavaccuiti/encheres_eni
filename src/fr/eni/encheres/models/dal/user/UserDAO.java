@@ -17,12 +17,10 @@ public interface UserDAO {
 	
 	public User selectUserByLogin(String login) throws BusinessException;
 	
-	public String selectPasswordById(int id) throws BusinessException;
-	
 	public User updateUserById(User user) throws BusinessException;
 	
 	public void deleteUserById(User user) throws BusinessException;
 
-    String findOneById(int idSeller);
+    public String findOneById(int id);
 }
 
