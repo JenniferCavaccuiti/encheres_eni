@@ -47,7 +47,6 @@ public class Login extends HttpServlet {
             user = form.connectUser(login, password);
         } catch (BusinessException e) {
             e.printStackTrace();
-//            request.setAttribute("listeError", exceptionList.getErrorCodesList());
         }
 
         if (exceptionList.hasErrors()) {

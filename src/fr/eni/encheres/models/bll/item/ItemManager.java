@@ -7,9 +7,8 @@ import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.dal.DAOFactory;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class ItemManager {
 
@@ -41,7 +40,6 @@ public class ItemManager {
         for (Item item : itemsList) {
             item.setCategoryName(DAOFactory.getCategoryDAO().findOne(item.getIdCategory()));
             item.setSellerName(DAOFactory.getUserDAO().findOneById(item.getIdSeller()));
-            System.out.println(item.getSellerName());
         }
 
         for (Item item : itemsList) {
@@ -56,7 +54,7 @@ public class ItemManager {
     public List<Item> getNonConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
         List<Item> itemsList;
 
-        keyword = prepareKeyWord(keyword);
+        keyword = prepareWord(keyword);
         int category = Integer.parseInt(searchedCategory);
 
         if (keyword == null && category == 0) {
@@ -75,7 +73,7 @@ public class ItemManager {
     public List<Item> getConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
         List<Item> itemsList;
 
-        keyword = prepareKeyWord(keyword);
+        keyword = prepareWord(keyword);
         int category = Integer.parseInt(searchedCategory);
 
         if (keyword == null && category == 0) {
@@ -91,11 +89,6 @@ public class ItemManager {
         return itemsList;
     }
 
-    public String prepareKeyWord(String keyWord) {
-        keyWord = keyWord.toLowerCase(Locale.ROOT);
-        keyWord = keyWord.trim();
-        return keyWord;
-    }
 
     public List<Item> searchedItemsByFilter(String filter, int user) throws SQLException, BusinessException {
         List<Item> newItemsList = new ArrayList<>();
@@ -123,20 +116,54 @@ public class ItemManager {
         setSellerAndBidsToItemsList(newItemsList);
         return newItemsList;
     }
-    
+
     //--------------- Méthode qui récupère en item en fonction de son id
-    
+
     public Item getItemById(int id) throws BusinessException {
     	return DAOFactory.getItemDAO().selectItemById(id);
     }
 
     //---------------- Méthode qui set le nom de la catégorie et du vendeur pour un item
-    
+
     public Item setSellerNameCatagoryName(Item item) {
     	 item.setCategoryName(DAOFactory.getCategoryDAO().findOne(item.getIdCategory()));
          item.setSellerName(DAOFactory.getUserDAO().findOneById(item.getIdSeller()));
-         
+
 		return item;
     }
-    
+
+    // --------- Ajout d'un nouvel item ------ //
+
+    public String prepareWord(String word) {
+        word = word.toLowerCase(Locale.ROOT);
+        word = word.trim();
+        return word;
+    }
+
+    public Item addItem(Map<String, String[]> parameters, int idUser) {
+        Item item = new Item();
+
+        LocalDateTime bidsStartDate = getCorrectFormatDate(parameters.get("bidsStartDate")[0], parameters.get("bidsStartTime")[0]);
+        LocalDateTime bidsEndDate = getCorrectFormatDate(parameters.get("bidsEndDate")[0], parameters.get("bidsEndTime")[0]);
+
+//        // créer l'item
+        item.setItemName(parameters.get("itemName")[0]);
+        item.setDescription(parameters.get("description")[0]);
+        item.setBidsStartDate(bidsStartDate);
+        item.setBidsEndDate(bidsEndDate);
+        item.setInitialPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
+        item.setCurrentPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
+        item.setIdSeller(idUser);
+        item.setStreet(parameters.get("street")[0]);
+        item.setPostalCode(parameters.get("postalCode")[0]);
+        item.setCity(parameters.get("city")[0]);
+        item.setIdCategory(Integer.parseInt(parameters.get("category")[0]));
+
+//        // l'ajouter en base et le renvoi
+        return DAOFactory.getItemDAO().insertNewItem(item);
+    }
+    public LocalDateTime getCorrectFormatDate(String date, String time) {
+        return LocalDateTime.parse(date + "T" + time + ":00.000");
+    }
+
 }

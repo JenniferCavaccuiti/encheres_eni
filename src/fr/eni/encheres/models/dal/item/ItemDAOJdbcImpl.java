@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ItemDAOJdbcImpl implements ItemDAO {
 
+    //------- Requête Select pour la barre de recherche -------------//
+
     private static final String SQL_SELECT_ALL_ITEMS =
             "select * from ITEM";
 
@@ -264,26 +266,58 @@ public class ItemDAOJdbcImpl implements ItemDAO {
             itemsList.add(item);
         }
     }
-    
-    
+
+    //--------------- Requête insertion d'une nouvelle vente -------------//
+    private static final String SQL_INSERT_ITEM =
+            "INSERT INTO ITEM " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    public Item insertNewItem(Item item) {
+        try (Connection connection = ConnectionProvider.getConnection()) {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_INSERT_ITEM);
+
+            pStmt.setString(1, item.getItemName());
+            pStmt.setString(2, item.getDescription());
+            pStmt.setTimestamp(3, Timestamp.valueOf(item.getBidsStartDate()));
+            pStmt.setTimestamp(4, Timestamp.valueOf(item.getBidsEndDate()));
+            pStmt.setInt(5, item.getInitialPrice());
+            pStmt.setInt(6, item.getCurrentPrice());
+            pStmt.setInt(7, item.getIdSeller());
+            pStmt.setString(8, item.getStreet());
+            pStmt.setString(9, item.getPostalCode());
+            pStmt.setString(10, item.getCity());
+            pStmt.setInt(11, item.getIdCategory());
+
+            pStmt.executeUpdate();
+
+            ResultSet rs = pStmt.getGeneratedKeys();
+
+            item.setIdItem(rs.getInt("item_id"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return item;
+    }
+
+
     //------------- Méthode qui selectionne un item via son nom
-    
+
     private static final String selectItemById = "SELECT * FROM ITEM where item_id = ?";
-    
+
     @Override
     public Item selectItemById(int id) throws BusinessException {
-    	
+
     	Item item = null;
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement pStmt = cnx.prepareStatement(selectItemById);) {
-			
+
 			pStmt.setInt(1, id);
-		
+
 			ResultSet resultSet = pStmt.executeQuery();
-		
+
 			if (resultSet.next()) {
-				
+
 				item = new Item();
 	            item.setIdItem(resultSet.getInt("item_id"));
 	            item.setItemName(resultSet.getString("item_name"));
@@ -307,8 +341,8 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 			exception.addError(ResultCodesDAL.SELECT_ITEM_ID_FAILED);
 			throw exception;
 		}
-    	
+
     	return item;
     }
-    
+
 }

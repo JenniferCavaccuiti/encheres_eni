@@ -1,5 +1,6 @@
-function changePage(newPage) {
-    window.location.pathname = newPage;
+function changePage(parameter, newPage) {
+    newPage = newPage + '?itemId=' + parameter;
+    window.location.href = newPage;
 }
 
 function radio() {
@@ -21,3 +22,24 @@ function radio() {
         document.getElementById('wonBuy').disabled = true;
     }
 }
+
+(function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+

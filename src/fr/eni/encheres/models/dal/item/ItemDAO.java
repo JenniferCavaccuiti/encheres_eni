@@ -35,8 +35,10 @@ public interface ItemDAO {
     List<Item> findAllItemsByKeyword(String searchedWord);
 
     List<Item> findAllItemsByKeywordAndCategory(String searchedWord, int category);
-    
+
+    Item insertNewItem(Item item);
+
     public Item selectItemById(int id) throws BusinessException;
-    
+
     }
 

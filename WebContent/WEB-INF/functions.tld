@@ -19,4 +19,14 @@
         <function-class>fr.eni.encheres.tag.ItemUserServices</function-class>
         <function-signature>java.lang.String getUserLogin(java.lang.Integer,java.util.List)</function-signature>
     </function>
+    <function>
+        <name>getDate</name>
+        <function-class>fr.eni.encheres.tag.Dates</function-class>
+        <function-signature>java.time.LocalDateTime getDate()</function-signature>
+    </function>
+    <function>
+        <name>addDaysToDate</name>
+        <function-class>fr.eni.encheres.tag.Dates</function-class>
+        <function-signature>java.time.LocalDateTime addDaysToDate(int,java.time.LocalDateTime)</function-signature>
+    </function>
 </taglib>

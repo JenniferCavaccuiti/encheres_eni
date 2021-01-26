@@ -17,66 +17,53 @@ public class Index extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List<Item> itemsList = null;
-        List<Category> categoriesList = null;
 
-       boolean connected = isConnected(request.getSession().getAttribute("idUser"));
+        boolean connected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
 
         try {
             if (!connected) {
-                itemsList = ManagerFactory.getItemManager().findOnGoingItems();
+                request.setAttribute("itemsList", ManagerFactory.getItemManager().findOnGoingItems());
             } else {
-                itemsList = ManagerFactory.getItemManager().findAll();
+                request.setAttribute("itemsList", ManagerFactory.getItemManager().findAll());
             }
-            categoriesList = ManagerFactory.getCategoryManager().findAll();
-
+            request.setAttribute("categoriesList", BaseController.getCategoriesList());
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
-
-        request.setAttribute("itemsList", itemsList);
-        request.setAttribute("categoriesList", categoriesList);
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Item> itemsList = null;
-        List<Category> categoriesList = null;
 
         String keyword = request.getParameter("keyword");
         String searchedCategory = request.getParameter("searchedCategory");
         String filter = request.getParameter("filter");
-        int idUser;
+        int idUser = (int) request.getSession().getAttribute("idUser");
 
         // renvoi si user est connecté
-        boolean isConnected = isConnected(request.getSession().getAttribute("idUser"));
+        boolean isConnected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
+        HttpSession session = request.getSession();
 
         try {
             if (!isConnected) {
-                itemsList = ManagerFactory.getItemManager().getNonConnectedList(keyword, searchedCategory);
+                request.setAttribute("itemsList", ManagerFactory.getItemManager().getNonConnectedList(keyword, searchedCategory));
             } else {
-                idUser = (int) request.getSession().getAttribute("idUser");
                 if (filter == null) {
-                    itemsList = ManagerFactory.getItemManager().getConnectedList(keyword, searchedCategory);
+                    request.setAttribute("itemsList", ManagerFactory.getItemManager().getConnectedList(keyword, searchedCategory));
                 } else {
-                    itemsList = ManagerFactory.getItemManager().searchedItemsByFilter(filter, idUser);
+                    request.setAttribute("itemsList", ManagerFactory.getItemManager().searchedItemsByFilter(filter, idUser));
                 }
             }
-
-            categoriesList = ManagerFactory.getCategoryManager().findAll();
+            request.setAttribute("categoriesList", BaseController.getCategoriesList());
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
 
-        request.setAttribute("itemsList", itemsList);
-        request.setAttribute("categoriesList", categoriesList);
+        request.setAttribute("message", request.getSession().getAttribute("message"));
+        session.removeAttribute("message");
 
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
-    }
-
-    public boolean isConnected(Object idUser) {
-        return idUser != null;
     }
 }

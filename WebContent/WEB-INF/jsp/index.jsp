@@ -5,6 +5,8 @@
 <div class="col-11 center-block">
     <h1>Bienvenue</h1>
 
+    <h3 class="message">${message}</h3>
+
     <h5>Filtres : </h5>
 
 <%--    barre de recherche --%>
@@ -22,9 +24,8 @@
     <div class="row justify-content-center">
         <c:forEach var="item" items="${itemsList}">
         <c:if test="${not empty sessionScope}">
-        <div class="card col-4" id="item-${item.idItem}">
-        	 <a href="details-vente?itemId=${item.idItem}">Afficher détails</a>
-        
+        <div class="card col-4" id="item-${item.idItem}"
+             onClick="changePage('${item.idItem}', '${pageContext.request.contextPath}/details-vente');">
             </c:if>
             <c:if test="${empty sessionScope}">
             <div class="card col-4" id="item-${item.idItem}">
