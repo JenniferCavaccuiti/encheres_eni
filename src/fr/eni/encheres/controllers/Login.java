@@ -30,7 +30,6 @@ public class Login extends HttpServlet {
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
 
-    
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
@@ -55,7 +54,6 @@ public class Login extends HttpServlet {
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("idUser", user.getIdUser());
-            //session.setAttribute("login", user.getLogin());
             session.setAttribute("user", user);
             response.sendRedirect("index");
         }

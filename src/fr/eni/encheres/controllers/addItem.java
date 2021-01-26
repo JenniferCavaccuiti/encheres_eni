@@ -21,7 +21,7 @@ public class addItem extends HttpServlet {
         boolean connected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
 
         if (!connected) {
-            response.sendRedirect("index");
+            request.getServletContext().getRequestDispatcher("/index").forward(request, response);
         }
 
         try {
@@ -38,6 +38,10 @@ public class addItem extends HttpServlet {
 
         Map<String, String[]> parameters = new HashMap<>(request.getParameterMap());
 
+        boolean connected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
+        if (!connected) {
+            request.getServletContext().getRequestDispatcher("/index").forward(request, response);
+        }
 
         Item item = ManagerFactory.getItemManager().addItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
         HttpSession session = request.getSession();

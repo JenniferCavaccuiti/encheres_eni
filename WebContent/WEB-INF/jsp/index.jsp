@@ -9,7 +9,7 @@
 
     <h5>Filtres : </h5>
 
-<%--    barre de recherche --%>
+    <%--    barre de recherche --%>
     <c:choose>
     <c:when test="${empty sessionScope}">
         <%@include file="../templates/searchBarNonConnectedTemplate.jsp" %>
@@ -19,8 +19,7 @@
     </c:when>
     </c:choose>
 
-
-<%--    Affichage items--%>
+    <%--    Affichage items--%>
     <div class="row justify-content-center">
         <c:forEach var="item" items="${itemsList}">
         <c:if test="${not empty sessionScope}">
