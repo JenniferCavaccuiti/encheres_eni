@@ -12,5 +12,7 @@ public interface BidDAO {
     List<Bid> findAll() throws BusinessException, SQLException;
     
     public int biggestBider(Item item) throws BusinessException;
+    
+    public Bid insertBid(Bid bid) throws BusinessException;
 
 }

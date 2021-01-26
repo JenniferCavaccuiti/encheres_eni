@@ -344,5 +344,48 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 
     	return item;
     }
+    
+    //---------------- Méthode de mise à jour d'un item
+    
+    private static final String updateItemById = "UPDATE ITEM SET item_name = ?, description = ?, bids_start_date = ?, bids_end_date = ?, initial_price = ?, current_price = ?, seller_id = ?, street = ?, postal_code = ?, city = ?, category_id = ? WHERE item_id = ?";
+	
+	@Override
+	public Item updateItem(Item item) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+
+		if (item == null) {
+			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+			throw exception;
+		}
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(updateItemById)) {
+
+			pStmt.setString(1, item.getItemName());
+			pStmt.setString(2, item.getDescription());
+			pStmt.setTimestamp(3, Timestamp.valueOf(item.getBidsStartDate()));
+			pStmt.setTimestamp(4, Timestamp.valueOf(item.getBidsEndDate()));
+			pStmt.setInt(5, item.getInitialPrice());
+			pStmt.setInt(6, item.getCurrentPrice());
+			pStmt.setInt(7, item.getIdSeller());
+			pStmt.setString(8, item.getStreet());
+			pStmt.setString(9, item.getPostalCode());
+			pStmt.setString(10, item.getCity());
+			pStmt.setInt(11, item.getIdCategory());
+			pStmt.setInt(12, item.getIdItem());
+
+			pStmt.executeUpdate();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+			throw exception;
+		}
+		
+		return item;
+		
+	}
 
 }

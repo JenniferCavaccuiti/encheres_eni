@@ -43,6 +43,14 @@ public class UserManager {
 			throw e;
 		}		
 	}
+	
+	// --------- Méthode simple de mise à jour d'un user
+	
+	public User updateUser (User user) throws BusinessException {
+		
+		return userDAO.updateUserById(user);
+		
+	}
 
 	// --------- Méthode de mise à jour d'un user en BDD après verif du pseudo, de
 	// l'email, de la correspondance entre le nouveau mdp et la confirmation

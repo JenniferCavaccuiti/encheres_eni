@@ -21,7 +21,8 @@
 			<a href=""">Mot de passe oublié</a>
 		</fieldset>
 	</form>
-	<input type="button" value="Créer un compte"  onClick="changePage('${pageContext.request.contextPath}/nouveau-profil');"/>
+	<button type="submit" class="btn btn-secondary mb-3"><a href="nouveau-profil">Créer un compte</a></button>
+	
 	
 <c:if test="${listeError != null }">
 	<c:forEach var="erreur" items="${listeError}">

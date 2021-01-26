@@ -39,6 +39,8 @@ public interface ItemDAO {
     Item insertNewItem(Item item);
 
     public Item selectItemById(int id) throws BusinessException;
+    
+    public Item updateItem(Item item) throws BusinessException;
 
     }
 

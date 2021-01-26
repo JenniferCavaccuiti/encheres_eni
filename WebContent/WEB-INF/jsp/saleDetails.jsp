@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../templates/startFile.jsp"%>
+<%@page import="fr.eni.encheres.messages.MessagesReader"%>
 
 <div class="container">
 
@@ -56,14 +57,30 @@
 		<button class="btn btn-secondary mb-2"><a>Modifier ma vente</a></button>
 	</c:if>
 
+<c:if test="${liste != null }">
+
+	<p>Votre enchère n'a pas été prise en compte</p>
+	<ul>
+	<c:forEach var="erreur" items="${liste}">
+		<li>${MessagesReader.getErrorMessage(erreur)}</li>
+	</c:forEach>
+	</ul>
+</c:if>
+
+
+<form method="post" action="details-vente">
 	<c:if test="${afterStart && beforeEnd && sessionScope.user.getIdUser() != item.idSeller}">
+
 		<div>
 			<label>Ma proposition : </label>
-			<input type="number" required="required" min="0">
+			<input type="number" required="required" min="${item.currentPrice + 1}" name="bidderPrice">
+			<input type="hidden" name="idItem" value="${item.idItem}">
+			<input type="hidden" name="login" value = "${login}">
 			<button type="submit" class="btn btn-primary mb-2">Enchérir</button>
 		</div>
 	</c:if>
 </div>
+</form>
 
 <div class="container">
 	<div class="col-auto">
