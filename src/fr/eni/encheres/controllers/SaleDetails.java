@@ -1,6 +1,7 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,8 @@ public class SaleDetails extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		  
 		
 		//Recupération du paramètre placé en URL
 		int id = Integer.parseInt(request.getParameter("itemId"));
@@ -58,7 +61,16 @@ public class SaleDetails extends HttpServlet {
 		request.setAttribute("item", item);
 		request.setAttribute("login", login);
 		
-		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/saleDetails.jsp").forward(request, response);
+		//Ne pas autoriser l'accès à la page en cas de déconnexion
+		boolean connected = BaseController.isConnected(request.getSession().getAttribute("user"));
+	       
+        if (!connected) {
+			response.sendRedirect(request.getContextPath()+"/index");
+        } else {
+        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/saleDetails.jsp").forward(request, response);
+        }
+       
+		
 	}
 
 	

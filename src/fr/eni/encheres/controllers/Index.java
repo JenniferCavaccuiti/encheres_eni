@@ -62,8 +62,9 @@ public class Index extends HttpServlet {
         }
 
         request.setAttribute("message", request.getSession().getAttribute("message"));
-        session.removeAttribute("message");
 
+        session.removeAttribute("message");
+                
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }
 }
