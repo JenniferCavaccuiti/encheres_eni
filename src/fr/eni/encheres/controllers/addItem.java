@@ -52,12 +52,9 @@ public class addItem extends HttpServlet {
             response.sendRedirect("index");
         } else {
             Map<String, String[]> parameters = new HashMap<>(request.getParameterMap());
-            System.out.println(parameters.get("itemName")[0]);
             if (request.getParameter("idItem") != null) {
                 try {
-                    System.out.println("je passe ici");
                     item = ManagerFactory.getItemManager().updateItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
-                System.out.println(item);
                 } catch (BusinessException businessException) {
                     businessException.printStackTrace();
                 }

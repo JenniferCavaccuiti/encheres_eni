@@ -20,7 +20,7 @@
                 <label for="itemName" class="col-4">Article : </label>
             </div>
             <div class="col-8">
-                <input type="text" class="form-control" value="${item.itemName}" name="itemName" id="itemName" required>
+                <input type="text" class="form-control" value="${item.itemName}" name="itemName" id="itemName" minlength="4" maxlength="30" required>
                 <div class="invalid-feedback">
                     Le nom de l'article est obligatoire
                 </div>
@@ -32,7 +32,7 @@
                 <label for="description" class="col-4">Description : </label>
             </div>
             <div class="col-8">
-                <textarea class="form-control" id="description" rows="3" name="description"
+                <textarea class="form-control" id="description" rows="3" name="description" minlength="10" maxlength="300"
                           required>${item.description}</textarea>
                 <div class="invalid-feedback">
                     Le description est obligatoire
@@ -157,7 +157,7 @@
             </div>
             <div class="col-8">
                 <input type="text" class="form-control col-8" name="street" id="street"
-                       value="${sessionScope.user.street}" required>
+                       value="${sessionScope.user.street}" minlength="10" maxlength="100" required>
                 <div class="invalid-feedback">
                     Le date de fin est obligatoire
                 </div>
@@ -170,7 +170,7 @@
             </div>
             <div class="col-8">
                 <input type="text" class="form-control col-8" name="postalCode" id="postalCode"
-                       value="${sessionScope.user.postalCode}" required>
+                       value="${sessionScope.user.postalCode}" minlength="5" maxlength="5" required>
                 <div class="invalid-feedback">
                     Le date de fin est obligatoire
                 </div>
@@ -183,7 +183,7 @@
             </div>
             <div class="col-8">
                 <input type="text" class="form-control col-8" name="city" id="city" value="${sessionScope.user.city}"
-                       required>
+                       minlength="4" maxlength="100" required>
                 <div class="invalid-feedback">
                     Le date de fin est obligatoire
                 </div>
