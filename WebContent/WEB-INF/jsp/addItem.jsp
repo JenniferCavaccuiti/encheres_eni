@@ -1,3 +1,7 @@
+<%--@elvariable id="message" type=""--%>
+<%--@elvariable id="item" type=""--%>
+<%--@elvariable id="categoriesList" type=""--%>
+
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../templates/startFile.jsp" %>
@@ -26,7 +30,7 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
         <div class="form-group row">
             <div class="col-4">
                 <label for="description" class="col-4">Description : </label>
@@ -39,7 +43,7 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
         <div class="form-group row">
             <div class="col-4">
                 <label for="category" class="col-4">Catégories</label>
@@ -57,7 +61,7 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
         <div class="form-group row">
             <div class="col-4">
                 <label for="initialPrice" class="col-4">Mise à prix : </label>
@@ -77,7 +81,7 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
 
 
         <c:if test="${empty item.bidsStartDate}">
@@ -96,7 +100,7 @@
                            value="${f:formatLocalDateTime(f:getDate(), 'HH:mm')}">
                 </div>
             </div>
-            </br>
+            <br>
             <div class="form-group row">
                 <label for="bidsEndDate" class="col-4">Fin de l'enchère</label>
                 <div class="col-4">
@@ -112,7 +116,7 @@
                            value="${f:formatLocalDateTime(f:getDate(), 'HH:mm')}">
                 </div>
             </div>
-            </br>
+            <br>
         </c:if>
         <c:if test="${not empty item.bidsStartDate}">
             <div class="form-group row">
@@ -130,7 +134,7 @@
                            value="${f:formatLocalDateTime(item.bidsStartDate, 'HH:mm')}">
                 </div>
             </div>
-            </br>
+            <br>
             <div class="form-group row">
                 <label for="bidsEndDate2" class="col-4">Fin de l'enchère</label>
                 <div class="col-4">
@@ -146,11 +150,11 @@
                            value="${f:formatLocalDateTime(item.bidsEndDate, 'HH:mm')}">
                 </div>
             </div>
-            </br>
+            <br>
         </c:if>
 
         <p>Retrait</p>
-        </br>
+        <br>
         <div class="form-group row">
             <div class="col-4">
                 <label for="street">Rue : </label>
@@ -163,7 +167,7 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
         <div class="form-group row">
             <div class="col-4">
                 <label for="postalCode" class="col-4">Code postal : </label>
@@ -176,7 +180,7 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
         <div class="form-group row">
             <div class="col-4">
                 <label for="city" class="col-4">Ville : </label>
@@ -189,7 +193,7 @@
                 </div>
             </div>
         </div>
-        </br>
+        <br>
         <a class="btn btn-default" href="index" role="button">Annuler</a>
         <button type="submit">Valider</button>
     </form>
