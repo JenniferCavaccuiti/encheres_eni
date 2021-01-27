@@ -18,7 +18,7 @@
 			<input type="checkbox" id="remember" name="remember" value="${login}"/>
 			<label for="remember">Se souvenir de moi</label>
 			<br/>
-			<a href=""">Mot de passe oublié</a>
+			<a href="">Mot de passe oublié</a>
 		</fieldset>
 	</form>
 	<button type="submit" class="btn btn-secondary mb-3"><a href="nouveau-profil">Créer un compte</a></button>

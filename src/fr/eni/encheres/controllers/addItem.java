@@ -47,12 +47,20 @@ public class addItem extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean connected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
+        Item item = null;
         if (!connected) {
             response.sendRedirect("index");
         } else {
             Map<String, String[]> parameters = new HashMap<>(request.getParameterMap());
-
-            Item item = ManagerFactory.getItemManager().addItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
+            if (request.getParameter("idItem") != null) {
+                try {
+                    item = ManagerFactory.getItemManager().updateItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
+                } catch (BusinessException businessException) {
+                    businessException.printStackTrace();
+                }
+            } else {
+                item = ManagerFactory.getItemManager().addItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
+            }
             HttpSession session = request.getSession();
             if (item != null) {
                 session.setAttribute("message", "Nouvelle vente enregistrée.");

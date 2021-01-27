@@ -38,7 +38,6 @@ public class Index extends HttpServlet {
         String keyword = request.getParameter("keyword");
         String searchedCategory = request.getParameter("searchedCategory");
         String filter = request.getParameter("filter");
-        int idUser = (int) request.getSession().getAttribute("idUser");
 
         // renvoi si user est connecté
         boolean isConnected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
@@ -51,6 +50,7 @@ public class Index extends HttpServlet {
                 if (filter == null) {
                     request.setAttribute("itemsList", ManagerFactory.getItemManager().getConnectedList(keyword, searchedCategory));
                 } else {
+                    int idUser = (int) request.getSession().getAttribute("idUser");
                     request.setAttribute("itemsList", ManagerFactory.getItemManager().searchedItemsByFilter(filter, idUser));
                 }
             }
