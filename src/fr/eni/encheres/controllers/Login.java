@@ -21,10 +21,6 @@ import fr.eni.encheres.models.bo.User;
  */
 @WebServlet("/login")
 public class Login extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    public static final String ATT_USER = "user";
-    public static final String ATT_FORM = "form";
-    public static final String ATT_SESSION_USER = "sessionUser";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);

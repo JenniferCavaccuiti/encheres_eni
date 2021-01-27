@@ -14,6 +14,7 @@
 
 <div class="col-5 justify-content-center">
     <form action="${pageContext.request.contextPath}/nouvelle-vente" method="post" novalidate class="needs-validation">
+        <input type="hidden" name="idItem" value="${item.idItem}">
         <div class="form-group row">
             <div class="col-4">
                 <label for="itemName" class="col-4">Article : </label>
