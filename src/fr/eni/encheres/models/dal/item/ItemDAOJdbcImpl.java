@@ -274,7 +274,7 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 
     public Item insertNewItem(Item item) {
         try (Connection connection = ConnectionProvider.getConnection()) {
-            PreparedStatement pStmt = connection.prepareStatement(SQL_INSERT_ITEM);
+            PreparedStatement pStmt = connection.prepareStatement(SQL_INSERT_ITEM, PreparedStatement.RETURN_GENERATED_KEYS);
 
             pStmt.setString(1, item.getItemName());
             pStmt.setString(2, item.getDescription());
@@ -292,7 +292,9 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 
             ResultSet rs = pStmt.getGeneratedKeys();
 
-            item.setIdItem(rs.getInt("item_id"));
+            if (rs.next()) {
+                item.setIdItem(rs.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

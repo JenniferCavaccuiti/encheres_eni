@@ -3,7 +3,7 @@
 <%@include file="../templates/startFile.jsp" %>
 <h1>Nouvelle vente</h1>
 
-<h1>${message}</h1>
+<h5 class="message">${message}</h5>
 
 <div class="col-5 justify-content-center">
     <form action="${pageContext.request.contextPath}/nouvelle-vente" method="post" novalidate class="needs-validation">
@@ -133,7 +133,7 @@
             </div>
         </div>
         </br>
-        <button><a type="button" href="index">Annuler</a></button>
+        <a class="btn btn-default" href="index" role="button">Modifier</a>
         <button type="submit">Enregistrer</button>
     </form>
 </div>

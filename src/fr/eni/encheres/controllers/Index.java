@@ -2,23 +2,20 @@ package fr.eni.encheres.controllers;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ManagerFactory;
-import fr.eni.encheres.models.bo.Category;
-import fr.eni.encheres.models.bo.Item;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 @WebServlet(name = "index", value = "/index")
 public class Index extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
         boolean connected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
+        HttpSession session = request.getSession();
 
         try {
             if (!connected) {
@@ -30,7 +27,8 @@ public class Index extends HttpServlet {
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
-
+        request.setAttribute("message", request.getSession().getAttribute("message"));
+        session.removeAttribute("message");
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }
 
@@ -60,10 +58,8 @@ public class Index extends HttpServlet {
         } catch (BusinessException | SQLException businessException) {
             businessException.printStackTrace();
         }
-
         request.setAttribute("message", request.getSession().getAttribute("message"));
         session.removeAttribute("message");
-
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
     }
 }

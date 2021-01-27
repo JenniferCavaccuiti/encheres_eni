@@ -13,8 +13,7 @@ public class BaseController {
         return idUser != null;
     }
 
-    public static List<Category>  getCategoriesList() throws SQLException, BusinessException {
+    public static List<Category> getCategoriesList() throws SQLException, BusinessException {
         return ManagerFactory.getCategoryManager().findAll();
     }
-
 }
