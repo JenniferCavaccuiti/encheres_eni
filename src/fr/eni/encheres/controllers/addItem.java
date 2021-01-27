@@ -18,9 +18,25 @@ public class addItem extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         boolean connected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
 
+        System.out.println(request.getParameter("itemId"));
+
         if (!connected) {
             response.sendRedirect(request.getContextPath() + "/index");
         } else {
+            if (request.getParameter("itemId") != null) {
+                System.out.println("j'arrive au bon endroit");
+                int idItem = Integer.parseInt(request.getParameter("itemId"));
+                System.out.println(request.getAttribute("itemId"));
+                Item item = null;
+                try {
+                    item = ManagerFactory.getItemManager().getItemById(idItem);
+                    System.out.println(item);
+                } catch (BusinessException businessException) {
+                    businessException.printStackTrace();
+                }
+                request.setAttribute("item", item);
+            }
+
             try {
                 request.setAttribute("categoriesList", BaseController.getCategoriesList());
             } catch (BusinessException | SQLException businessException) {

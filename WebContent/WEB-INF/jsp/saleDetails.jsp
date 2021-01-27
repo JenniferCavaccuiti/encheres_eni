@@ -3,6 +3,19 @@
 <%@page import="fr.eni.encheres.messages.MessagesReader"%>
 
 <div class="container">
+<c:choose>
+	<c:when test="${!beforeEnd && login == sessionScope.user.login}">
+		<h3>Vous avez remporté la vente</h3>
+	</c:when>
+	<c:when test="${!beforeEnd && login != sessionScope.user.login}">
+		<h3>${login} a remporté la vente</h3>
+	</c:when>
+	<c:otherwise>
+		<h3>Détails de la vente</h3>
+	</c:otherwise>
+
+</c:choose>
+</br>
 
 	<div>
 		<h6>${item.itemName}</h6>
@@ -54,7 +67,7 @@
 	</c:if>
 	
 	<c:if test="${!afterStart && sessionScope.user.getIdUser() == item.idSeller}">
-		<button class="btn btn-secondary mb-2"><a>Modifier ma vente</a></button>
+			<a onClick="changePage('${item.idItem}', '${pageContext.request.contextPath}/nouvelle-vente');" class="btn btn-default" type="submit" role="button">Modifier ma vente</a>
 	</c:if>
 
 <c:if test="${liste != null }">

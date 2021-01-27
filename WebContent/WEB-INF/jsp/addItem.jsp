@@ -12,7 +12,7 @@
                 <label for="itemName" class="col-4">Article : </label>
             </div>
             <div class="col-8">
-                <input type="text" class="form-control" name="itemName" id="itemName" required>
+                <input type="text" class="form-control" value="${item.itemName}" name="itemName" id="itemName" required>
                 <div class="invalid-feedback">
                     Le nom de l'article est obligatoire
                 </div>
@@ -24,7 +24,8 @@
                 <label for="description" class="col-4">Description : </label>
             </div>
             <div class="col-8">
-                <textarea class="form-control" id="description" rows="3" name="description" required></textarea>
+                <textarea class="form-control" id="description" rows="3" name="description"
+                          required>${item.description}</textarea>
                 <div class="invalid-feedback">
                     Le description est obligatoire
                 </div>
@@ -37,7 +38,8 @@
             </div>
             <div class="col-8">
                 <select class="form-control" id="category" name="category" required>
-                    <option></option>
+                    <option value="${item.idCategory}">${item.categoryName}</option>
+                    // Pas de récupération de la catégorie ?
                     <c:forEach var="category" items="${categoriesList}">
                         <option value="${category.idCategory}">${category.wording}</option>
                     </c:forEach>
@@ -53,45 +55,85 @@
                 <label for="initialPrice" class="col-4">Mise à prix : </label>
             </div>
             <div class="col-8">
-                <input type="number" class="form-control" id="initialPrice" name="initialPrice">
+                <input type="number" class="form-control" id="initialPrice" value="${item.initialPrice}"
+                       name="initialPrice">
                 <div class="invalid-feedback">
                     Le prix est obligatoire
                 </div>
             </div>
         </div>
         </br>
-        <div class="form-group row">
-            <label for="bidsStartDate" class="col-4">Début de l'enchère</label>
-            <div class="col-4">
-                <input type="date" class="form-control" id="bidsStartDate" name="bidsStartDate"
-                       min="${f:formatLocalDateTime(f:getDate(), 'yyyy-MM-dd')}"
-                       value="${f:formatLocalDateTime(f:getDate(), 'yyyy-MM-dd')}">
+
+
+        <c:if test="${empty item.bidsStartDate}">
+            <div class="form-group row">
+                <label for="bidsStartDate1" class="col-4">Début de l'enchère</label>
+                <div class="col-4">
+                    <input type="date" class="form-control" id="bidsStartDate1" name="bidsStartDate"
+                           min="${f:formatLocalDateTime(f:getDate(), 'yyyy-MM-dd')}"
+                           value="${f:formatLocalDateTime(f:getDate(), 'yyyy-MM-dd')}">
+                </div>
                 <div class="invalid-feedback">
                     La date de début est obligatoire et ne peut pas être inférieure à la date du jour
                 </div>
-            </div>
-            <div class="col-4">
-                <input type="time" class="form-control" id="bidsStartTime" name="bidsStartTime"
-                       value="${f:formatLocalDateTime(f:getDate(), 'HH:mm')}">
-            </div>
-        </div>
-        </br>
-        <div class="form-group row">
-            <label for="bidsEndDate" class="col-4">Fin de l'enchère</label>
-            <div class="col-4">
-                <input type="date" class="form-control col-3" id="bidsEndDate" name="bidsEndDate"
-                       value="${f:formatLocalDateTime(f:addDaysToDate(1, f:getDate()), 'yyyy-MM-dd')}"
-                       min="${f:formatLocalDateTime(f:addDaysToDate(1, f:getDate()), 'yyyy-MM-dd')}">
-                <div class="invalid-feedback">
-                    Le date de fin est obligatoire
+                <div class="col-4">
+                    <input type="time" class="form-control" id="bidsStartTime1" name="bidsStartTime"
+                           value="${f:formatLocalDateTime(f:getDate(), 'HH:mm')}">
                 </div>
             </div>
-            <div class="col-4">
-                <input type="time" class="form-control col-3" id="bidsEndTime" name="bidsEndTime"
-                       value="${f:formatLocalDateTime(f:getDate(), 'HH:mm')}">
+            </br>
+            <div class="form-group row">
+                <label for="bidsEndDate" class="col-4">Fin de l'enchère</label>
+                <div class="col-4">
+                    <input type="date" class="form-control col-3" id="bidsEndDate" name="bidsEndDate"
+                           value="${f:formatLocalDateTime(f:addDaysToDate(1, f:getDate()), 'yyyy-MM-dd')}"
+                           min="${f:formatLocalDateTime(f:addDaysToDate(1, f:getDate()), 'yyyy-MM-dd')}">
+                    <div class="invalid-feedback">
+                        Le date de fin est obligatoire
+                    </div>
+                </div>
+                <div class="col-4">
+                    <input type="time" class="form-control col-3" id="bidsEndTime" name="bidsEndTime"
+                           value="${f:formatLocalDateTime(f:getDate(), 'HH:mm')}">
+                </div>
             </div>
-        </div>
-        </br>
+            </br>
+        </c:if>
+        <c:if test="${not empty item.bidsStartDate}">
+            <div class="form-group row">
+                <label for="bidsStartDate2" class="col-4">Début de l'enchère</label>
+                <div class="col-4">
+                    <input type="date" class="form-control" id="bidsStartDate2" name="bidsStartDate"
+                           min="${f:formatLocalDateTime(f:getDate(), 'yyyy-MM-dd')}"
+                           value="${f:formatLocalDateTime(item.bidsStartDate, 'yyyy-MM-dd')}">
+                </div>
+                <div class="invalid-feedback">
+                    La date de début est obligatoire et ne peut pas être inférieure à la date du jour
+                </div>
+                <div class="col-4">
+                    <input type="time" class="form-control" id="bidsStartTime2" name="bidsStartTime"
+                           value="${f:formatLocalDateTime(item.bidsStartDate, 'HH:mm')}">
+                </div>
+            </div>
+            </br>
+            <div class="form-group row">
+                <label for="bidsEndDate2" class="col-4">Fin de l'enchère</label>
+                <div class="col-4">
+                    <input type="date" class="form-control col-3" id="bidsEndDate2" name="bidsEndDate"
+                           value="${f:formatLocalDateTime(f:addDaysToDate(1, item.bidsEndDate), 'yyyy-MM-dd')}"
+                           min="${f:formatLocalDateTime(f:addDaysToDate(1, f:getDate()), 'yyyy-MM-dd')}">
+                    <div class="invalid-feedback">
+                        Le date de fin est obligatoire
+                    </div>
+                </div>
+                <div class="col-4">
+                    <input type="time" class="form-control col-3" id="bidsEndTime2" name="bidsEndTime"
+                           value="${f:formatLocalDateTime(item.bidsEndDate, 'HH:mm')}">
+                </div>
+            </div>
+            </br>
+        </c:if>
+
         <p>Retrait</p>
         </br>
         <div class="form-group row">

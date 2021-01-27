@@ -302,7 +302,7 @@ public class ItemDAOJdbcImpl implements ItemDAO {
     }
 
 
-    //------------- Méthode qui selectionne un item via son nom
+    //------------- Méthode qui selectionne un item via son id
 
     private static final String selectItemById = "SELECT * FROM ITEM where item_id = ?";
 
