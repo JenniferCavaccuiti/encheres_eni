@@ -20,7 +20,18 @@ public class DeleteProfile extends HttpServlet {
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/deleteProfile.jsp").forward(request, response);
+		
+		//Ne pas autoriser l'accès à la page en cas de déconnexion
+		boolean connected = BaseController.isConnected(request.getSession().getAttribute("user"));
+			       
+		        if (!connected) {
+					response.sendRedirect(request.getContextPath()+"/index");
+		        } else {
+		        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/deleteProfile.jsp").forward(request, response);
+		        }
+		       
+		
+		
 	}
 
 	

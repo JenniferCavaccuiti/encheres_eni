@@ -3,6 +3,7 @@ package fr.eni.encheres.models.dal.bid;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bo.Bid;
 import fr.eni.encheres.models.bo.Item;
+import fr.eni.encheres.models.bo.User;
 import fr.eni.encheres.models.dal.ConnectionProvider;
 import fr.eni.encheres.models.dal.ResultCodesDAL;
 
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,5 +85,45 @@ public class BidDAOJdbcImpl implements BidDAO {
     	return id;
     }
 
+    //---------------------- Méthode d'insertion d'une enchère en BDD
+    
+    private static final String insertBid = "INSERT INTO BID (buyer_id, item_id, bid_date, bid_amount) VALUES (?, ?, ?, ?)";
+
+	@Override
+	public Bid insertBid(Bid bid) throws BusinessException {
+
+		BusinessException exception = new BusinessException();
+
+		if (bid == null) {
+			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+			throw exception;
+		}
+
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(insertBid, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+			pStmt.setInt(1, bid.getIdBuyer());
+			pStmt.setInt(2, bid.getIdItem());
+			pStmt.setTimestamp(3, Timestamp.valueOf(bid.getBidDate()));
+			pStmt.setInt(4, bid.getBidAmount());
+			
+			pStmt.executeUpdate();
+
+			ResultSet rs = pStmt.getGeneratedKeys();
+
+			if (rs.next()) {
+				bid.setIdBid(rs.getInt(1));
+			}
+
+			rs.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+			throw exception;
+		}
+
+		return bid;
+	}
 
 }

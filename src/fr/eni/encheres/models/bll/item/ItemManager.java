@@ -5,6 +5,7 @@ import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Bid;
 import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.dal.DAOFactory;
+import fr.eni.encheres.models.dal.item.ItemDAO;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -164,6 +165,12 @@ public class ItemManager {
     }
     public LocalDateTime getCorrectFormatDate(String date, String time) {
         return LocalDateTime.parse(date + "T" + time + ":00.000");
+    }
+    
+    //--------------- Méthode d'update d'un item
+    
+    public Item updateItemById(Item item) throws BusinessException {
+    	return DAOFactory.getItemDAO().updateItem(item);
     }
 
 }
