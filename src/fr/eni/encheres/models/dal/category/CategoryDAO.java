@@ -10,5 +10,5 @@ public interface CategoryDAO {
 
     List<Category> findAll() throws BusinessException, SQLException;
 
-    String findOne(int idCategory);
+    String findOneById(int idCategory);
 }

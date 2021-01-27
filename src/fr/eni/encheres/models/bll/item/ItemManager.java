@@ -1,11 +1,11 @@
 package fr.eni.encheres.models.bll.item;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.models.bll.BaseManager;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Bid;
 import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.dal.DAOFactory;
-import fr.eni.encheres.models.dal.item.ItemDAO;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -39,7 +39,7 @@ public class ItemManager {
         List<Bid> bidsList = ManagerFactory.getBidManager().findAll();
 
         for (Item item : itemsList) {
-            item.setCategoryName(DAOFactory.getCategoryDAO().findOne(item.getIdCategory()));
+            item.setCategoryName(DAOFactory.getCategoryDAO().findOneById(item.getIdCategory()));
             item.setSellerName(DAOFactory.getUserDAO().findOneById(item.getIdSeller()));
         }
 
@@ -55,7 +55,7 @@ public class ItemManager {
     public List<Item> getNonConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
         List<Item> itemsList;
 
-        keyword = prepareWord(keyword);
+        keyword = BaseManager.prepareWord(keyword);
         int category = Integer.parseInt(searchedCategory);
 
         if (keyword == null && category == 0) {
@@ -74,7 +74,7 @@ public class ItemManager {
     public List<Item> getConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
         List<Item> itemsList;
 
-        keyword = prepareWord(keyword);
+        keyword = BaseManager.prepareWord(keyword);
         int category = Integer.parseInt(searchedCategory);
 
         if (keyword == null && category == 0) {
@@ -126,8 +126,8 @@ public class ItemManager {
 
     //---------------- Méthode qui set le nom de la catégorie et du vendeur pour un item
 
-    public Item setSellerNameCatagoryName(Item item) {
-    	 item.setCategoryName(DAOFactory.getCategoryDAO().findOne(item.getIdCategory()));
+    public Item setSellerNameCategoryName(Item item) {
+    	 item.setCategoryName(DAOFactory.getCategoryDAO().findOneById(item.getIdCategory()));
          item.setSellerName(DAOFactory.getUserDAO().findOneById(item.getIdSeller()));
 
 		return item;
@@ -135,11 +135,7 @@ public class ItemManager {
 
     // --------- Ajout d'un nouvel item ------ //
 
-    public String prepareWord(String word) {
-        word = word.toLowerCase(Locale.ROOT);
-        word = word.trim();
-        return word;
-    }
+
 
     public Item addItem(Map<String, String[]> parameters, int idUser) {
         Item item = new Item();
@@ -147,17 +143,17 @@ public class ItemManager {
         LocalDateTime bidsStartDate = getCorrectFormatDate(parameters.get("bidsStartDate")[0], parameters.get("bidsStartTime")[0]);
         LocalDateTime bidsEndDate = getCorrectFormatDate(parameters.get("bidsEndDate")[0], parameters.get("bidsEndTime")[0]);
 
-//        // créer l'item
-        item.setItemName(parameters.get("itemName")[0]);
-        item.setDescription(parameters.get("description")[0]);
+//         créer l'item
+        item.setItemName(BaseManager.prepareWord(parameters.get("itemName")[0]));
+        item.setDescription(BaseManager.prepareWord(parameters.get("description")[0]));
         item.setBidsStartDate(bidsStartDate);
         item.setBidsEndDate(bidsEndDate);
         item.setInitialPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
         item.setCurrentPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
         item.setIdSeller(idUser);
-        item.setStreet(parameters.get("street")[0]);
-        item.setPostalCode(parameters.get("postalCode")[0]);
-        item.setCity(parameters.get("city")[0]);
+        item.setStreet(BaseManager.prepareWord(parameters.get("street")[0]));
+        item.setPostalCode(BaseManager.prepareWord(parameters.get("postalCode")[0]));
+        item.setCity(BaseManager.prepareWord(parameters.get("city")[0]));
         item.setIdCategory(Integer.parseInt(parameters.get("category")[0]));
 
 //        // l'ajouter en base et le renvoi

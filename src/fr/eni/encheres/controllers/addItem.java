@@ -24,13 +24,11 @@ public class addItem extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/index");
         } else {
             if (request.getParameter("itemId") != null) {
-                System.out.println("j'arrive au bon endroit");
                 int idItem = Integer.parseInt(request.getParameter("itemId"));
-                System.out.println(request.getAttribute("itemId"));
                 Item item = null;
                 try {
                     item = ManagerFactory.getItemManager().getItemById(idItem);
-                    System.out.println(item);
+                    item.setCategoryName(ManagerFactory.getCategoryManager().findOneById(item.getIdCategory()));
                 } catch (BusinessException businessException) {
                     businessException.printStackTrace();
                 }

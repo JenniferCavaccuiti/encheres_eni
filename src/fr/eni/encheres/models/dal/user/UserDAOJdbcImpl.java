@@ -26,7 +26,6 @@ public class UserDAOJdbcImpl implements UserDAO {
 		if (instance == null) {
 			instance = new UserDAOJdbcImpl();
 		}
-
 		return instance;
 	}
 

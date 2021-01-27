@@ -7,6 +7,9 @@
 	<c:when test="${!beforeEnd && login == sessionScope.user.login}">
 		<h3>Vous avez remporté la vente</h3>
 	</c:when>
+	<c:when test="${!beforeEnd && login == null}">
+		<h3>Détails de la vente</h3>
+	</c:when>
 	<c:when test="${!beforeEnd && login != sessionScope.user.login}">
 		<h3>${login} a remporté la vente</h3>
 	</c:when>

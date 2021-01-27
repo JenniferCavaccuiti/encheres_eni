@@ -39,7 +39,7 @@ public class CategoryDAOJdbcImpl implements CategoryDAO {
     }
 
     @Override
-    public String findOne(int idCategory) {
+    public String findOneById(int idCategory) {
         String categoryName = null;
 
         try (Connection connection = ConnectionProvider.getConnection()) {

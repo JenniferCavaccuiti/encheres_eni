@@ -1,7 +1,6 @@
 package fr.eni.encheres.controllers;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.encheres.BusinessException;
-import fr.eni.encheres.messages.MessagesReader;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Bid;
 import fr.eni.encheres.models.bo.Item;
@@ -40,7 +38,7 @@ public class SaleDetails extends HttpServlet {
 
 		// On cherche la catégorie correspondante à l'idCategory
 		// On cherche le vendeur correspondant à l'idSeller
-		item = ManagerFactory.getItemManager().setSellerNameCatagoryName(item);
+		item = ManagerFactory.getItemManager().setSellerNameCategoryName(item);
 
 		// On cherche le login du plus gros encherisseur
 		String login = null;
@@ -60,6 +58,7 @@ public class SaleDetails extends HttpServlet {
 		request.setAttribute("afterStart", afterStartBid);
 		request.setAttribute("item", item);
 		request.setAttribute("login", login);
+		System.out.println(login);
 
 		// Ne pas autoriser l'accès à la page en cas de déconnexion
 		boolean connected = BaseController.isConnected(request.getSession().getAttribute("user"));
@@ -85,7 +84,7 @@ public class SaleDetails extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		item = ManagerFactory.getItemManager().setSellerNameCatagoryName(item);
+		item = ManagerFactory.getItemManager().setSellerNameCategoryName(item);
 		boolean beforeEndBid = LocalDateTime.now().isBefore(item.getBidsEndDate());
 		boolean afterStartBid = LocalDateTime.now().isAfter(item.getBidsStartDate());
 		request.setAttribute("beforeEnd", beforeEndBid);

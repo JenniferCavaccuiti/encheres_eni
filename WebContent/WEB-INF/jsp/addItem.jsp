@@ -1,7 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../templates/startFile.jsp" %>
-<h1>Nouvelle vente</h1>
+
+<c:if test="${empty item}">
+    <h1>Nouvelle vente</h1>
+</c:if>
+<c:if test="${not empty item}">
+    <h1>Modifier la vente</h1>
+</c:if>
+
 
 <h5 class="message">${message}</h5>
 
