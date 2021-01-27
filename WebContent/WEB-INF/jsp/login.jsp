@@ -11,34 +11,34 @@
 				<legend class="form-title">Connexion</legend>
 
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<h6>
 						<label for="login">Identifiant<span class="required">: </span></label>
 					</h6>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<input type="text" id="login" name="login" placeholder="login ou email" required/>
 					<span class="error">${form.errors['login']}</span>
 				</div>
 			</div>
 			<br/>
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<h6>
 						<label for="password">Mot de passe<span class="required">: </span></label>
 					</h6>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<input type="password" id="password" name="password" placeholder="mot de passe" required/>
 					<span class="error">${form.errors['password']}</span>
 				</div>
 			</div>
 			<br/>
 			<div class="row">
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<input class="btn btn-primary btn-lg btn-block" type="submit" value="Connexion" />
 				</div>
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<input type="checkbox" id="remember" name="remember" value=""/>
 					<label for="remember">Se souvenir de moi</label>
 					<br/>
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<br/>
-	<div class="col-lg-12">
+	<div class="col-md-12">
 	<div class="row">
 			<input type="button" class="btn btn-info btn-xl btn-block" value="Créer un compte"  
 			onClick="changePage('${pageContext.request.contextPath}/nouveau-profil');"/>
