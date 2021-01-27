@@ -139,7 +139,7 @@ public class SaleDetails extends HttpServlet {
 				}
 				
 				//On met à jour l'item
-				item.setCurrentPrice(bidderPrice); //TODO update l'item en BDD
+				item.setCurrentPrice(bidderPrice); //update l'item en BDD
 				item = ManagerFactory.getItemManager().updateItemById(item);
 				
 				response.sendRedirect("index");
