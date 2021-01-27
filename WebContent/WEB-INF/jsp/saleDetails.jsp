@@ -70,7 +70,9 @@
 	</c:if>
 	
 	<c:if test="${!afterStart && sessionScope.user.getIdUser() == item.idSeller}">
-			<a onClick="changePage('${item.idItem}', '${pageContext.request.contextPath}/nouvelle-vente');" class="btn btn-default" type="submit" role="button">Modifier ma vente</a>
+			<button class="btn">
+				<a onClick="changePage('${item.idItem}', '${pageContext.request.contextPath}/nouvelle-vente');" type="submit" role="button">Modifier ma vente</a>
+			</button>
 	</c:if>
 
 <c:if test="${liste != null }">

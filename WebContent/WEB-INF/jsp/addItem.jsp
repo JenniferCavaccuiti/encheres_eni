@@ -61,9 +61,16 @@
             <div class="col-4">
                 <label for="initialPrice" class="col-4">Mise à prix : </label>
             </div>
+
             <div class="col-8">
-                <input type="number" class="form-control" id="initialPrice" value="${item.initialPrice}"
-                       name="initialPrice">
+                <c:if test="${empty item.initialPrice}">
+                    <input type="number" class="form-control" id="initialPrice" value="20"
+                           name="initialPrice">
+                </c:if>
+                <c:if test="${ not empty item.initialPrice}">
+                    <input type="number" class="form-control" id="initialPrice" value="${item.initialPrice}"
+                           name="initialPrice">
+                </c:if>
                 <div class="invalid-feedback">
                     Le prix est obligatoire
                 </div>
@@ -182,8 +189,8 @@
             </div>
         </div>
         </br>
-        <a class="btn btn-default" href="index" role="button">Modifier</a>
-        <button type="submit">Enregistrer</button>
+        <a class="btn btn-default" href="index" role="button">Annuler</a>
+        <button type="submit">Valider</button>
     </form>
 </div>
 
