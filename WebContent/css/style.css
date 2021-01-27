@@ -6,3 +6,20 @@
     padding: 0;
     margin: 20px;
 }
+
+.bloc-form {
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.right-part{
+	margin-left: auto;
+}
+
+footer {
+    position: sticky;
+
+    bottom: 0;
+    width: 100%;
+}
