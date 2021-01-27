@@ -7,7 +7,7 @@
 		<fieldset>
 			<legend>Connexion</legend>
 			<label for="login">Identifiant<span class="required">*</span></label>
-			<input type="text" id="login" name="login" size="20" maxlength="60" required/>
+			<input type="text" id="login" name="login" size="20" maxlength="60" value="${login}" required/>
 			<span class="error">${form.errors['login']}</span>
 			<br/>
 			<label for="password">Mot de passe<span class="required">*</span></label>
@@ -15,7 +15,7 @@
 			<span class="error">${form.errors['password']}</span>
 			<br/>
 			<input type="submit" value="Log in" class="noLabel"/>
-			<input type="checkbox" id="remember" name="remember" value=""/>
+			<input type="checkbox" id="remember" name="remember" value="${login}"/>
 			<label for="remember">Se souvenir de moi</label>
 			<br/>
 			<a href=""">Mot de passe oublié</a>
