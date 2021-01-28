@@ -41,7 +41,7 @@ public class Item {
 		this.sellerName = sellerName;
 	}
 
-	// association bitaupe que je sais pas encore trop quoi en faire mais c'est zoli
+	// association bidirectionnel
 	List<Bid> bidsList = new ArrayList<>();
 	
 	

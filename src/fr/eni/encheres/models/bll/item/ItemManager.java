@@ -214,4 +214,9 @@ public class ItemManager {
         Item newItem = DAOFactory.getItemDAO().updateItem(item);
         return newItem;
     }
+
+    public int deleteItem(int idItem) {
+        int isDelete = DAOFactory.getItemDAO().deleteItem(idItem);
+        return isDelete;
+    }
 }
