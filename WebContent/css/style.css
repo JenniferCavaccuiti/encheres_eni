@@ -37,7 +37,7 @@ body {
 	margin-left: auto;
 }
 
-footer {
+.footer {
     position: sticky;
 
     bottom: 0;
@@ -46,4 +46,30 @@ footer {
 
 .message {
     color: red;
+}
+
+button {
+    border: none;
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+button:hover {
+    color: #95a1ae;
+} 
+
+.heading h3 {
+	margin : 50px;
+}
+
+.create-button {
+	display : flex;
+	justify-content: center;
+	margin : 50px;
+}
+
+.create-button button {
+	padding : 
 }
