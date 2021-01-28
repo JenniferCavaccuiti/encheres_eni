@@ -3,9 +3,11 @@
 <%@page import="fr.eni.encheres.messages.MessagesReader"%>
 <%@include file="../templates/startFile.jsp"%>
 
+<div class="container">
+<div class="bloc-form">
 	<form method="POST" action="login">
 		<fieldset>
-				<legend class="form-title">Connexion</legend>
+				<h5 class="form-title">Connexion</h5>
 
 			<div class="row">
 				<div class="col-md-6">
@@ -43,13 +45,13 @@
 				</div>
 			</div>
 			<br/>
-	<div class="col-md-12">
-	<div class="row">
-			<button type="submit" class="btn btn-info btn-xl btn-block">
-				<a href="nouveau-profil" style="color:black">Créer un compte</a>
-			</button>
+		<div class="col-md-12">
+			<div class="row">
+				<button type="submit" class="btn btn-info btn-xl btn-block">
+					<a href="nouveau-profil" style="color:black">Créer un compte</a>
+				</button>
+			</div>
 		</div>
-	</div>
 	</fieldset>
 	</form>
 </div>
