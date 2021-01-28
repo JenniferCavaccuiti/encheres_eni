@@ -52,18 +52,22 @@ public class addItem extends HttpServlet {
             response.sendRedirect("index");
         } else {
             Map<String, String[]> parameters = new HashMap<>(request.getParameterMap());
-            if (request.getParameter("idItem") != null) {
+            HttpSession session = request.getSession();
+            if (!request.getParameter("idItem").equals("")) {
+
                 try {
                     item = ManagerFactory.getItemManager().updateItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
+                    session.setAttribute("message", "Modification enregistrée.");
                 } catch (BusinessException businessException) {
                     businessException.printStackTrace();
                 }
             } else {
                 item = ManagerFactory.getItemManager().addItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
-            }
-            HttpSession session = request.getSession();
-            if (item != null) {
                 session.setAttribute("message", "Nouvelle vente enregistrée.");
+            }
+
+            if (item != null) {
+
                 response.sendRedirect("index");
             } else {
                 request.setAttribute("message", "Impossible d'enregistrer la nouvelle vente.");
