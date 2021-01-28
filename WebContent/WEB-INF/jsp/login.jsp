@@ -3,11 +3,8 @@
 <%@page import="fr.eni.encheres.messages.MessagesReader"%>
 <%@include file="../templates/startFile.jsp"%>
 
-<div class="fond">
-<div class="bloc-form">
 	<form method="POST" action="login">
 		<fieldset>
-<<<<<<< HEAD
 				<legend class="form-title">Connexion</legend>
 
 			<div class="row">
@@ -21,12 +18,6 @@
 					<span class="error">${form.errors['login']}</span>
 				</div>
 			</div>
-=======
-			<legend>Connexion</legend>
-			<label for="login">Identifiant<span class="required">*</span></label>
-			<input type="text" id="login" name="login" size="20" maxlength="60" value="${login}" required/>
-			<span class="error">${form.errors['login']}</span>
->>>>>>> refs/heads/master
 			<br/>
 			<div class="row">
 				<div class="col-md-6">
@@ -40,7 +31,6 @@
 				</div>
 			</div>
 			<br/>
-<<<<<<< HEAD
 			<div class="row">
 				<div class="col-md-6">
 					<input class="btn btn-primary btn-lg btn-block" type="submit" value="Connexion" />
@@ -52,13 +42,7 @@
 					<a href="">Mot de passe oublié</a>
 				</div>
 			</div>
-=======
-			<input type="submit" value="Log in" class="noLabel"/>
-			<input type="checkbox" id="remember" name="remember" value="${login}"/>
-			<label for="remember">Se souvenir de moi</label>
->>>>>>> refs/heads/master
 			<br/>
-<<<<<<< HEAD
 	<div class="col-md-12">
 	<div class="row">
 			<button type="submit" class="btn btn-info btn-xl btn-block">
@@ -67,10 +51,6 @@
 		</div>
 	</div>
 	</fieldset>
-=======
-			<a href="">Mot de passe oublié</a>
-		</fieldset>
->>>>>>> refs/heads/master
 	</form>
 </div>
 </div>

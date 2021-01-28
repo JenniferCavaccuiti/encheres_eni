@@ -29,7 +29,7 @@
             <c:if test="${empty sessionScope}">
             <div class="card col-4" id="item-${item.idItem}">
                 </c:if>
-                <div class="card-header">
+                <div class="card-header header-color">
                         ${item.itemName}
                 </div>
                 <div class="card-body">

@@ -47,5 +47,6 @@ public interface ItemDAO {
     
     public List<Item> selectItemByUser(User user) throws BusinessException;
 
-    }
+    int deleteItem(int idItem);
+}
 

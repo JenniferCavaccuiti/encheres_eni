@@ -85,9 +85,14 @@
 	</ul>
 </c:if>
 
+<c:if test="${sessionScope.user.administrator == null}">
+
+	<p>Vous ne pouvez pas enchérir votre profil est désactivé</p>
+
+</c:if>
 
 <form method="post" action="details-vente">
-	<c:if test="${afterStart && beforeEnd && sessionScope.user.getIdUser() != item.idSeller}">
+	<c:if test="${afterStart && beforeEnd && sessionScope.user.getIdUser() != item.idSeller && sessionScope.user.administrator != null}">
 
 		<div>
 			<label>Ma proposition : </label>

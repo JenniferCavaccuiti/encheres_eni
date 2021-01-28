@@ -13,7 +13,7 @@ public class User {
 	private String city;
 	private String password;
 	private int credits;
-	private boolean administrator;
+	private String administrator;
 	
 	
 	//--------- Constructeur
@@ -21,7 +21,7 @@ public class User {
 	public User() {}
 
 	public User(String login, String lastname, String firstname, String email, String phoneNumber, String street,
-			String postalCode, String city, String password, int credits, boolean administrator) {
+			String postalCode, String city, String password, int credits, String administrator) {
 
 		this.login = login;
 		this.lastname = lastname;
@@ -37,7 +37,7 @@ public class User {
 	}
 
 	public User(int idUser, String login, String lastname, String firstname, String email, String phoneNumber,
-			String street, String postalCode, String city, String password, int credits, boolean administrator) {
+			String street, String postalCode, String city, String password, int credits, String administrator) {
 		
 		this.idUser = idUser;
 		this.login = login;
@@ -144,11 +144,11 @@ public class User {
 		this.credits = credits;
 	}
 
-	public boolean isAdministrator() {
+	public String getAdministrator() {
 		return administrator;
 	}
 
-	public void setAdministrator(boolean administrator) {
+	public void setAdministrator(String administrator) {
 		this.administrator = administrator;
 	}
 	

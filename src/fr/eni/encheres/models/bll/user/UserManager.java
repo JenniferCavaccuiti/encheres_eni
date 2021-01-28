@@ -129,7 +129,7 @@ public class UserManager {
 		// l'email
 	
 	public User addUser(String login, String lastname, String firstname, String email, String phoneNumber,
-			String street, String postalCode, String city, String password, String confirmPassword, boolean administrator) throws BusinessException
+			String street, String postalCode, String city, String password, String confirmPassword, String administrator) throws BusinessException
 			 {
 
 		BusinessException exception = new BusinessException();

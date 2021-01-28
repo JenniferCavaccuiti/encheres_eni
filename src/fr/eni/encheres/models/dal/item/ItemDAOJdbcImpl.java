@@ -92,6 +92,10 @@ public class ItemDAOJdbcImpl implements ItemDAO {
                     " WHERE bids_end_date < getdate() " +
                     "AND USERS.user_id = ?";
 
+    private static final String SQL_DELETE_ITEM =
+            "DELETE FROM ITEM " +
+                    "WHERE item_id = ?";
+
     private List<Item> getItemsStatement(String sqlItemUserSellOpened, int option, int option2) {
         List<Item> itemsList = new ArrayList<>();
         Item item;
@@ -304,7 +308,7 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 
     //------------- Méthode qui selectionne un item via son id
 
-    private static final String selectItemById = "SELECT * FROM ITEM where item_id = ?";
+    private static final String SELECT_ITEM_BY_ID = "SELECT * FROM ITEM where item_id = ?";
 
     @Override
     public Item selectItemById(int id) throws BusinessException {
@@ -312,7 +316,7 @@ public class ItemDAOJdbcImpl implements ItemDAO {
         Item item = null;
 
         try (Connection cnx = ConnectionProvider.getConnection();
-             PreparedStatement pStmt = cnx.prepareStatement(selectItemById);) {
+             PreparedStatement pStmt = cnx.prepareStatement(SELECT_ITEM_BY_ID);) {
 
             pStmt.setInt(1, id);
 
@@ -389,41 +393,40 @@ public class ItemDAOJdbcImpl implements ItemDAO {
     }
 
     //----------------- Méthode de suppression de tous les articles correspondants à un user en BDD
-    
-	private static final String deleteItemByIdUser = "DELETE FROM ITEM where seller_id = ?";
-	
-	@Override
-	public void deleteItemByIdUser(User user) throws BusinessException {
-		
-		BusinessException exception = new BusinessException();
-		
-		if (user == null) {
-			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
-			throw exception;
-		}
-		
-		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pStmt = cnx.prepareStatement(deleteItemByIdUser)) {
 
-			pStmt.setInt(1, user.getIdUser());
-			pStmt.executeUpdate();
+    private static final String deleteItemByIdUser = "DELETE FROM ITEM where seller_id = ?";
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-			exception.addError(ResultCodesDAL.DELETE_ITEM_FAILED);
-			throw exception;
-		}
-		
-	}
-	
-	// ---------------- Méthode de sélection des articles correspondants à un user
-    
-	private static final String selectItemByUser = "SELECT * FROM ITEM where seller_id = ?";
+    @Override
+    public void deleteItemByIdUser(User user) throws BusinessException {
+
+        BusinessException exception = new BusinessException();
+
+        if (user == null) {
+            exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+            throw exception;
+        }
+
+        try (Connection cnx = ConnectionProvider.getConnection();
+             PreparedStatement pStmt = cnx.prepareStatement(deleteItemByIdUser)) {
+
+            pStmt.setInt(1, user.getIdUser());
+            pStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            exception.addError(ResultCodesDAL.DELETE_ITEM_FAILED);
+            throw exception;
+        }
+    }
+
+    // ---------------- Méthode de sélection des articles correspondants à un user
+
+    private static final String selectItemByUser = "SELECT * FROM ITEM where seller_id = ?";
 
     @Override
     public List<Item> selectItemByUser(User user) throws BusinessException {
 
-        List <Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         Item item = null;
 
         try (Connection cnx = ConnectionProvider.getConnection();
@@ -462,5 +465,18 @@ public class ItemDAOJdbcImpl implements ItemDAO {
 
         return items;
     }
-	
+
+    public int deleteItem(int idItem) {
+        int result = 0;
+        try (Connection connection = ConnectionProvider.getConnection()) {
+            PreparedStatement pStmt = connection.prepareStatement(SQL_DELETE_ITEM);
+
+            pStmt.setInt(1, idItem);
+            result = pStmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
 }

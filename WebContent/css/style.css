@@ -13,6 +13,25 @@
   	justify-content: center;
 }
 
+.white-color {
+    color: white;
+}
+
+nav {
+    background-color: #95a1ae;
+}
+
+.header-color {
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+body {
+    background-color: #EBE9E7;
+}
+
 
 .right-part{
 	margin-left: auto;

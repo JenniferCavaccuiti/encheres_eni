@@ -5,6 +5,7 @@ import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Category;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class BaseController {
@@ -15,5 +16,9 @@ public class BaseController {
 
     public static List<Category> getCategoriesList() throws SQLException, BusinessException {
         return ManagerFactory.getCategoryManager().findAll();
+    }
+
+    public static boolean isAfterStartBid(LocalDateTime now, LocalDateTime startBid) {
+        return startBid.isAfter(now);
     }
 }
