@@ -16,12 +16,11 @@
 </head>
 <body class="fond-body">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/enchere_test/index">
-                <%--                Ici, logo du site--%>
+            <a class="navbar-brand white-color" href="/enchere_test/index">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index">
+            <a class="navbar-brand white-color" href="index">
                 <img src="img/logo1.png" alt="" width="30" height="24" class="d-inline-block align-top">
                 Enchères Eni
             </a>
@@ -32,7 +31,7 @@
             <c:when test="${empty sessionScope}">
                 <div class="collapse navbar-collapse" id="disconnect">
                     <div class="right-part">
-                        <a class="nav-link active" aria-current="page" href="login">Se connecter / s'inscrire</a>
+                        <a class="nav-link active white-color" aria-current="page" href="login">Se connecter / s'inscrire</a>
                     </div>
                 </div>
             </c:when>
@@ -41,10 +40,10 @@
                 <div class="collapse navbar-collapse" id="connect">
                     <div class="navbar-nav">
                     <c:if test="${not empty sessionScope && sessionScope.user.administrator == '1'}"><a class="nav-link" href="administration-accueil">Administration</a></c:if>
-                        <a class="nav-link active" aria-current="page" href="index">Enchères</a>
+                        <a class="nav-link active white-color" aria-current="page" href="index">Enchères</a>
                     <c:if test="${not empty sessionScope && sessionScope.user.administrator != null}"><a class="nav-link" href="nouvelle-vente">Vendre un article</a></c:if>
                         <a class="nav-link" href="profil-utilisateur?login=${sessionScope.user.getLogin()}">Mon profil</a>
-                        <a class="nav-link" href="deconnexion" tabindex="-1">Déconnexion</a>
+                        <a class="nav-link white-color" href="deconnexion" tabindex="-1">Déconnexion</a>
                     </div>
                 </div>
              </div>
@@ -53,4 +52,5 @@
         </div>
     </nav>
 </header>
+<main class="container-fluid">
 
