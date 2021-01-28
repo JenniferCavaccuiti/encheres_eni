@@ -23,6 +23,7 @@ public class AdminIndex extends HttpServlet {
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+
 		List<User> users = new ArrayList<>();
 		
 		//On récupère la liste des utilisateurs
@@ -33,8 +34,20 @@ public class AdminIndex extends HttpServlet {
 		}
 	
 		request.setAttribute("users", users);
-		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/admin.jsp").forward(request, response);
-		
+			
+		//Ne pas autoriser l'accès à la page en cas de déconnexion et user not admin
+		User user = (User) request.getSession().getAttribute("user");
+		boolean connected = BaseController.isConnected(user);
+
+		        if (!connected) {
+					response.sendRedirect(request.getContextPath()+"/index");
+		        } 
+		        else if (connected && !user.getAdministrator().equals("1")) {
+		        	response.sendRedirect(request.getContextPath()+"/index");
+		        } else {
+		        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/admin.jsp").forward(request, response);
+		        }
+	
 	}
 
 	

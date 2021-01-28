@@ -3,6 +3,7 @@ package fr.eni.encheres.controllers;
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Item;
+import fr.eni.encheres.models.bo.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -17,12 +18,20 @@ public class addItem extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         boolean connected = BaseController.isConnected(request.getSession().getAttribute("idUser"));
+        
+        User user = (User) request.getSession().getAttribute("user");
 
         System.out.println(request.getParameter("itemId"));
 
         if (!connected) {
             response.sendRedirect(request.getContextPath() + "/index");
-        } else {
+        } 
+        
+        else if (connected && user.getAdministrator().equals(null)) {
+        	response.sendRedirect(request.getContextPath() + "/index");
+        }
+        
+        else {
             if (request.getParameter("itemId") != null) {
                 int idItem = Integer.parseInt(request.getParameter("itemId"));
                 Item item = null;

@@ -23,7 +23,20 @@ public class AdminActions extends HttpServlet {
     
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+		
+		//Ne pas autoriser l'accès à la page en cas de déconnexion et user not admin
+		User user = (User) request.getSession().getAttribute("user");
+		System.out.println(user);
+		boolean connected = BaseController.isConnected(user);
+			       
+		        if (!connected) {
+					response.sendRedirect(request.getContextPath()+"/index");
+		        } 
+		        else if (connected && user.getAdministrator() != "1") {
+		        	response.sendRedirect(request.getContextPath()+"/index");
+		        } else {
+		        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/adminActions.jsp").forward(request, response);
+		        }
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
