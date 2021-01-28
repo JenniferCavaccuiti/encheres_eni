@@ -7,14 +7,19 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Enchères Eni</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
 </head>
-<body class="container-fluid">
+<body class="fond-body">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/enchere_test/index">
+                <%--                Ici, logo du site--%>
         <div class="container-fluid">
             <a class="navbar-brand" href="index">
                 <img src="img/logo1.png" alt="" width="30" height="24" class="d-inline-block align-top">
@@ -22,16 +27,17 @@
             </a>
         </div>
 
-        <div class="container-fluid">
+        <div class="container">
             <c:choose>
             <c:when test="${empty sessionScope}">
                 <div class="collapse navbar-collapse" id="disconnect">
-                    <div class="navbar-nav">
+                    <div class="right-part">
                         <a class="nav-link active" aria-current="page" href="login">Se connecter / s'inscrire</a>
                     </div>
                 </div>
             </c:when>
             <c:when test="${not empty sessionScope}">
+            <div class="right-part">
                 <div class="collapse navbar-collapse" id="connect">
                     <div class="navbar-nav">
                     <c:if test="${not empty sessionScope && sessionScope.user.administrator == true}"><a class="nav-link" href="administration-accueil">Administration</a></c:if>
@@ -41,6 +47,7 @@
                         <a class="nav-link" href="deconnexion" tabindex="-1">Déconnexion</a>
                     </div>
                 </div>
+             </div>
             </c:when>
             </c:choose>
         </div>

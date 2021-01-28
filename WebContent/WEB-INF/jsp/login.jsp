@@ -5,25 +5,57 @@
 
 	<form method="POST" action="login">
 		<fieldset>
-			<legend>Connexion</legend>
-			<label for="login">Identifiant<span class="required">*</span></label>
-			<input type="text" id="login" name="login" size="20" maxlength="60" value="${login}" required/>
-			<span class="error">${form.errors['login']}</span>
+				<legend class="form-title">Connexion</legend>
+
+			<div class="row">
+				<div class="col-md-6">
+					<h6>
+						<label for="login">Identifiant<span class="required">: </span></label>
+					</h6>
+				</div>
+				<div class="col-md-6">
+					<input type="text" id="login" name="login" placeholder="login ou email" required/>
+					<span class="error">${form.errors['login']}</span>
+				</div>
+			</div>
 			<br/>
-			<label for="password">Mot de passe<span class="required">*</span></label>
-			<input type="password" id="password" name="password" size="20" maxlength="20" required/>
-			<span class="error">${form.errors['password']}</span>
+			<div class="row">
+				<div class="col-md-6">
+					<h6>
+						<label for="password">Mot de passe<span class="required">: </span></label>
+					</h6>
+				</div>
+				<div class="col-md-6">
+					<input type="password" id="password" name="password" placeholder="mot de passe" required/>
+					<span class="error">${form.errors['password']}</span>
+				</div>
+			</div>
 			<br/>
-			<input type="submit" value="Log in" class="noLabel"/>
-			<input type="checkbox" id="remember" name="remember" value="${login}"/>
-			<label for="remember">Se souvenir de moi</label>
+			<div class="row">
+				<div class="col-md-6">
+					<input class="btn btn-primary btn-lg btn-block" type="submit" value="Connexion" />
+				</div>
+				<div class="col-md-6">
+					<input type="checkbox" id="remember" name="remember" value=""/>
+					<label for="remember">Se souvenir de moi</label>
+					<br/>
+					<a href="">Mot de passe oublié</a>
+				</div>
+			</div>
 			<br/>
-			<a href="">Mot de passe oublié</a>
-		</fieldset>
+	<div class="col-md-12">
+	<div class="row">
+			<button type="submit" class="btn btn-info btn-xl btn-block">
+				<a href="nouveau-profil" style="color:black">Créer un compte</a>
+			</button>
+		</div>
+	</div>
+	</fieldset>
 	</form>
-	<button type="submit" class="btn btn-secondary mb-3"><a href="nouveau-profil">Créer un compte</a></button>
-	
-	
+</div>
+</div>
+
+
 <c:if test="${listeError != null }">
 	<c:forEach var="erreur" items="${listeError}">
 	<li>${MessagesReader.getErrorMessage(erreur)}</li>
