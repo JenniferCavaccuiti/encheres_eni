@@ -72,13 +72,13 @@ public class UserManager {
 			}
 		}
 
-		if(!user.getFirstname().equals(firstname)) {
+		//if(!user.getFirstname().equals(firstname)) {
 			user.setFirstname(firstname);
-		}
+		//}
 
-		if(!user.getLastname().equals(lastname)) {
+		//if(!user.getLastname().equals(lastname)) {
 			user.setLastname(lastname);
-		}
+		//}
 
 		if(!user.getEmail().equals(email)) {
 
@@ -89,21 +89,21 @@ public class UserManager {
 			}
 		}
 
-		if(!user.getPhoneNumber().equals(phoneNumber)) {
+		//if(!user.getPhoneNumber().equals(phoneNumber)) {
 			user.setPhoneNumber(phoneNumber);
-		}
+		//}
 
-		if(!user.getStreet().equals(street)) {
+		//if(!user.getStreet().equals(street)) {
 			user.setStreet(street);
-		}
+		//}
 
-		if(!user.getPostalCode().equals(postalCode)) {
+		//if(!user.getPostalCode().equals(postalCode)) {
 			user.setPostalCode(postalCode);
-		}
+		//}
 
-		if(!user.getCity().equals(city)) {
+		//if(!user.getCity().equals(city)) {
 			user.setCity(city);
-		}
+		//}
 
 		if(!newPassword.isEmpty()) {
 			confirmPassword(newPassword, confirmPassword, exception);
