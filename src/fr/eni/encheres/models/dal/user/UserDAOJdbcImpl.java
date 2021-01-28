@@ -318,7 +318,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+			exception.addError(ResultCodesDAL.DELETE_USER_FAILED);
 			throw exception;
 		}
 		

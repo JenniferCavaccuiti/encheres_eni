@@ -309,85 +309,158 @@ public class ItemDAOJdbcImpl implements ItemDAO {
     @Override
     public Item selectItemById(int id) throws BusinessException {
 
-    	Item item = null;
+        Item item = null;
 
-		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pStmt = cnx.prepareStatement(selectItemById);) {
+        try (Connection cnx = ConnectionProvider.getConnection();
+             PreparedStatement pStmt = cnx.prepareStatement(selectItemById);) {
 
-			pStmt.setInt(1, id);
+            pStmt.setInt(1, id);
 
-			ResultSet resultSet = pStmt.executeQuery();
+            ResultSet resultSet = pStmt.executeQuery();
 
-			if (resultSet.next()) {
+            if (resultSet.next()) {
 
-				item = new Item();
-	            item.setIdItem(resultSet.getInt("item_id"));
-	            item.setItemName(resultSet.getString("item_name"));
-	            item.setDescription(resultSet.getString("description"));
-	            item.setBidsStartDate(resultSet.getTimestamp("bids_start_date").toLocalDateTime());
-	            item.setBidsEndDate(resultSet.getTimestamp("bids_end_date").toLocalDateTime());
-	            item.setInitialPrice(resultSet.getInt("initial_price"));
-	            item.setCurrentPrice(resultSet.getInt("current_price"));
-	            item.setIdSeller(resultSet.getInt("seller_id"));
-	            item.setStreet(resultSet.getString("street"));
-	            item.setPostalCode(resultSet.getString("postal_code"));
-	            item.setCity(resultSet.getString("city"));
-	            item.setIdCategory(resultSet.getInt("category_id"));
-			}
+                item = new Item();
+                item.setIdItem(resultSet.getInt("item_id"));
+                item.setItemName(resultSet.getString("item_name"));
+                item.setDescription(resultSet.getString("description"));
+                item.setBidsStartDate(resultSet.getTimestamp("bids_start_date").toLocalDateTime());
+                item.setBidsEndDate(resultSet.getTimestamp("bids_end_date").toLocalDateTime());
+                item.setInitialPrice(resultSet.getInt("initial_price"));
+                item.setCurrentPrice(resultSet.getInt("current_price"));
+                item.setIdSeller(resultSet.getInt("seller_id"));
+                item.setStreet(resultSet.getString("street"));
+                item.setPostalCode(resultSet.getString("postal_code"));
+                item.setCity(resultSet.getString("city"));
+                item.setIdCategory(resultSet.getInt("category_id"));
+            }
 
-			resultSet.close();
+            resultSet.close();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-			BusinessException exception = new BusinessException();
-			exception.addError(ResultCodesDAL.SELECT_ITEM_ID_FAILED);
-			throw exception;
-		}
+        } catch (SQLException e) {
+            e.printStackTrace();
+            BusinessException exception = new BusinessException();
+            exception.addError(ResultCodesDAL.SELECT_ITEM_ID_FAILED);
+            throw exception;
+        }
 
-    	return item;
+        return item;
     }
-    
+
     //---------------- Méthode de mise à jour d'un item
-    
+
     private static final String updateItemById = "UPDATE ITEM SET item_name = ?, description = ?, bids_start_date = ?, bids_end_date = ?, initial_price = ?, current_price = ?, seller_id = ?, street = ?, postal_code = ?, city = ?, category_id = ? WHERE item_id = ?";
+
+    @Override
+    public Item updateItem(Item item) throws BusinessException {
+        System.out.println(item);
+
+        BusinessException exception = new BusinessException();
+
+        if (item == null) {
+            exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+            throw exception;
+        }
+
+        try (Connection cnx = ConnectionProvider.getConnection();
+             PreparedStatement pStmt = cnx.prepareStatement(updateItemById)) {
+
+            pStmt.setString(1, item.getItemName());
+            pStmt.setString(2, item.getDescription());
+            pStmt.setTimestamp(3, Timestamp.valueOf(item.getBidsStartDate()));
+            pStmt.setTimestamp(4, Timestamp.valueOf(item.getBidsEndDate()));
+            pStmt.setInt(5, item.getInitialPrice());
+            pStmt.setInt(6, item.getCurrentPrice());
+            pStmt.setInt(7, item.getIdSeller());
+            pStmt.setString(8, item.getStreet());
+            pStmt.setString(9, item.getPostalCode());
+            pStmt.setString(10, item.getCity());
+            pStmt.setInt(11, item.getIdCategory());
+            pStmt.setInt(12, item.getIdItem());
+
+            pStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+            throw exception;
+        }
+        return item;
+    }
+
+    //----------------- Méthode de suppression de tous les articles correspondants à un user en BDD
+    
+	private static final String deleteItemByIdUser = "DELETE FROM ITEM where seller_id = ?";
 	
 	@Override
-	public Item updateItem(Item item) throws BusinessException {
+	public void deleteItemByIdUser(User user) throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
-
-		if (item == null) {
+		
+		if (user == null) {
 			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
 			throw exception;
 		}
 		
 		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pStmt = cnx.prepareStatement(updateItemById)) {
+				PreparedStatement pStmt = cnx.prepareStatement(deleteItemByIdUser)) {
 
-			pStmt.setString(1, item.getItemName());
-			pStmt.setString(2, item.getDescription());
-			pStmt.setTimestamp(3, Timestamp.valueOf(item.getBidsStartDate()));
-			pStmt.setTimestamp(4, Timestamp.valueOf(item.getBidsEndDate()));
-			pStmt.setInt(5, item.getInitialPrice());
-			pStmt.setInt(6, item.getCurrentPrice());
-			pStmt.setInt(7, item.getIdSeller());
-			pStmt.setString(8, item.getStreet());
-			pStmt.setString(9, item.getPostalCode());
-			pStmt.setString(10, item.getCity());
-			pStmt.setInt(11, item.getIdCategory());
-			pStmt.setInt(12, item.getIdItem());
-
+			pStmt.setInt(1, user.getIdUser());
 			pStmt.executeUpdate();
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+			exception.addError(ResultCodesDAL.DELETE_ITEM_FAILED);
 			throw exception;
 		}
 		
-		return item;
-		
 	}
+	
+	// ---------------- Méthode de sélection des articles correspondants à un user
+    
+	private static final String selectItemByUser = "SELECT * FROM ITEM where seller_id = ?";
 
+    @Override
+    public List<Item> selectItemByUser(User user) throws BusinessException {
+
+        List <Item> items = new ArrayList<>();
+        Item item = null;
+
+        try (Connection cnx = ConnectionProvider.getConnection();
+             PreparedStatement pStmt = cnx.prepareStatement(selectItemByUser);) {
+
+            pStmt.setInt(1, user.getIdUser());
+
+            ResultSet resultSet = pStmt.executeQuery();
+
+            while (resultSet.next()) {
+
+                item = new Item();
+                item.setIdItem(resultSet.getInt("item_id"));
+                item.setItemName(resultSet.getString("item_name"));
+                item.setDescription(resultSet.getString("description"));
+                item.setBidsStartDate(resultSet.getTimestamp("bids_start_date").toLocalDateTime());
+                item.setBidsEndDate(resultSet.getTimestamp("bids_end_date").toLocalDateTime());
+                item.setInitialPrice(resultSet.getInt("initial_price"));
+                item.setCurrentPrice(resultSet.getInt("current_price"));
+                item.setIdSeller(resultSet.getInt("seller_id"));
+                item.setStreet(resultSet.getString("street"));
+                item.setPostalCode(resultSet.getString("postal_code"));
+                item.setCity(resultSet.getString("city"));
+                item.setIdCategory(resultSet.getInt("category_id"));
+                items.add(item);
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            BusinessException exception = new BusinessException();
+            exception.addError(ResultCodesDAL.SELECT_ITEM_ID_FAILED);
+            throw exception;
+        }
+
+        return items;
+    }
+	
 }

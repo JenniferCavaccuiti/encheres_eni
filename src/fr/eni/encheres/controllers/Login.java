@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +22,19 @@ import fr.eni.encheres.models.bo.User;
  */
 @WebServlet("/login")
 public class Login extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    public static final String ATT_USER = "user";
-    public static final String ATT_FORM = "form";
-    public static final String ATT_SESSION_USER = "sessionUser";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    	//On récupère les cookies
+    	Cookie[] cookies = request.getCookies();
+    	if(cookies != null) {
+
+    		for (Cookie cookie : cookies) {
+    			if(cookie.getName().equals("log")) {
+    				request.setAttribute("login", cookie.getValue());
+    			}
+			}
+    	}
         request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
     }
 
@@ -42,6 +50,15 @@ public class Login extends HttpServlet {
             user = form.connectUser(login, password);
         } catch (BusinessException e) {
             e.printStackTrace();
+        }
+
+        //On set les cookies pour un Remember me
+        String rememberMe = request.getParameter("remember");
+
+       if(rememberMe != null) {
+        	 Cookie cookie = new Cookie("log", login);
+             cookie.setMaxAge(60*60*60*24*30);
+             response.addCookie(cookie);
         }
 
         if (exceptionList.hasErrors()) {

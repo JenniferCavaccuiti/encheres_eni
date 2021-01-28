@@ -1,10 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../templates/startFile.jsp" %>
+<%@page import="fr.eni.encheres.messages.MessagesReader"%>
 
 <h1>Supprimer mon profil</h1>
 
 <p>Êtes-vous sûr de vouloir supprimer votre profil ?</p>
+
+
 
 <c:if test="${liste != null }">
 

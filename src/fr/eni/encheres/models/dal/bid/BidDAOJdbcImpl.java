@@ -125,5 +125,64 @@ public class BidDAOJdbcImpl implements BidDAO {
 
 		return bid;
 	}
+	
+	
+	//----------------- Méthode de suppression de tous les enchères correspondantes à un user en BDD
+    
+		private static final String deleteBidByIdUser = "DELETE FROM BID where buyer_id = ?";
+		
+		@Override
+		public void deleteBidByIdUser(User user) throws BusinessException {
+			
+			BusinessException exception = new BusinessException();
+			
+			if (user == null) {
+				exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+				throw exception;
+			}
+			
+			try (Connection cnx = ConnectionProvider.getConnection();
+					PreparedStatement pStmt = cnx.prepareStatement(deleteBidByIdUser)) {
+
+				pStmt.setInt(1, user.getIdUser());
+				pStmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				exception.addError(ResultCodesDAL.DELETE_ITEM_FAILED);
+				throw exception;
+			}
+			
+		}
+		
+	
+		//----------------- Méthode de suppression de tous les enchères correspondantes à un article en BDD
+	    
+			private static final String deleteBidByItem = "DELETE FROM BID where item_id = ?";
+			
+			@Override
+			public void deleteBidByItem(Item item) throws BusinessException {
+				
+				BusinessException exception = new BusinessException();
+				
+				if (item == null) {
+					exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+					throw exception;
+				}
+				
+				try (Connection cnx = ConnectionProvider.getConnection();
+						PreparedStatement pStmt = cnx.prepareStatement(deleteBidByItem)) {
+
+					pStmt.setInt(1, item.getIdItem());
+					pStmt.executeUpdate();
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+					exception.addError(ResultCodesDAL.DELETE_ITEM_FAILED);
+					throw exception;
+				}
+				
+			}
+
 
 }

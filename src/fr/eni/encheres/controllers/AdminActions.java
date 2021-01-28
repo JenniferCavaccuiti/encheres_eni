@@ -15,35 +15,38 @@ import fr.eni.encheres.models.bo.Item;
 import fr.eni.encheres.models.bo.User;
 
 /**
- * Servlet implementation class DeleteProfile
+ * Servlet implementation class AdminActions
  */
-@WebServlet("/supprimer-profil")
-public class DeleteProfile extends HttpServlet {
+@WebServlet("/administration-actions")
+public class AdminActions extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		//Ne pas autoriser l'accès à la page en cas de déconnexion
-		boolean connected = BaseController.isConnected(request.getSession().getAttribute("user"));
-			       
-		        if (!connected) {
-					response.sendRedirect(request.getContextPath()+"/index");
-		        } else {
-		        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/deleteProfile.jsp").forward(request, response);
-		        }
-		       
-		
-		
+				
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		User user = (User) request.getSession().getAttribute("user");
+		//On récupère l'user concerné par l'action d'admin
+		String login = request.getParameter("login");
+		User user = null;
+		try {
+			user = ManagerFactory.getUserManager().selectUserByLog(login);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 		
+		String action = request.getParameter("action");
+		
+		if(action.equals("deactivate")) {
+			
+			
+			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/admin.jsp").forward(request, response); //TODO changer les chemins
+		}
+		
+		if(action.equals("delete")) {
 			try {
-				
 				List<Item> itemLists = ManagerFactory.getItemManager().selectItemByUser(user); //On récupère la liste de tous les articles correspondants à l'user
 				
 				for (Item item : itemLists) {
@@ -51,18 +54,18 @@ public class DeleteProfile extends HttpServlet {
 				}
 				ManagerFactory.getBidManager().deleteBidByIdBuyer(user); //On suppr les enchères de l'user
 				ManagerFactory.getItemManager().deleteItemByIdSeller(user); //On suppr les articles de l'user
-				ManagerFactory.getUserManager().deleteUser(user);
-				request.getSession().invalidate();
-				response.sendRedirect(request.getContextPath()+"/index");
-
+				ManagerFactory.getUserManager().deleteUser(user); //On suppr l'user
+				
+				
 			} catch (BusinessException e) {
 				e.printStackTrace();
 				e.getErrorCodesList();
 				request.setAttribute("liste", e.getErrorCodesList());
-				System.out.println(e.getErrorCodesList());
-				request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/deleteProfile.jsp").forward(request, response);
-			}	
-		}		
+			}
+			
+			response.sendRedirect("administration-accueil");
+		}
+		
 	}
 
-
+}
