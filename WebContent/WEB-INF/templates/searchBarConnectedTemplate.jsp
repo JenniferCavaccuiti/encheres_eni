@@ -24,7 +24,8 @@
 
         <div class="row">
             <div class="form-check col-6">
-                <input class="form-check-input" type="radio" onclick="radio();" name="type" id="buy" value="buy" checked>
+                <input class="form-check-input" type="radio" onclick="radio();" name="type" id="buy" value="buy"
+                       checked>
                 <label class="form-check-label" for="buy">
                     Achats
                 </label>
@@ -72,5 +73,8 @@
             </div>
         </div>
     </div>
-    <button class="col-5 btn btn-outline-success btn-lg my-2 my-sm-0 block" type="submit" onclick="filter();">Rechercher</button>
+    <div class="col-3">
+        <button type="submit" onclick="filter();">Rechercher</button>
+    </div>
+
 </form>

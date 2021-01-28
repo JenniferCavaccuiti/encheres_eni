@@ -70,9 +70,6 @@ public class addItem extends HttpServlet {
 
             switch (choiceType) {
                 case "update" :
-//                    Boolean startBids = BaseController.isAfterStartBid(LocalDateTime.now(), LocalDateTime.parse(parameters.get("bidsStartDate")[0]));
-//                    System.out.println("isAfterStart" + startBids);
-//                    request.setAttribute("startBid", startBids);
                     try {
                         item = ManagerFactory.getItemManager().updateItem(parameters, (Integer) request.getSession().getAttribute("idUser"));
                     } catch (BusinessException businessException) {

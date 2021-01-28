@@ -21,6 +21,6 @@
         </div>
     </div>
 
-    <button class="col-3 btn btn-outline-success btn-lg my-2 my-sm-0 block" type="submit">Rechercher</button>
+    <button class="col-3 " type="submit">Rechercher</button>
 
 </form>

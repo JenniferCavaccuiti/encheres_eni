@@ -21,11 +21,34 @@ nav {
     background-color: #95a1ae;
 }
 
+.dark-blue-color {
+    color: #95a1ae;
+    font-weight: 550;
+}
+
+a:hover {
+    color: #BAC9D9;
+}
+
 .header-color {
     background-color: #BAC9D9;
     color: white;
     font-size: 18px;
     font-weight: bold;
+}
+
+button {
+    border: none;
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 25px 100px;
+    border-radius: 2px;
+}
+
+button:hover {
+    color: #95a1ae;
 }
 
 body {
@@ -39,7 +62,6 @@ body {
 
 footer {
     position: sticky;
-
     bottom: 0;
     width: 100%;
 }

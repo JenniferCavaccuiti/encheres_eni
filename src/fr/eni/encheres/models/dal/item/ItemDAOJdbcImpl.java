@@ -433,7 +433,6 @@ public class ItemDAOJdbcImpl implements ItemDAO {
              PreparedStatement pStmt = cnx.prepareStatement(selectItemByUser);) {
 
             pStmt.setInt(1, user.getIdUser());
-
             ResultSet resultSet = pStmt.executeQuery();
 
             while (resultSet.next()) {

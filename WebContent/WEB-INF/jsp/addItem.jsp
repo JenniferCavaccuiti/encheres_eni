@@ -86,7 +86,6 @@
             </div>
             <br>
 
-
             <c:if test="${empty item.bidsStartDate}">
                 <div class="form-group row">
                     <label for="bidsStartDate1" class="col-5">Début de l'enchère :</label>
@@ -204,11 +203,9 @@
                 <button class="btn btn-primary" type="submit" name="submitType" value="delete">Annuler la vente</button>
             </c:if>
             <c:if test="${empty item}">
-                <button class="btn-primary" type="submit" name="submitType" value="create">Valider</button>
+                <button class="btn btn-primary" type="submit" name="submitType" value="create">Valider</button>
                 <a class="btn btn-primary" href="index" type="button" role="button">Annuler</a>
             </c:if>
-
-
         </form>
     </div>
 </div>
