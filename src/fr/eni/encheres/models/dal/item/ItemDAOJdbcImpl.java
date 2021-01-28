@@ -388,4 +388,79 @@ public class ItemDAOJdbcImpl implements ItemDAO {
         return item;
     }
 
+    //----------------- Méthode de suppression de tous les articles correspondants à un user en BDD
+    
+	private static final String deleteItemByIdUser = "DELETE FROM ITEM where seller_id = ?";
+	
+	@Override
+	public void deleteItemByIdUser(User user) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if (user == null) {
+			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+			throw exception;
+		}
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(deleteItemByIdUser)) {
+
+			pStmt.setInt(1, user.getIdUser());
+			pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			exception.addError(ResultCodesDAL.DELETE_ITEM_FAILED);
+			throw exception;
+		}
+		
+	}
+	
+	// ---------------- Méthode de sélection des articles correspondants à un user
+    
+	private static final String selectItemByUser = "SELECT * FROM ITEM where seller_id = ?";
+
+    @Override
+    public List<Item> selectItemByUser(User user) throws BusinessException {
+
+        List <Item> items = new ArrayList<>();
+        Item item = null;
+
+        try (Connection cnx = ConnectionProvider.getConnection();
+             PreparedStatement pStmt = cnx.prepareStatement(selectItemByUser);) {
+
+            pStmt.setInt(1, user.getIdUser());
+
+            ResultSet resultSet = pStmt.executeQuery();
+
+            while (resultSet.next()) {
+
+                item = new Item();
+                item.setIdItem(resultSet.getInt("item_id"));
+                item.setItemName(resultSet.getString("item_name"));
+                item.setDescription(resultSet.getString("description"));
+                item.setBidsStartDate(resultSet.getTimestamp("bids_start_date").toLocalDateTime());
+                item.setBidsEndDate(resultSet.getTimestamp("bids_end_date").toLocalDateTime());
+                item.setInitialPrice(resultSet.getInt("initial_price"));
+                item.setCurrentPrice(resultSet.getInt("current_price"));
+                item.setIdSeller(resultSet.getInt("seller_id"));
+                item.setStreet(resultSet.getString("street"));
+                item.setPostalCode(resultSet.getString("postal_code"));
+                item.setCity(resultSet.getString("city"));
+                item.setIdCategory(resultSet.getInt("category_id"));
+                items.add(item);
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            BusinessException exception = new BusinessException();
+            exception.addError(ResultCodesDAL.SELECT_ITEM_ID_FAILED);
+            throw exception;
+        }
+
+        return items;
+    }
+	
 }

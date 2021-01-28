@@ -5,6 +5,7 @@ import fr.eni.encheres.models.bll.BaseManager;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Bid;
 import fr.eni.encheres.models.bo.Item;
+import fr.eni.encheres.models.bo.User;
 import fr.eni.encheres.models.dal.DAOFactory;
 
 import java.sql.SQLException;
@@ -170,7 +171,21 @@ public class ItemManager {
     public Item updateItemById(Item item) throws BusinessException {
         return DAOFactory.getItemDAO().updateItem(item);
     }
+    
+    //--------------- Méthode de suppresion d'item pour un utilisateur
+    
+    public void deleteItemByIdSeller(User user) throws BusinessException {
+    	DAOFactory.getItemDAO().deleteItemByIdUser(user);
+    }
+    
+    // ------------- Méthode qui renvoie la liste des articles d'un user
+    
+    public List<Item> selectItemByUser(User user) throws BusinessException {
+    	return DAOFactory.getItemDAO().selectItemByUser(user);
+    }
 
+    //TODO commentaires
+    
     public Item getItem(Map<String, String[]> parameters, int idUser) {
         Item item = new Item();
         LocalDateTime bidsStartDate = getCorrectFormatDate(parameters.get("bidsStartDate")[0], parameters.get("bidsStartTime")[0]);

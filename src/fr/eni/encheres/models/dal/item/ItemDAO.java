@@ -2,6 +2,7 @@ package fr.eni.encheres.models.dal.item;
 
 import fr.eni.encheres.BusinessException;
 import fr.eni.encheres.models.bo.Item;
+import fr.eni.encheres.models.bo.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -41,6 +42,10 @@ public interface ItemDAO {
     public Item selectItemById(int id) throws BusinessException;
     
     public Item updateItem(Item item) throws BusinessException;
+    
+    public void deleteItemByIdUser(User user) throws BusinessException;
+    
+    public List<Item> selectItemByUser(User user) throws BusinessException;
 
     }
 

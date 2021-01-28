@@ -34,7 +34,8 @@
             <c:when test="${not empty sessionScope}">
                 <div class="collapse navbar-collapse" id="connect">
                     <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="#">Enchères</a>
+                    <c:if test="${not empty sessionScope && sessionScope.user.administrator == true}"><a class="nav-link" href="administration-accueil">Administration</a></c:if>
+                        <a class="nav-link active" aria-current="page" href="index">Enchères</a>
                         <a class="nav-link" href="nouvelle-vente">Vendre un article</a>
                         <a class="nav-link" href="profil-utilisateur?login=${sessionScope.user.getLogin()}">Mon profil</a>
                         <a class="nav-link" href="deconnexion" tabindex="-1">Déconnexion</a>

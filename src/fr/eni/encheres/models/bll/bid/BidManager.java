@@ -61,4 +61,17 @@ public class BidManager {
     	return DAOFactory.getBidDAO().insertBid(bid);
     }
     
+    //--------------- Méthode de suppresion d'enchère pour un utilisateur
+    
+    public void deleteBidByIdBuyer(User user) throws BusinessException {
+    	DAOFactory.getBidDAO().deleteBidByIdUser(user);
+    }
+    
+//--------------- Méthode de suppresion d'enchère pour un article
+    
+    public void deleteBidByItem(Item item) throws BusinessException {
+    	DAOFactory.getBidDAO().deleteBidByItem(item);
+    }
+    
+    
 }
