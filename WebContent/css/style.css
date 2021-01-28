@@ -60,16 +60,40 @@ button:hover {
     color: #95a1ae;
 } 
 
+
+/* -------------- Marjo ---------------- */
+
+a:hover {
+    color: #95a1ae;
+} 
+
+
 .heading h3 {
 	margin : 50px;
 }
 
 .create-button {
-	display : flex;
-	justify-content: center;
+	
 	margin : 50px;
 }
 
-.create-button button {
-	padding : 
+.buttonProfile {
+	padding : 10px;
+	padding-right : 30px;
+	padding-left : 30px;
+	border-radius: 5px;
+}
+
+.lienProfile {
+	color : white;
+	text-decoration: none;
+}
+
+#creer {
+	float: right;
+	
+}
+
+#annulerCreate {
+	float: left;
 }

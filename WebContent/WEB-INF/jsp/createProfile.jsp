@@ -112,17 +112,18 @@
 		</div>
 
 		<div class="row create-button">
-
-			
-				<div class="col-auto">
-					<button type="submit" class="button">Créer</button>
+			<div class="col" >
+				<div class="col-auto" id="creer">
+					<button type="submit" class="buttonProfile">Créer</button>
 				</div>
-				<div class="col-auto">
-					<button class="button">
-						<a href="<%=response.encodeURL(request.getContextPath() + "/index")%>">Annuler</a>
+			</div>
+			<div class="col">	
+				<div class="col-auto"  id="annulerCreate">
+					<button class="buttonProfile">
+						<a class="lienProfile" href="<%=response.encodeURL(request.getContextPath() + "/index")%>">Annuler</a>
 					</button>
 				</div>
-			
+			</div>
 		</div>
 
 
