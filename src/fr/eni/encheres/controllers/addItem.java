@@ -91,7 +91,6 @@ public class addItem extends HttpServlet {
                     break;
             }
 
-
             if (item != null || isDelete == 1) {
                 response.sendRedirect("index");
             } else {

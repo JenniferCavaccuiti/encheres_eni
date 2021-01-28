@@ -24,7 +24,8 @@
                 <label for="itemName" class="col-4">Article : </label>
             </div>
             <div class="col-8">
-                <input type="text" class="form-control" value="${item.itemName}" name="itemName" id="itemName" minlength="4" maxlength="30" required>
+                <input type="text" class="form-control" value="${item.itemName}" name="itemName" id="itemName"
+                       minlength="4" maxlength="30" required>
                 <div class="invalid-feedback">
                     Le nom de l'article est obligatoire
                 </div>
@@ -36,7 +37,8 @@
                 <label for="description" class="col-4">Description : </label>
             </div>
             <div class="col-8">
-                <textarea class="form-control" id="description" rows="3" name="description" minlength="10" maxlength="300"
+                <textarea class="form-control" id="description" rows="3" name="description" minlength="10"
+                          maxlength="300"
                           required>${item.description}</textarea>
                 <div class="invalid-feedback">
                     Le description est obligatoire
@@ -194,8 +196,18 @@
             </div>
         </div>
         <br>
-        <a class="btn btn-default" href="index" role="button">Annuler</a>
-        <button type="submit">Valider</button>
+<%--        en fait il était là le problème--%>
+        <c:if test="${not empty item}">
+            <button type="submit" name="submitType" value="update">Valider</button>
+            <a class="btn btn-default" href="index" role="button">Annuler</a>
+            <button type="submit" name="submitType" value="delete">Annuler la vente</button>
+        </c:if>
+        <c:if test="${empty item}">
+            <button type="submit" name="submitType" value="create">Valider</button>
+            <a class="btn btn-default" href="index" role="button">Annuler</a>
+        </c:if>
+
+
     </form>
 </div>
 

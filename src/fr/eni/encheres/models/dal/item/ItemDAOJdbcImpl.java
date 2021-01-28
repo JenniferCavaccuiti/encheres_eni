@@ -417,7 +417,6 @@ public class ItemDAOJdbcImpl implements ItemDAO {
             exception.addError(ResultCodesDAL.DELETE_ITEM_FAILED);
             throw exception;
         }
-
     }
 
     // ---------------- Méthode de sélection des articles correspondants à un user
@@ -472,14 +471,8 @@ public class ItemDAOJdbcImpl implements ItemDAO {
         try (Connection connection = ConnectionProvider.getConnection()) {
             PreparedStatement pStmt = connection.prepareStatement(SQL_DELETE_ITEM);
 
-
             pStmt.setInt(1, idItem);
-            // return le nombre de lignes s'il ça marche
             result = pStmt.executeUpdate();
-
-            System.out.println(result);
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
