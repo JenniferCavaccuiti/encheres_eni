@@ -20,7 +20,7 @@ create table ITEM
     current_price   int,
     seller_id       int          not null
         constraint FK_ITEM_USER
-            references [USER] (user_id),
+            references [USERs] (user_id),
     street          varchar(100) not null,
     postal_code     char(5)      not null,
     city            varchar(100) not null,
@@ -34,7 +34,7 @@ create table BID
 (
     buyer_id   int      not null
         constraint FK_BID_USER
-            references [USER] (user_id),
+            references [USERS] (user_id),
     item_id    int      not null
         constraint FK_ITEM_BID
             references ITEM,
@@ -66,21 +66,3 @@ create table USERS
     administrator bit          not null
 )
 go
-
-create table sysdiagrams
-(
-    name         sysname not null,
-    principal_id int     not null,
-    diagram_id   int identity
-        primary key,
-    version      int,
-    definition   varbinary(max),
-    constraint UK_principal_name
-        unique (principal_id, name)
-)
-go
-
-exec sp_addextendedproperty 'microsoft_database_tools_support', 1, 'SCHEMA', 'dbo', 'TABLE', 'sysdiagrams'
-go
-
-

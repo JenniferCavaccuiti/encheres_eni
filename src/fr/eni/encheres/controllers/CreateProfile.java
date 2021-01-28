@@ -40,13 +40,9 @@ public class CreateProfile extends HttpServlet {
 		String confirm = request.getParameter("passwordConfirm");
 			
 		UserManager userManager = new UserManager();
-
-
-		// TODO pas laissé trainé les syso :)
-		System.out.println("xxxxxxxx");
 		
 		try {
-			User user = userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, false);
+			User user = userManager.addUser(login, lastname, firstname, email, phoneNumber, street, postalCode, city, password, confirm, "0");
 			//user = userManager.selectUserByLog(login);
 			//request.getSession().setAttribute("login", user.getLogin());
 			request.getSession().setAttribute("user", user);
@@ -58,21 +54,11 @@ public class CreateProfile extends HttpServlet {
 			e.getErrorCodesList();
 			request.setAttribute("liste", e.getErrorCodesList());
 			
-			System.out.println(e.getErrorCodesList());
-			
-			for (int z : e.getErrorCodesList()) {
-				
-				MessagesReader.getErrorMessage(z);
-				System.out.println(MessagesReader.getErrorMessage(z));
-			}
-			
 			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/createProfile.jsp").forward(request, response);
 		}
-	
-		System.out.println("xxxxxxxx");
 
 	}
 		
-	}
+}
 
 

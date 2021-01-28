@@ -44,14 +44,12 @@ public class AdminIndex extends HttpServlet {
 		String desactiver = request.getParameter("desactiver");
 		
 		if(supprimer != null) {
-			System.out.println("supprimer");
 			request.setAttribute("simpleUser", supprimer);
 			request.setAttribute("supprimer", "supprimer");
 			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/adminActions.jsp").forward(request, response);
 		}
 		
 		if(desactiver != null) {
-			System.out.println("desactiver");
 			request.setAttribute("simpleUser", desactiver);
 			request.setAttribute("desactiver", "desactiver");
 			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/adminActions.jsp").forward(request, response);
