@@ -105,9 +105,7 @@ public class SaleDetails extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if(lastBidder == null) { //Dans le cas où l'user serait le premier enchérisseur
-			lastBidder = user;
-		}
+		
 		
 		//On teste si l'enchère est possible
 		BusinessException exception = new BusinessException();
@@ -123,10 +121,21 @@ public class SaleDetails extends HttpServlet {
 				
 				//On update les users - on débite/crédite le crédit
 				
+				if(lastBidder == null) { //Dans le cas où l'user serait le premier enchérisseur
+					lastBidder = user;
+				}
+				
 				if(lastBidder.getIdUser() == user.getIdUser()) {
-					user.setCredits(user.getCredits() - bidderPrice + item.getCurrentPrice()); 
-					user = ManagerFactory.getUserManager().updateUser(user);
-					System.out.println(user);
+					if(item.getCurrentPrice() == item.getInitialPrice()) {
+						user.setCredits(user.getCredits() - bidderPrice);	//Dans le cas ou l'user serait le premier encherisseur
+						user = ManagerFactory.getUserManager().updateUser(user);
+					}
+					else {
+						user.setCredits(user.getCredits() - bidderPrice + item.getCurrentPrice()); //Si il enchérit 2 fois 2 suite il récup son argent avant de le redépenser
+						user = ManagerFactory.getUserManager().updateUser(user);
+						System.out.println(user);
+					}
+					
 					//request.getSession().setAttribute("user", user);
 				}
 				
