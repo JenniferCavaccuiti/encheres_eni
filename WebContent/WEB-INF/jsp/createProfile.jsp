@@ -30,7 +30,7 @@
 	<form method="post" action="nouveau-profil" novalidate
 		class="needs-validation">
 
-		<div class="row">
+		<div class="row align-items-center">
 
 			<div class="col">
 
@@ -112,18 +112,18 @@
 		</div>
 
 		<div class="row create-button">
-			<div class="col" >
-				<div class="col-auto" id="creer">
+			
+				<div class="col-md-3 offset-md-3 text-center" id="creer">
 					<button type="submit" class="buttonProfile">Créer</button>
 				</div>
-			</div>
-			<div class="col">	
-				<div class="col-auto"  id="annulerCreate">
+			
+			
+				<div class="col-md-3 text-center"  id="annulerCreate">
 					<button class="buttonProfile">
 						<a class="lienProfile" href="<%=response.encodeURL(request.getContextPath() + "/index")%>">Annuler</a>
 					</button>
 				</div>
-			</div>
+			
 		</div>
 
 
