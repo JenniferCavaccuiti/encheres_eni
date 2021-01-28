@@ -23,7 +23,20 @@ public class AdminActions extends HttpServlet {
     
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
+		
+		//Ne pas autoriser l'accès à la page en cas de déconnexion et user not admin
+		User user = (User) request.getSession().getAttribute("user");
+		System.out.println(user);
+		boolean connected = BaseController.isConnected(user);
+			       
+		        if (!connected) {
+					response.sendRedirect(request.getContextPath()+"/index");
+		        } 
+		        else if (connected && user.getAdministrator() != "1") {
+		        	response.sendRedirect(request.getContextPath()+"/index");
+		        } else {
+		        	request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/adminActions.jsp").forward(request, response);
+		        }
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,19 +54,33 @@ public class AdminActions extends HttpServlet {
 		
 		if(action.equals("deactivate")) {
 			
-			
-			request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/admin.jsp").forward(request, response); //TODO changer les chemins
-		}
-		
-		if(action.equals("delete")) {
 			try {
 				List<Item> itemLists = ManagerFactory.getItemManager().selectItemByUser(user); //On récupère la liste de tous les articles correspondants à l'user
-				
 				for (Item item : itemLists) {
 					ManagerFactory.getBidManager().deleteBidByItem(item);//On suppr les enchères faites sur les articles de l'user
 				}
 				ManagerFactory.getBidManager().deleteBidByIdBuyer(user); //On suppr les enchères de l'user
 				ManagerFactory.getItemManager().deleteItemByIdSeller(user); //On suppr les articles de l'user
+				user.setAdministrator(null);
+				user = ManagerFactory.getUserManager().updateUser(user); //On met à jour l'user avec son nouveau statut
+				
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			} 
+			
+			response.sendRedirect("administration-accueil");
+
+		}
+		
+		if(action.equals("delete")) {
+			try {
+				List<Item> itemLists = ManagerFactory.getItemManager().selectItemByUser(user); 
+				
+				for (Item item : itemLists) {
+					ManagerFactory.getBidManager().deleteBidByItem(item);
+				}
+				ManagerFactory.getBidManager().deleteBidByIdBuyer(user); 
+				ManagerFactory.getItemManager().deleteItemByIdSeller(user); 
 				ManagerFactory.getUserManager().deleteUser(user); //On suppr l'user
 				
 				

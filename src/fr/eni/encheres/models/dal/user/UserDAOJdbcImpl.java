@@ -123,7 +123,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 					user = new User(rs.getInt("user_id"), rs.getString("login"), rs.getString("lastname"),
 							rs.getString("firstname"), 	rs.getString("email"), rs.getString("phone_number"), 
 							rs.getString("street"), rs.getString("postal_code"), rs.getString("city"), 
-							rs.getString("password"), rs.getInt("credits"), rs.getBoolean("administrator"));
+							rs.getString("password"), rs.getInt("credits"), rs.getString("administrator"));
 				}
 
 				rs.close();
@@ -159,7 +159,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 						user = new User(rs.getInt("user_id"), rs.getString("login"), rs.getString("lastname"),
 								rs.getString("firstname"), 	rs.getString("email"), rs.getString("phone_number"), 
 								rs.getString("street"), rs.getString("postal_code"), rs.getString("city"), 
-								rs.getString("password"), rs.getInt("credits"), rs.getBoolean("administrator"));
+								rs.getString("password"), rs.getInt("credits"), rs.getString("administrator"));
 					}
 
 					rs.close();
@@ -192,7 +192,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 					user = new User(rs.getInt("user_id"), rs.getString("login"), rs.getString("lastname"),
 							rs.getString("firstname"), rs.getString("email"), rs.getString("phone_number"),
 							rs.getString("street"), rs.getString("postal_code"), rs.getString("city"),
-							rs.getString("password"), rs.getInt("credits"), rs.getBoolean("administrator"));
+							rs.getString("password"), rs.getInt("credits"), rs.getString("administrator"));
 					usersList.add(user);
 				}
 
@@ -232,7 +232,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pStmt.setString(8, user.getCity());
 			pStmt.setString(9, user.getPassword());
 			pStmt.setInt(10, user.getCredits());
-			pStmt.setBoolean(11, user.isAdministrator());
+			pStmt.setString(11, user.getAdministrator());
 
 			pStmt.executeUpdate();
 
@@ -255,7 +255,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	
 	//------------------ Méthode de modification d'un user (cherché en BDD via son id)
 
-	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ?, credits = ? WHERE user_id = ?";
+	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ?, credits = ?, administrator = ? WHERE user_id = ?";
 	
 	@Override
 	public User updateUserById(User user) throws BusinessException {
@@ -280,7 +280,8 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pStmt.setString(8, user.getCity());
 			pStmt.setString(9, user.getPassword());
 			pStmt.setInt(10, user.getCredits());
-			pStmt.setInt(11, user.getIdUser());
+			pStmt.setString(11, user.getAdministrator());
+			pStmt.setInt(12, user.getIdUser());
 			
 
 			pStmt.executeUpdate();

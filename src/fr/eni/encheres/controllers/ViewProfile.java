@@ -33,6 +33,17 @@ public class ViewProfile extends HttpServlet {
 		
 		request.setAttribute("userProfile", user);
 		request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/profileView.jsp").forward(request, response);
+		
+		// Ne pas autoriser l'accès à la page en cas de déconnexion
+		boolean connected = BaseController.isConnected(request.getSession().getAttribute("user"));
+
+			if (!connected) {
+					response.sendRedirect(request.getContextPath() + "/index");
+			} else {
+					request.getServletContext().getRequestDispatcher("/WEB-INF/jsp/updateProfile.jsp").forward(request, response);
+			}
+
+		
 	
 	}
 
