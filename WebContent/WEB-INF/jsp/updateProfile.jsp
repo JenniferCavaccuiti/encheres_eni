@@ -21,11 +21,11 @@
 			<div class="row">
 			
 				<div class="col-auto">
-					<label>Pseudo</label> <input type="text" name="login" placeholder="${user.getLogin()}">
+					<label>Pseudo</label> <input type="text" name="login" value="${user.getLogin()}" pattern="[a-zA-Z0-9]+" required="required">
 				</div>
 
 				<div class="col-auto">
-					<label>Nom : </label> <input type="text" name="lastname" placeholder="${user.getLastname()}">
+					<label>Nom : </label> <input type="text" name="lastname" value="${user.getLastname()}" required="required">
 				</div>
 
 			</div>
@@ -34,10 +34,10 @@
 		<div class="container">
 			<div class="row">
 					<div class="col-auto">
-						<label>Prénom : </label> <input type="text" name="firstname" placeholder="${user.getFirstname()}">
+						<label>Prénom : </label> <input type="text" name="firstname" value="${user.getFirstname()}" required="required">
 					</div>
 					<div class="col-auto">
-						<label>Email : </label> <input type="email" name="email" placeholder="${user.getEmail()}">
+						<label>Email : </label> <input type="email" name="email" value="${user.getEmail()}" required="required">
 					</div>
 			</div>
 		</div>
@@ -45,11 +45,11 @@
 		<div class="container">
 			<div class="row">
 					<div class="col-auto">
-						<label>Téléphone : </label> <input type="tel" name="phoneNumber" placeholder="${user.getPhoneNumber()}">
+						<label>Téléphone : </label> <input type="tel" name="phoneNumber" value="${user.getPhoneNumber()}" pattern="(0|\\+33|0033)[1-9][0-9]{8}" required="required">
 					</div>
 
 					<div class="col-auto">
-						<label>Rue : </label> <input type="text" name="street" placeholder="${user.getStreet()}">
+						<label>Rue : </label> <input type="text" name="street" value="${user.getStreet()}" required="required">
 					</div>
 			</div>
 		</div>
@@ -57,10 +57,10 @@
 		<div class="container">
 			<div class="row">
 					<div class="col-auto">
-						<label>Code postal : </label> <input type="text" name="postalCode" placeholder="${user.getPostalCode()}">
+						<label>Code postal : </label> <input type="text" name="postalCode" value="${user.getPostalCode()}" maxlength="5" pattern="^(([0-8][0-9])|(9[0-5]))[0-9]{3}$" required="required">
 					</div>
 					<div class="col-auto">
-						<label>Ville : </label> <input type="text" name="city" placeholder="${user.getCity()}">
+						<label>Ville : </label> <input type="text" name="city" value="${user.getCity()}" required="required">
 					</div>
 			</div>
 		</div>
@@ -100,7 +100,7 @@
 					</div>
 					<div class="col-auto">
 						<button class="btn  btn-secondary mb-2">
-							<a href="#">Supprimer mon compte</a>
+							<a href="supprimer-profil">Supprimer mon compte</a>
 						</button>
 					</div>
 					<div class="col-auto">

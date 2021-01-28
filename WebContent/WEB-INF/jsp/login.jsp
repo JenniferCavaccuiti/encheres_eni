@@ -3,8 +3,7 @@
 <%@page import="fr.eni.encheres.messages.MessagesReader"%>
 <%@include file="../templates/startFile.jsp"%>
 
-
-<div class="container">
+<div class="fond">
 <div class="bloc-form">
 	<form method="POST" action="login">
 		<fieldset>
@@ -48,14 +47,16 @@
 			<br/>
 	<div class="col-md-12">
 	<div class="row">
-			<input type="button" class="btn btn-info btn-xl btn-block" value="Créer un compte"  
-			onClick="changePage('${pageContext.request.contextPath}/nouveau-profil');"/>
+			<button type="submit" class="btn btn-info btn-xl btn-block">
+				<a href="nouveau-profil" style="color:black">Créer un compte</a>
+			</button>
 		</div>
 	</div>
 	</fieldset>
 	</form>
 </div>
 </div>
+
 
 <c:if test="${listeError != null }">
 	<c:forEach var="erreur" items="${listeError}">

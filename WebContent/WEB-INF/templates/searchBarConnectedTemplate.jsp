@@ -7,11 +7,10 @@
     <div class="col-5">
         <div class="col">
             <div class="col-auto my-1">
-                <input name="searchedWord" class="form-control mr-sm-2" type="search"
+                <input name="keyword" class="form-control mr-sm-2" type="search"
                        placeholder="Le nom de l'article contient"
                        aria-label="Search">
             </div>
-
             <div class="col-auto my-1">
                 <label class="mr-sm-2" for="category">Catégorie :</label>
                 <select name="searchedCategory" class="custom-select mr-sm-2" id="category">
@@ -25,50 +24,49 @@
 
         <div class="row">
             <div class="form-check col-6">
-                <input class="form-check-input" type="radio" onclick="radio();" name="type" id="buy" value="buy"
-                       checked>
+                <input class="form-check-input" type="radio" onclick="radio();" name="type" id="buy" value="buy" checked>
                 <label class="form-check-label" for="buy">
                     Achats
                 </label>
-                <div class="">
+                <div id="buyChoice">
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="openedBuy" name="filter"
                                value="openedBuy">
-                        <label class="form-check-label" for="openedBuy">Les enchères en cours</label>
+                        <label class="form-check-label" for="openedBuy">enchères en cours</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="onGoingBuy" name="filter"
                                value="onGoingBuy">
-                        <label class="form-check-label" for="onGoingBuy">Mes enchères suivies</label>
+                        <label class="form-check-label" for="onGoingBuy">mes enchères en cours</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="wonBuy" name="filter" value="wonBuy">
-                        <label class="form-check-label" for="wonBuy">Mes enchères remportées</label>
+                        <label class="form-check-label" for="wonBuy">mes enchères remportées</label>
                     </div>
                 </div>
             </div>
 
 
             <div class="form-check col-6">
-                <input class="form-check-input" type="radio" name="type" id="sell" value="sell" onclick="radio();">
+                <input class="form-check-input" type="radio" onclick="radio();" name="type" id="sell" value="sell">
                 <label class="form-check-label" for="buy">
                     Mes ventes
                 </label>
-                <div class="">
+                <div id="sellChoice">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="openedSell" name="filter"
-                               value="openedSell" disabled>
-                        <label class="form-check-label" for="openedSell">Mes enchères non commencées</label>
+                        <input class="form-check-input" type="checkbox" id="nonOpenedSell" name="filter"
+                               value="nonOpenedSell" disabled>
+                        <label class="form-check-label" for="nonOpenedSell">Ventes non commencées</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="onGoingSell" name="filter"
                                value="onGoingSell" disabled>
-                        <label class="form-check-label" for="onGoingSell">mes enchères en cours</label>
+                        <label class="form-check-label" for="onGoingSell">Ventes en cours</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="wonSell" name="filter" value="wonSell"
-                               disabled>
-                        <label class="form-check-label" for="wonSell">mes enchères terminées</label>
+                        <input class="form-check-input" type="checkbox" id="finishedSell" name="filter"
+                               value="finishedSell" disabled>
+                        <label class="form-check-label" for="finishedSell">Ventes terminées</label>
                     </div>
                 </div>
             </div>

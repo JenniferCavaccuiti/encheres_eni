@@ -7,7 +7,7 @@ import fr.eni.encheres.models.bo.User;
 
 public interface UserDAO {
 
-	public void insertUser (User user) throws BusinessException;
+	public User insertUser (User user) throws BusinessException;
 	
 	public List<String> selectLogin (String login) throws BusinessException;
 	
@@ -18,9 +18,11 @@ public interface UserDAO {
 	public User selectUserByLogin(String login) throws BusinessException;
 	
 	public User selectUserByEmail(String email) throws BusinessException;
-	
-	public String selectPasswordById(int id) throws BusinessException;
-	
-	public void updateUserById(User user) throws BusinessException;
 
+	public User updateUserById(User user) throws BusinessException;
+
+	public void deleteUserById(User user) throws BusinessException;
+
+    public String findOneById(int id);
 }
+

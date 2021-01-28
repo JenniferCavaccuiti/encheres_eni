@@ -23,4 +23,7 @@ public class CategoryManager {
         return DAOFactory.getCategoryDAO().findAll();
     }
 
+    public String findOneById(int idCategory) {
+        return DAOFactory.getCategoryDAO().findOneById(idCategory);
+    }
 }

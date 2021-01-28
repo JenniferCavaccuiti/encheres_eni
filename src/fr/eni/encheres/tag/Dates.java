@@ -10,5 +10,13 @@ public final class Dates {
     public static String formatLocalDateTime(LocalDateTime localDateTime, String pattern) {
         return localDateTime.format(DateTimeFormatter.ofPattern(pattern));
     }
+
+    public static LocalDateTime getDate() {
+        return LocalDateTime.now();
+    }
+
+    public static LocalDateTime addDaysToDate(int days, LocalDateTime date) {
+        return date.plusDays(days);
+    }
 }
 

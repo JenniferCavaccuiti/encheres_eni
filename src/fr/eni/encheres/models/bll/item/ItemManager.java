@@ -1,6 +1,7 @@
 package fr.eni.encheres.models.bll.item;
 
 import fr.eni.encheres.BusinessException;
+import fr.eni.encheres.models.bll.BaseManager;
 import fr.eni.encheres.models.bll.ManagerFactory;
 import fr.eni.encheres.models.bo.Bid;
 import fr.eni.encheres.models.bo.Item;
@@ -8,9 +9,7 @@ import fr.eni.encheres.models.dal.DAOFactory;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class ItemManager {
 
@@ -26,7 +25,23 @@ public class ItemManager {
     // récupère tous les items et les bids
     public List<Item> findAll() throws BusinessException, SQLException {
         List<Item> itemsList = DAOFactory.getItemDAO().findAll();
+        setSellerAndBidsToItemsList(itemsList);
+        return itemsList;
+    }
+
+    public List<Item> findOnGoingItems() throws BusinessException, SQLException {
+        List<Item> itemsList = DAOFactory.getItemDAO().findOnGoingItems();
+        setSellerAndBidsToItemsList(itemsList);
+        return itemsList;
+    }
+
+    private void setSellerAndBidsToItemsList(List<Item> itemsList) throws BusinessException, SQLException {
         List<Bid> bidsList = ManagerFactory.getBidManager().findAll();
+
+        for (Item item : itemsList) {
+            item.setCategoryName(DAOFactory.getCategoryDAO().findOneById(item.getIdCategory()));
+            item.setSellerName(DAOFactory.getUserDAO().findOneById(item.getIdSeller()));
+        }
 
         for (Item item : itemsList) {
             for (Bid bid : bidsList) {
@@ -35,148 +50,123 @@ public class ItemManager {
                 }
             }
         }
+    }
+
+    public List<Item> getNonConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
+        List<Item> itemsList;
+
+        keyword = BaseManager.prepareWord(keyword);
+        int category = Integer.parseInt(searchedCategory);
+
+        if (keyword == null && category == 0) {
+            itemsList = DAOFactory.getItemDAO().findOnGoingItems();
+        } else if (keyword == null && category != 0) {
+            itemsList = DAOFactory.getItemDAO().findOnGoingItemsByCategory(category);
+        } else if (keyword != null && category == 0) {
+            itemsList = DAOFactory.getItemDAO().findOnGoingItemsByKeyword(keyword);
+        } else {
+            itemsList = DAOFactory.getItemDAO().findOnGoingItemsByKeywordAndCategory(keyword, category);
+        }
+        setSellerAndBidsToItemsList(itemsList);
         return itemsList;
     }
+
+    public List<Item> getConnectedList(String keyword, String searchedCategory) throws BusinessException, SQLException {
+        List<Item> itemsList;
+
+        keyword = BaseManager.prepareWord(keyword);
+        int category = Integer.parseInt(searchedCategory);
+
+        if (keyword == null && category == 0) {
+            itemsList = DAOFactory.getItemDAO().findAll();
+        } else if (keyword == null && category != 0) {
+            itemsList = DAOFactory.getItemDAO().findAllItemsByCategory(category);
+        } else if (keyword != null && category == 0) {
+            itemsList = DAOFactory.getItemDAO().findAllItemsByKeyword(keyword);
+        } else {
+            itemsList = DAOFactory.getItemDAO().findAllItemsByKeywordAndCategory(keyword, category);
+        }
+        setSellerAndBidsToItemsList(itemsList);
+        return itemsList;
+    }
+
 
     public List<Item> searchedItemsByFilter(String filter, int user) throws SQLException, BusinessException {
         List<Item> newItemsList = new ArrayList<>();
 
         switch (filter) {
-            case "openedBuy": //enchères en cours
-                newItemsList = findOnGoingBids(user);
+            case "openedBuy":
+                newItemsList = DAOFactory.getItemDAO().findByDateAndBuyerWhithoutProposal(user);
                 break;
-            case "onGoingBuy": // enchères où l'user a fait une enchère
-                newItemsList = findOpenedBidsWithUserProposal(user);
+            case "onGoingBuy":
+                newItemsList = DAOFactory.getItemDAO().findByDateAndBuyerWhithProposal(user);
                 break;
-            case "wonBuy": // enchères gagnées
-                newItemsList = findFinishedBidsWinByUser(user);
+            case "wonBuy":
+                newItemsList = DAOFactory.getItemDAO().findFinishedBidsWinByUser(user);
                 break;
-            case "openedSell": // ventes de l'user non commencées
-                newItemsList = findUserBidsNotOpened(user);
+            case "nonOpenedSell":
+                newItemsList = DAOFactory.getItemDAO().findNotOpenedBidSellByUser(user);
                 break;
-            case "onGoingSell": // ventes en cours
-                newItemsList = findUserBidsOpened(user);
+            case "onGoingSell":
+                newItemsList = DAOFactory.getItemDAO().findOpenedSellItemsByUser(user);
                 break;
-            case "wonSell": // ventes terminées
-                newItemsList = findUserBidsFinished(user);
+            case "finishedSell":
+                newItemsList = DAOFactory.getItemDAO().findFinishedSellItemsByUser(user);
                 break;
         }
+        setSellerAndBidsToItemsList(newItemsList);
         return newItemsList;
     }
 
-    public List<Item> findOnGoingBids(int user) throws BusinessException, SQLException {
-        List<Item> itemsList = findAll();
-        List<Item> filteredList = new ArrayList<>();
+    //--------------- Méthode qui récupère en item en fonction de son id
 
-        for (Item item : itemsList) {
-            if (LocalDateTime.now().compareTo(item.getBidsEndDate()) < 0
-                    && item.getIdSeller() != user) {
-                filteredList.add(item);
-            }
-        }
-        return filteredList;
+    public Item getItemById(int id) throws BusinessException {
+    	return DAOFactory.getItemDAO().selectItemById(id);
     }
 
-    public List<Item> findFinishedBidsWinByUser(int user) throws BusinessException, SQLException {
+    //---------------- Méthode qui set le nom de la catégorie et du vendeur pour un item
 
-        // je récupère toutes les enchères
-        List<Item> itemsList = findAll();
-        List<Item> filteredList = new ArrayList<>();
+    public Item setSellerNameCategoryName(Item item) {
+    	 item.setCategoryName(DAOFactory.getCategoryDAO().findOneById(item.getIdCategory()));
+         item.setSellerName(DAOFactory.getUserDAO().findOneById(item.getIdSeller()));
 
-        // manque l'idée de récupérer la dernière enchère
-        for (Item item : itemsList) {
-            if (LocalDateTime.now().compareTo(item.getBidsEndDate()) > 0) {
-                for (Bid bid : item.getBidsList()) {
-                    if (bid.getIdBuyer() == user && item.getCurrentPrice() == bid.getBidAmount()) {
-                        filteredList.add(item);
-                    }
-                }
-            }
-        }
-        return filteredList;
+		return item;
     }
 
-    public List<Item> findOpenedBidsWithUserProposal(int user) throws SQLException, BusinessException {
-        List<Item> itemsList = findAll();
-        List<Item> filteredList = new ArrayList<>();
+    // --------- Ajout d'un nouvel item ------ //
 
-        // manque l'idée de récupérer la dernière enchère
-        for (Item item : itemsList) {
-            if (LocalDateTime.now().compareTo(item.getBidsEndDate()) < 0) {
-                for (Bid bid : item.getBidsList()) {
-                    if (bid.getIdBuyer() == user && item.getCurrentPrice() == bid.getBidAmount()) {
-                        filteredList.add(item);
-                    }
-                }
-            }
-        }
-        return filteredList;
+
+
+    public Item addItem(Map<String, String[]> parameters, int idUser) {
+        Item item = new Item();
+
+        LocalDateTime bidsStartDate = getCorrectFormatDate(parameters.get("bidsStartDate")[0], parameters.get("bidsStartTime")[0]);
+        LocalDateTime bidsEndDate = getCorrectFormatDate(parameters.get("bidsEndDate")[0], parameters.get("bidsEndTime")[0]);
+
+//         créer l'item
+        item.setItemName(BaseManager.prepareWord(parameters.get("itemName")[0]));
+        item.setDescription(BaseManager.prepareWord(parameters.get("description")[0]));
+        item.setBidsStartDate(bidsStartDate);
+        item.setBidsEndDate(bidsEndDate);
+        item.setInitialPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
+        item.setCurrentPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
+        item.setIdSeller(idUser);
+        item.setStreet(BaseManager.prepareWord(parameters.get("street")[0]));
+        item.setPostalCode(BaseManager.prepareWord(parameters.get("postalCode")[0]));
+        item.setCity(BaseManager.prepareWord(parameters.get("city")[0]));
+        item.setIdCategory(Integer.parseInt(parameters.get("category")[0]));
+
+//        // l'ajouter en base et le renvoi
+        return DAOFactory.getItemDAO().insertNewItem(item);
+    }
+    public LocalDateTime getCorrectFormatDate(String date, String time) {
+        return LocalDateTime.parse(date + "T" + time + ":00.000");
+    }
+    
+    //--------------- Méthode d'update d'un item
+    
+    public Item updateItemById(Item item) throws BusinessException {
+    	return DAOFactory.getItemDAO().updateItem(item);
     }
 
-    public List<Item> findUserBidsNotOpened(int user) throws SQLException, BusinessException {
-        List<Item> itemsList = findAll();
-        List<Item> filteredList = new ArrayList<>();
-
-        for (Item item : itemsList) {
-            if (item.getIdSeller() == user && LocalDateTime.now().compareTo(item.getBidsStartDate()) < 0) {
-                filteredList.add(item);
-            }
-        }
-        return filteredList;
-    }
-
-    public List<Item> findUserBidsOpened(int user) throws SQLException, BusinessException {
-        List<Item> itemsList = findAll();
-        List<Item> filteredList = new ArrayList<>();
-
-        for (Item item : itemsList) {
-            if (item.getIdSeller() == user
-                    && LocalDateTime.now().compareTo(item.getBidsStartDate()) > 0
-                    && LocalDateTime.now().compareTo(item.getBidsEndDate()) < 0) {
-                filteredList.add(item);
-            }
-        }
-        return filteredList;
-    }
-
-    public List<Item> findUserBidsFinished(int user) throws SQLException, BusinessException {
-        List<Item> itemsList = findAll();
-        List<Item> filteredList = new ArrayList<>();
-
-        for (Item item : itemsList) {
-            if (item.getIdSeller() == user
-                    && LocalDateTime.now().compareTo(item.getBidsEndDate()) > 0) {
-                filteredList.add(item);
-            }
-        }
-        return filteredList;
-    }
-
-    public List<Item> searchedItems(String searchedWord, List<Item> itemsList, String searchedCategory) throws
-            BusinessException {
-//        Mettre mot en minuscule et enlever les espaces avant et après
-        searchedWord = searchedWord.toLowerCase(Locale.ROOT);
-        searchedWord = searchedWord.trim();
-
-        int category = Integer.parseInt(searchedCategory);
-
-//        Conserver uniquement les items contenant le mot
-        List<Item> searchedItemsList = new ArrayList<>();
-
-        if (category == 0) {
-            for (Item item : itemsList) {
-                if (item.getItemName().contains(searchedWord)) {
-                    searchedItemsList.add(item);
-                }
-            }
-        } else {
-            for (Item item : itemsList) {
-                if (item.getItemName().contains(searchedWord)
-                        && (item.getIdCategory() == category)) {
-                    searchedItemsList.add(item);
-                }
-            }
-        }
-        return searchedItemsList;
-    }
 }

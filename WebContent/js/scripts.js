@@ -1,5 +1,6 @@
-function changePage(newPage) {
-    window.location.pathname = newPage;
+function changePage(parameter, newPage) {
+    newPage = newPage + '?itemId=' + parameter;
+    window.location.href = newPage;
 }
 
 function radio() {
@@ -8,13 +9,13 @@ function radio() {
         document.getElementById('onGoingBuy').disabled = false;
         document.getElementById('wonBuy').disabled = false;
 
-        document.getElementById('openedSell').disabled = true;
+        document.getElementById('nonOpenedSell').disabled = true;
         document.getElementById('onGoingSell').disabled = true;
-        document.getElementById('wonSell').disabled = true;
-    } else {
-        document.getElementById('openedSell').disabled = false;
+        document.getElementById('finishedSell').disabled = true;
+    } else if (document.getElementById('sell').checked) {
+        document.getElementById('nonOpenedSell').disabled = false;
         document.getElementById('onGoingSell').disabled = false;
-        document.getElementById('wonSell').disabled = false;
+        document.getElementById('finishedSell').disabled = false;
 
         document.getElementById('openedBuy').disabled = true;
         document.getElementById('onGoingBuy').disabled = true;
@@ -22,17 +23,23 @@ function radio() {
     }
 }
 
-// function filter() {
-//     // je récupère tous els boutons radio
-//     var filter = document.getElementsByName('filter');
-//
-//     var filterType;
-//
-//     // je récupère le bouton radio coché
-//     for (var i = 0; i < filter.length; i++) {
-//         if (filter[i].checked) {
-//             filterType = filter[i].value;
-//         }
-//     }
-//
-//     console.log(filterType);
+(function () {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+

@@ -21,9 +21,15 @@
 	<p>${userProfile.getCity()}</p>
 </div>
 
+
 <div class="container">
 	<div class="col-auto">
 		<c:if test="${userProfile.getLogin() == sessionScope.user.getLogin()}">
+		
+		<div class="row">
+			<label>Crédit</label><p>${user.getCredits()}</p>  <!-- TODO Récupérer le crédit de l'utilisateur !! -->
+			</div>
+		
 			<button class="btn btn-secondary mb-2">
 				<a href="modifier-profil">Modifier mon profil</a>
 			</button>

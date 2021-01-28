@@ -6,7 +6,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Enchères Eni</title>
@@ -15,12 +14,14 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
 </head>
-<body class="container-fluid">
+<body class="fond-body">
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/enchere_test/index">
                 <%--                Ici, logo du site--%>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index">
                 <img src="img/logo1.png" alt="" width="30" height="24" class="d-inline-block align-top">
                 Enchères Eni
             </a>
@@ -40,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="connect">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="#">Enchères</a>
-                        <a class="nav-link" href="#">Vendre un article</a>
+                        <a class="nav-link" href="nouvelle-vente">Vendre un article</a>
                         <a class="nav-link" href="profil-utilisateur?login=${sessionScope.user.getLogin()}">Mon profil</a>
                         <a class="nav-link" href="deconnexion" tabindex="-1">Déconnexion</a>
                     </div>

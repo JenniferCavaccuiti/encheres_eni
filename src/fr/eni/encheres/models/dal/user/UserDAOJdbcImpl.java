@@ -26,7 +26,6 @@ public class UserDAOJdbcImpl implements UserDAO {
 		if (instance == null) {
 			instance = new UserDAOJdbcImpl();
 		}
-
 		return instance;
 	}
 
@@ -67,37 +66,6 @@ public class UserDAOJdbcImpl implements UserDAO {
 	}
 
 	
-	// ------------ Méthode qui renvoie le mot de passe pour l'user dont l'id est en paramètres
-	
-	private static final String selectPasswordById = "SELECT password FROM USERS WHERE user_id = ?";
-	
-	@Override
-	public String selectPasswordById(int id) throws BusinessException {
-
-		String password = null;
-		
-		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pStmt = cnx.prepareStatement(selectPasswordById);) {
-
-			pStmt.setInt(1, id);
-			ResultSet rs = pStmt.executeQuery();
-
-			if (rs.next()) {
-				password = rs.getString(1);
-			}
-
-			rs.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			BusinessException exception = new BusinessException();
-			exception.addError(ResultCodesDAL.SELECT_PASSWORD_FAILED);
-			throw exception;
-		}
-		
-		return password;
-	}
-
 	// ------------ Méthode qui sélectionne en BDD l'email correspondant à la valeur
 	// ------------ passée en param (null si l'email n'est pas présent en base)
 
@@ -242,7 +210,7 @@ public class UserDAOJdbcImpl implements UserDAO {
 	private static final String insertUser = "INSERT INTO USERS (login, lastname, firstname, email, phone_number, street, postal_code, city, password, credits, administrator) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	@Override
-	public void insertUser(User user) throws BusinessException {
+	public User insertUser(User user) throws BusinessException {
 
 		BusinessException exception = new BusinessException();
 
@@ -282,14 +250,15 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw exception;
 		}
 
+		return user;
 	}
 	
 	//------------------ Méthode de modification d'un user (cherché en BDD via son id)
 
-	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ? WHERE user_id = ?";
+	private static final String updateUserById = "UPDATE USERS SET login = ?, lastname = ?, firstname = ?, email = ?, phone_number = ?, street = ?, postal_code = ?, city = ?, password = ?, credits = ? WHERE user_id = ?";
 	
 	@Override
-	public void updateUserById(User user) throws BusinessException {
+	public User updateUserById(User user) throws BusinessException {
 		
 		BusinessException exception = new BusinessException();
 
@@ -310,7 +279,8 @@ public class UserDAOJdbcImpl implements UserDAO {
 			pStmt.setString(7, user.getPostalCode());
 			pStmt.setString(8, user.getCity());
 			pStmt.setString(9, user.getPassword());
-			pStmt.setInt(10, user.getIdUser());
+			pStmt.setInt(10, user.getCredits());
+			pStmt.setInt(11, user.getIdUser());
 			
 
 			pStmt.executeUpdate();
@@ -322,9 +292,62 @@ public class UserDAOJdbcImpl implements UserDAO {
 			throw exception;
 		}
 		
+		return user;
 		
+	}
+	
+	//-------------- Méthode de suppression d'un user en BDD via son id
+	
+	private static final String deleteUser = "DELETE FROM USERS where user_id = ?";
+	
+	@Override
+	public void deleteUserById(User user) throws BusinessException {
+		
+		BusinessException exception = new BusinessException();
+		
+		if (user == null) {
+			exception.addError(ResultCodesDAL.INSERT_OBJET_NULL);
+			throw exception;
+		}
+		
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pStmt = cnx.prepareStatement(deleteUser)) {
+
+			pStmt.setInt(1, user.getIdUser());
+			pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			exception.addError(ResultCodesDAL.INSERT_UPDATE_OBJET_FAILED);
+			throw exception;
+		}
+		
+	}
+	
+	//--------------- Méthode qui retourne le login de l'utilisateur en fonction de son id
+
+	private static final String findOneById = "SELECT login FROM USERS WHERE user_id = ?";
+
+	public String findOneById(int id) {
+		String login = null;
+
+		try (Connection connection = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = connection.prepareStatement(findOneById);
+
+			pStmt.setInt(1, id);
+			ResultSet resultSet = pStmt.executeQuery();
+
+            while (resultSet.next()) {
+			login = resultSet.getString("login");
+            }
+            
+            resultSet.close();
+            
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return login;
 	}
 
 	
-
 }
