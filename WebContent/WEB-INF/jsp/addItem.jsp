@@ -14,7 +14,10 @@
 </c:if>
 
 
-<h5 class="message">${message}</h5>
+<c:if test="${not empty message}">
+    <p  class="alert alert-warning text-center">${message}</p>
+</c:if>
+
 <div class="row justify-content-center">
     <div class="col-5">
         <form action="${pageContext.request.contextPath}/nouvelle-vente" method="post" novalidate

@@ -4,7 +4,10 @@
 <div class="col-11 center-block">
     <h1 class="title">Bienvenue</h1>
 
-	<h3 class="message">${message}</h3>
+    <c:if test="${not empty message}">
+    <p  class="alert alert-warning text-center">${message}</p>
+    </c:if>
+
 
 	<h5>Filtres :</h5>
 
