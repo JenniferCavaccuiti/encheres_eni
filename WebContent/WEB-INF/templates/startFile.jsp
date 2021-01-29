@@ -9,38 +9,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Enchères Eni</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
 </head>
 <body class="fond-body">
 <header>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand white-color ml-4" href="index">
-                <img src="img/logo1.png" alt="" width="30" height="24" class="d-inline-block align-top">
-                Enchères Eni
-            </a>
-        </div>
+    <nav class="navbar navbar-expand-lg d-flex justify-content-around">
+        <a class="navbar-brand white-color ml-4" href="index">
+            <img src="img/logo1.png" alt="" width="30" height="24" class="d-inline-block align-top">
+            Enchères Eni
+        </a>
         <button class="navbar-toggler" id="toggle-button" type="button" data-toggle="collapse"
                 data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav ">
                 <c:choose>
                     <c:when test="${empty sessionScope}">
                         <div class="collapse navbar-collapse" id="disconnect">
-                            <div class="right-part navbar-nav">
-                                <a class="nav-item nav-link" aria-current="page" href="login">
-                                    Se connecter / s'inscrire
+                            <div class=" navbar-nav">
+                                <a class="nav-item nav-link white-color" aria-current="page" href="login">
+                                    <span>Se connecter / s'inscrire</span>
                                 </a>
                             </div>
                         </div>
                     </c:when>
                     <c:when test="${not empty sessionScope}">
-                        <div class="right-part navbar-nav">
+                        <div class="d-flex navbar-nav">
                             <div class="collapse navbar-collapse" id="connect">
                                 <div class="navbar-nav">
                                     <c:if test="${not empty sessionScope && sessionScope.user.administrator == '1'}">
