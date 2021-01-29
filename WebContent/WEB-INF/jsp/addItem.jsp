@@ -57,7 +57,6 @@
                 <div class="col-md-7 col-xs-12">
                     <select class="form-control" id="category" name="category" required>
                         <option value="${item.idCategory}">${item.categoryName}</option>
-                        // Pas de récupération de la catégorie ?
                         <c:forEach var="category" items="${categoriesList}">
                             <option value="${category.idCategory}">${category.wording}</option>
                         </c:forEach>
@@ -114,8 +113,8 @@
                         <label for="bidsEndDate">Fin de l'enchère :</label>
                     </div>
 
-                    <div class="col-4">
-                        <input type="date" class="col-md-4 col-xs-12" id="bidsEndDate" name="bidsEndDate"
+                    <div class="col-md-4 col-xs-12">
+                        <input type="date" class="form-control" id="bidsEndDate" name="bidsEndDate"
                                value="${f:formatLocalDateTime(f:addDaysToDate(1, f:getDate()), 'yyyy-MM-dd')}"
                                min="${f:formatLocalDateTime(f:addDaysToDate(1, f:getDate()), 'yyyy-MM-dd')}">
                         <div class="invalid-feedback">
@@ -123,7 +122,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 col-xs-12">
-                        <input type="time" class="form-control col-3" id="bidsEndTime" name="bidsEndTime"
+                        <input type="time" class="form-control" id="bidsEndTime" name="bidsEndTime"
                                value="${f:formatLocalDateTime(f:getDate(), 'HH:mm')}">
                     </div>
                 </div>
@@ -214,8 +213,8 @@
             <br>
             <c:if test="${not empty item}">
                 <button class="normal-button" type="submit" name="submitType" value="update">Valider</button>
-                <a class="btn normal-button" href="index" type="button" role="button">Annuler</a>
-                <button class="btn normal-button" type="submit" name="submitType" value="delete">Annuler la vente</button>
+                <button class="normal-button" onclick="callServlet('${pageContext.request.contextPath}/index')" type="button" role="button">Retour</button>
+                <button class="normal-button" type="submit" name="submitType" value="delete">Annuler la vente</button>
             </c:if>
             <c:if test="${empty item}">
                 <button class="normal-button" type="submit" name="submitType" value="create">Valider</button>

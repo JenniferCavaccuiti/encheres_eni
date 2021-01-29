@@ -171,7 +171,6 @@
 				<div class="col">
 					<div class="col-auto updateProfile buttonEnchere">
 					<button type="submit" class="buttonProfile">Enchérir</button>
-					
 					</div>
 
 				</div>
@@ -185,9 +184,7 @@
 
 	<div class="row">
 		<div class="text-center updateProfile" id="returnEnchere">
-			<button class="buttonProfile">
-				<a class="lienProfile" href="index">Retour</a>
-			</button>
+			<button class="normal-button" onclick="callServlet('${pageContext.request.contextPath}/index')" type="button" role="button">Retour</button>
 		</div>
 	</div>
 
