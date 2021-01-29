@@ -37,16 +37,6 @@ nav {
     font-weight: 550;
 }
 
-a:hover {
-    color: #BAC9D9;
-}
-
-
-
-
-
-<<<<<<< HEAD
-=======
 button {
     border: none;
     background-color: #BAC9D9;
@@ -60,15 +50,30 @@ button {
 button:hover {
     color: #95a1ae;
 }
->>>>>>> refs/heads/master
+/*---------- Général ------------*/
 
 body {
     background-color: #EBE9E7;
 }
 
+a:hover {
+    color: #BAC9D9;
+}
 
 .message {
     color: red;
+}
+
+button {
+    border: none;
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    color: #95a1ae;
 }
 /*--------- NavBar ----------*/
 
@@ -86,6 +91,8 @@ body {
 }
 
 
+
+
 /*--------- Footer --------------*/
 footer {
     position: sticky;
@@ -93,19 +100,6 @@ footer {
     width: 100%;
     font-weight: bold;
 }
-
-button {
-    border: none;
-    background-color: #BAC9D9;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-button:hover {
-    color: #95a1ae;
-}
-
 
 /* -------------- Marjo ---------------- */
 
