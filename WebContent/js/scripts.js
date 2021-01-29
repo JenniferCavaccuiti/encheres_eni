@@ -3,6 +3,10 @@ function changePage(parameter, newPage) {
     window.location.href = newPage;
 }
 
+function callServlet(newPage) {
+    window.location.href = newPage;
+}
+
 function radio() {
     if (document.getElementById('buy').checked) {
         document.getElementById('openedBuy').disabled = false;

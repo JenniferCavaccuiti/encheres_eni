@@ -43,14 +43,14 @@
 </div>
 =======
     <%--    Affichage items--%>
-   <div class="row justify-content-center">
+    <div class="row justify-content-evenly">
         <c:forEach var="item" items="${itemsList}">
         <c:if test="${not empty sessionScope}">
-        <div class="card col-xs-12 col-md-4" id="item-${item.idItem}"
+        <div class="card col-xs-12 col-md-5" id="item-${item.idItem}"
              onClick="changePage('${item.idItem}', '${pageContext.request.contextPath}/details-vente');">
             </c:if>
             <c:if test="${empty sessionScope}">
-            <div class="card  col-xs-12 col-md-4" id="item-${item.idItem}">
+            <div class="card  col-xs-12 col-md-5" id="item-${item.idItem}">
                 </c:if>
                 <div class="card-header header-color">
                         ${item.itemName}
@@ -59,7 +59,8 @@
                     <h5 class="card-title">Prix : ${item.currentPrice}</h5>
                     <p>Fin de l'enchère : ${f:formatLocalDateTime(item.bidsEndDate, 'EEEE dd MMMM yyyy HH:mm')}</p>
                     <p class="card-text">Vendeur :
-                        <a class="dark-blue-color" href="profil-utilisateur?login=${item.sellerName}">${item.sellerName}</a>
+                        <a class="dark-blue-color"
+                           href="profil-utilisateur?login=${item.sellerName}">${item.sellerName}</a>
                     </p>
                 </div>
             </div>

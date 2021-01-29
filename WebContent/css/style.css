@@ -17,8 +17,14 @@
     color: white;
 }
 
+footer {
+    background-color: #95a1ae;
+    height: 10%;
+}
+
 nav {
     background-color: #95a1ae;
+    height: 10%;
 }
 
 .dark-blue-color {
@@ -30,12 +36,19 @@ a:hover {
     color: #BAC9D9;
 }
 
+.font-size {
+font-size: 13px;
+}
+
 .header-color {
     background-color: #BAC9D9;
     color: white;
     font-size: 18px;
     font-weight: bold;
 }
+/*.header-menu {*/
+/*    width: 40%;*/
+/*}*/
 
 <<<<<<< HEAD
 =======
@@ -59,14 +72,15 @@ body {
 }
 
 
-.right-part{
-	margin-left: auto;
-}
+/*.right-part{*/
+/*	margin-left: auto;*/
+/*}*/
 
 footer {
     position: sticky;
     bottom: 0;
     width: 100%;
+    font-weight: bold;
 }
 
 .message {
