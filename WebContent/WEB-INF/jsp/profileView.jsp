@@ -4,9 +4,6 @@
 <div class="container" id="viewProfile">
 
 
-
-    <div class="container">
-
        <div class="row">
 		<div class="col heading">
 			<h3 class="text-center">Détails du profil</h3>
@@ -68,26 +65,65 @@
         </div>
 </c:if>	
 
-        
+<c:if test="${userProfile.getLogin() != sessionScope.user.getLogin()}">
+	<div class="row align-items-center updateForm">
+            <div class="col">  
+                <div class="col-auto">
+            </div>
+            </div>
+            <div class="col"></div> 
+        </div>
+</c:if>	
 
-        <div class="row">
+
+<c:choose>
+	<c:when test="${userProfile.getLogin() == sessionScope.user.getLogin()}">
+		
+		 <div class="row">
 
             <div class="col-md-3 offset-md-3 text-center updateProfile">
             <button class="buttonProfile">
             	<a class="lienProfile" href="modifier-profil">Modifier mon profil</a>
             	 </button>
             </div>
-
-
+            
             <div class="col-md-3 text-center updateProfile">
                 <button class="buttonProfile">
                     	<a class="lienProfile" href="index">Retour</a>
                 </button>
-
             </div>
-        </div>
-    </div>
+          
+          </div>
+		
+	</c:when>
+	
+	<c:otherwise>
+	
+		 <div class="row">
+
+            <div class="text-center updateProfile ">
+                <button class="buttonProfile">
+                    	<a class="lienProfile" href="index">Retour</a>
+                </button>
+            </div>
+          
+          </div>
+	
+	</c:otherwise>
+
+
+</c:choose>
+
+
+       
+
+       
+
+
+
 </div>
+
+
 
 
 

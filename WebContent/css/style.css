@@ -134,7 +134,7 @@ a:hover {
 }
 
 .updateForm {
-	margin-bottom : 30px;
+	margin-bottom : 40px;
 }
 
 .updateProfile {
@@ -143,4 +143,8 @@ a:hover {
 
 .deleteButton{
 	margin-top : 30px;
+}
+
+#buttonReturnProfile {
+	margin-top : 40px;
 }
