@@ -13,7 +13,7 @@
 				
 				<!-- Identifiant -->
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-5">
 						<h6>
 							<label for="login">Identifiant<span class="required">:</span></label>
 						</h6>
@@ -27,9 +27,9 @@
 					
 				<!-- Mot de passe -->
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-5">
 						<h6>
-							<label for="password">Mot de passe<span class="required">: </span></label>
+							<label for="password">Mot de passe<span class="required">:</span></label>
 						</h6>
 					</div>
 					<div class="col-sm-4">
@@ -41,10 +41,10 @@
 				
 				<!-- Connexion++ -->
 				<div class="row">
-					<div class="col-sm-6">
-						<input  type="submit" class="btn btn-primary btn-xl btn-block" value="Connexion" />
+					<div class="col-sm-5">
+						<input  type="submit" class="btn btn-secondary" value="Connexion" />
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-7">
 						<input type="checkbox" id="remember" name="remember" value=""/>
 						<label for="remember">Se souvenir de moi</label>
 						<br/>
@@ -55,7 +55,7 @@
 				
 				<!-- Bouton créer un compte -->
 				<div class="row">
-						<button type="submit" class="btn btn-primary btn-xl btn-block">
+						<button type="submit" class="button">
 							<a href="nouveau-profil" style="color: white; border:none">Créer un compte</a>
 						</button>
 				</div>
