@@ -2,17 +2,17 @@
          pageEncoding="UTF-8" %>
 
 <form method="POST" action="${pageContext.request.contextPath}/index"
-      class="form-inline row my-2 my-lg-0  justify-content-around">
+      class="form-inline justify-content-around">
     <div class="col-md-4 col-xs-12">
-        <div class="col-auto my-1">
-            <input name="keyword" class="form-control mr-sm-2" type="search"
+        <div class="col-12">
+            <input name="keyword" class="form-control" type="search"
                    placeholder="Le nom de l'article contient"
                    aria-label="Search">
         </div>
 
-        <div class="col-md-auto col-xs-12 my-1">
-            <label class="mr-sm-3" for="category">Catégorie :</label>
-            <select name="searchedCategory" class="custom-select mr-sm-3" id="category">
+        <div class="col-md-4 col-xs-12">
+            <label for="category">Catégorie :</label>
+            <select name="searchedCategory" class="custom-select" id="category">
                 <option value="0">Toutes</option>
                 <c:forEach var="category" items="${categoriesList}">
                     <option value="${category.idCategory}">${category.wording}</option>

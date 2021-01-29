@@ -2,6 +2,11 @@
     margin: auto;
 }
 
+.title {
+    margin-top : 30px;
+    margin-bottom: 30px;
+}
+
 .card {
     padding: 0;
     margin: 20px;
@@ -32,26 +37,6 @@ nav {
     font-weight: 550;
 }
 
-a:hover {
-    color: #BAC9D9;
-}
-
-.font-size {
-font-size: 13px;
-}
-
-.header-color {
-    background-color: #BAC9D9;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-}
-/*.header-menu {*/
-/*    width: 40%;*/
-/*}*/
-
-<<<<<<< HEAD
-=======
 button {
     border: none;
     background-color: #BAC9D9;
@@ -65,17 +50,50 @@ button {
 button:hover {
     color: #95a1ae;
 }
->>>>>>> refs/heads/master
+/*---------- Général ------------*/
 
 body {
     background-color: #EBE9E7;
 }
 
+a:hover {
+    color: #BAC9D9;
+}
 
-/*.right-part{*/
-/*	margin-left: auto;*/
-/*}*/
+.message {
+    color: red;
+}
 
+button {
+    border: none;
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    color: #95a1ae;
+}
+/*--------- NavBar ----------*/
+
+.header-color {
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/*--------- Page d'accueil -----------*/
+.font-size {
+    font-size: 13px;
+}
+
+
+
+
+/*--------- Footer --------------*/
 footer {
     position: sticky;
     bottom: 0;
@@ -83,6 +101,46 @@ footer {
     font-weight: bold;
 }
 
-.message {
-    color: red;
+/* -------------- Marjo ---------------- */
+
+a:hover {
+    color: #95a1ae;
+}
+
+
+.heading h3 {
+	margin : 50px;
+}
+
+.create-button {
+
+	margin : 50px;
+}
+
+.buttonProfile {
+	padding : 10px;
+	padding-right : 30px;
+	padding-left : 30px;
+	border-radius: 5px;
+}
+
+.lienProfile {
+	color : white;
+	text-decoration: none;
+}
+
+#creer{
+	margin-bottom : 10px;
+}
+
+.updateForm {
+	margin-bottom : 30px;
+}
+
+.updateProfile {
+	margin-bottom : 10px;
+}
+
+.deleteButton{
+	margin-top : 30px;
 }
