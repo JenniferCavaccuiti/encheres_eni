@@ -15,17 +15,19 @@
             </div>
 
         </div>
-			
+		
+		
 			<c:if test="${liste != null }">
-
+	<div class="alert alert-danger" role="alert">
 				<p>La création du profil a échoué</p>
 				<ul>
 					<c:forEach var="erreur" items="${liste}">
 						<li>${MessagesReader.getErrorMessage(erreur)}</li>
 					</c:forEach>
 				</ul>
+				</div>
 			</c:if>
-
+		
 
 	<form method="post" action="nouveau-profil" novalidate
 		class="needs-validation">

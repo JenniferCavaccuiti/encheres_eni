@@ -11,13 +11,14 @@
 	</div>
 
 	<c:if test="${liste != null }">
-
-		<p>La création du profil a échoué</p>
+	<div class="alert alert-danger" role="alert">
+		<p>La modification du profil a échoué</p>
 		<ul>
 			<c:forEach var="erreur" items="${liste}">
 				<li>${MessagesReader.getErrorMessage(erreur)}</li>
 			</c:forEach>
 		</ul>
+	</div>
 	</c:if>
 
 	<form method="post" action="modifier-profil" novalidate
@@ -62,7 +63,7 @@
 				</div>
 
 				<div class="col-auto">
-					<label>Nouveau mot de passe : </label> <input type="password"
+					<label>Mot de passe : </label> <input type="password"
 						name="newPassword" class="form-control" maxlength="30">
 				</div>
 
