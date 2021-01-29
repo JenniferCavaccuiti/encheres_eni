@@ -22,6 +22,6 @@
         </div>
     </div>
     <div class="col-md-3 col-xs-12 d-flex justify-content-center align-items-center">
-    <button class="col-xs-12"  type="submit">Rechercher</button>
+    <button class="col-xs-12 searchButton"  type="submit">Rechercher</button>
     </div>
 </form>
