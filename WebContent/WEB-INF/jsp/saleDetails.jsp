@@ -131,8 +131,13 @@
 
 		<div class=" col alert alert-dark justify-content-center" role="alert">
 			<p>
+				<c:if test="${login != null}">
 				<label>Meilleure offre : </label> ${item.currentPrice} par <a
 					href="profil-utilisateur?login=${login}">${login}</a>
+				</c:if>
+				<c:if test="${login == null}">
+				<label>Meilleure offre : </label> Il n'y pas encore d'enchères sur cette article
+				</c:if>
 			</p>
 		</div>
 		
