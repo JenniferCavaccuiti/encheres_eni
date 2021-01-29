@@ -43,10 +43,19 @@ button {
     border: none;
     background-color: #BAC9D9;
     color: white;
+    border-radius: 3px;
+}
+
+.normal-button {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px 50px;
+}
+
+.uggly-button {
     font-size: 18px;
     font-weight: bold;
     padding: 25px 100px;
-    border-radius: 3px;
 }
 
 button:hover {

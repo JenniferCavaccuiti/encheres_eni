@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="col-md-3 col-xs-12 d-flex justify-content-center align-items-center">
-        <button class="col-xs-12" type="submit" onclick="filter();">Rechercher</button>
+        <button class="col-xs-12 uggly-button" type="submit" onclick="filter();">Rechercher</button>
     </div>
 
 </form>

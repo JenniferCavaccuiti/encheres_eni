@@ -55,7 +55,7 @@
 
                     <!-- Bouton créer un compte -->
                     <div class="row">
-                        <button type="submit" class="button" onclick="callServlet('${pageContext.request.contextPath}/nouveau-profil')">
+                        <button type="submit" class="button uggly-button" onclick="callServlet('${pageContext.request.contextPath}/nouveau-profil')">
                             Créer un profil
                         </button>
                     </div>
