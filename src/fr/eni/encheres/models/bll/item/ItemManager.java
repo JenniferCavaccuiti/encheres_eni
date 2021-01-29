@@ -142,22 +142,6 @@ public class ItemManager {
 
         item = getItem(parameters, idUser);
 
-//        LocalDateTime bidsStartDate = getCorrectFormatDate(parameters.get("bidsStartDate")[0], parameters.get("bidsStartTime")[0]);
-//        LocalDateTime bidsEndDate = getCorrectFormatDate(parameters.get("bidsEndDate")[0], parameters.get("bidsEndTime")[0]);
-//
-////         créer l'item
-//        item.setItemName(BaseManager.prepareWord(parameters.get("itemName")[0]));
-//        item.setDescription(BaseManager.prepareWord(parameters.get("description")[0]));
-//        item.setBidsStartDate(bidsStartDate);
-//        item.setBidsEndDate(bidsEndDate);
-//        item.setInitialPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
-//        item.setCurrentPrice(Integer.parseInt(parameters.get("initialPrice")[0]));
-//        item.setIdSeller(idUser);
-//        item.setStreet(BaseManager.prepareWord(parameters.get("street")[0]));
-//        item.setPostalCode(BaseManager.prepareWord(parameters.get("postalCode")[0]));
-//        item.setCity(BaseManager.prepareWord(parameters.get("city")[0]));
-//        item.setIdCategory(Integer.parseInt(parameters.get("category")[0]));
-
 //        // l'ajouter en base et le renvoi
         return DAOFactory.getItemDAO().insertNewItem(item);
     }

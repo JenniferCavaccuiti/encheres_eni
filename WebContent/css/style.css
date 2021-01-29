@@ -44,12 +44,25 @@ button {
     font-size: 18px;
     font-weight: bold;
     padding: 25px 100px;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 button:hover {
     color: #95a1ae;
 }
+/*--------- SearchBar --------*/
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+.border-radius {
+    border-radius: 3px;
+}
+
 /*---------- Général ------------*/
 
 body {
@@ -91,8 +104,6 @@ button:hover {
 }
 
 
-
-
 /*--------- Footer --------------*/
 footer {
     position: sticky;
@@ -102,12 +113,6 @@ footer {
 }
 
 /* -------------- Marjo ---------------- */
-
-a:hover {
-    color: #95a1ae;
-}
-
-
 .heading h3 {
 	margin : 50px;
 }

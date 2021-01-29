@@ -6,7 +6,7 @@
 
     <div class="col-md-6 col-xs-12">
         <div class="col-12">
-            <div class="col-md-12 col-xs-12">
+            <div class="col-md-9 col-xs-12">
                 <input name="keyword" class="form-control" type="search"
                        placeholder="Le nom de l'article contient"
                        aria-label="Search">
@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row margin-left-10">
             <div class="form-check col-md-5 col-xs-12">
                 <input class="form-check-input" type="radio" onclick="radio();" name="type" id="buy" value="buy"
                        checked>
@@ -73,8 +73,8 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 col-xs-12">
-        <button type="submit" onclick="filter();">Rechercher</button>
+    <div class="col-md-3 col-xs-12 d-flex justify-content-center align-items-center">
+        <button class="col-xs-12" type="submit" onclick="filter();">Rechercher</button>
     </div>
 
 </form>
