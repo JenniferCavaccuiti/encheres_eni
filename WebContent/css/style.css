@@ -2,6 +2,11 @@
     margin: auto;
 }
 
+.title {
+    margin-top : 30px;
+    margin-bottom: 30px;
+}
+
 .card {
     padding: 0;
     margin: 20px;
@@ -36,19 +41,9 @@ a:hover {
     color: #BAC9D9;
 }
 
-.font-size {
-font-size: 13px;
-}
 
-.header-color {
-    background-color: #BAC9D9;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-}
-/*.header-menu {*/
-/*    width: 40%;*/
-/*}*/
+
+
 
 button {
     border: none;
@@ -69,17 +64,29 @@ body {
 }
 
 
-/*.right-part{*/
-/*	margin-left: auto;*/
-/*}*/
+.message {
+    color: red;
+}
+/*--------- NavBar ----------*/
 
+.header-color {
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+/*--------- Page d'accueil -----------*/
+.font-size {
+    font-size: 13px;
+}
+
+
+/*--------- Footer --------------*/
 footer {
     position: sticky;
     bottom: 0;
     width: 100%;
     font-weight: bold;
-}
-
-.message {
-    color: red;
 }

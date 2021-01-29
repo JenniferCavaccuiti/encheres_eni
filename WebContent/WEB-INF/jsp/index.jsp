@@ -3,7 +3,7 @@
 <%@taglib uri="http://example.com/functions" prefix="f" %>
 <%@include file="../templates/startFile.jsp" %>
 <div class="col-11 center-block">
-    <h1>Bienvenue</h1>
+    <h1 class="title">Bienvenue</h1>
 
     <h3 class="message">${message}</h3>
 

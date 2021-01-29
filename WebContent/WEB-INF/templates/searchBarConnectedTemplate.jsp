@@ -6,7 +6,7 @@
 
     <div class="col-md-6 col-xs-12">
         <div class="col-12">
-            <div class="col-md-10 col-xs-12">
+            <div class="col-md-12 col-xs-12">
                 <input name="keyword" class="form-control" type="search"
                        placeholder="Le nom de l'article contient"
                        aria-label="Search">
