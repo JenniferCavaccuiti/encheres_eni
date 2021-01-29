@@ -21,6 +21,15 @@ nav {
     background-color: #95a1ae;
 }
 
+.dark-blue-color {
+    color: #95a1ae;
+    font-weight: 550;
+}
+
+a:hover {
+    color: #BAC9D9;
+}
+
 .header-color {
     background-color: #BAC9D9;
     color: white;
@@ -28,6 +37,22 @@ nav {
     font-weight: bold;
 }
 
+<<<<<<< HEAD
+=======
+button {
+    border: none;
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 25px 100px;
+    border-radius: 2px;
+}
+
+button:hover {
+    color: #95a1ae;
+}
+>>>>>>> refs/heads/master
 
 body {
     background-color: #EBE9E7;
@@ -40,7 +65,6 @@ body {
 
 footer {
     position: sticky;
-
     bottom: 0;
     width: 100%;
 }
