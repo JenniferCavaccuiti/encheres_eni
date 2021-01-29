@@ -150,7 +150,7 @@ footer {
 }
 
 .updateForm {
-	margin-bottom : 30px;
+	margin-bottom : 40px;
 }
 
 .updateProfile {
@@ -159,4 +159,21 @@ footer {
 
 .deleteButton{
 	margin-top : 30px;
+}
+
+#buttonReturnProfile {
+	margin-top : 40px;
+}
+
+.buttonEnchere {
+	margin-top : 20px;
+}
+
+#returnEnchere {
+	margin-top: 20px;
+	margin-bottom : 40px;
+}
+
+#modifVente{
+	margin-top: 30px;
 }
