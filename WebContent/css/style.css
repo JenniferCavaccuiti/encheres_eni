@@ -45,6 +45,8 @@ a:hover {
 
 
 
+<<<<<<< HEAD
+=======
 button {
     border: none;
     background-color: #BAC9D9;
@@ -58,6 +60,7 @@ button {
 button:hover {
     color: #95a1ae;
 }
+>>>>>>> refs/heads/master
 
 body {
     background-color: #EBE9E7;

@@ -1,13 +1,12 @@
-<%@ page contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@taglib uri="http://example.com/functions" prefix="f" %>
-<%@include file="../templates/startFile.jsp" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://example.com/functions" prefix="f"%>
+<%@include file="../templates/startFile.jsp"%>
 <div class="col-11 center-block">
     <h1 class="title">Bienvenue</h1>
 
-    <h3 class="message">${message}</h3>
+	<h3 class="message">${message}</h3>
 
-    <h5>Filtres : </h5>
+	<h5>Filtres :</h5>
 
     <%--    barre de recherche --%>
     <c:choose>
@@ -45,4 +44,4 @@
         </div>
     </div>
 
-<%@include file="../templates/footer.jsp" %>
+<%@include file="../templates/footer.jsp"%>
