@@ -90,3 +90,60 @@ footer {
     width: 100%;
     font-weight: bold;
 }
+
+button {
+    border: none;
+    background-color: #BAC9D9;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    color: #95a1ae;
+}
+
+
+/* -------------- Marjo ---------------- */
+
+a:hover {
+    color: #95a1ae;
+}
+
+
+.heading h3 {
+	margin : 50px;
+}
+
+.create-button {
+
+	margin : 50px;
+}
+
+.buttonProfile {
+	padding : 10px;
+	padding-right : 30px;
+	padding-left : 30px;
+	border-radius: 5px;
+}
+
+.lienProfile {
+	color : white;
+	text-decoration: none;
+}
+
+#creer{
+	margin-bottom : 10px;
+}
+
+.updateForm {
+	margin-bottom : 30px;
+}
+
+.updateProfile {
+	margin-bottom : 10px;
+}
+
+.deleteButton{
+	margin-top : 30px;
+}
